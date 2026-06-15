@@ -2,11 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const xpText = document.getElementById('xpText');
   const progressFill = document.getElementById('progressFill');
   const toggle = document.getElementById('openOnNewTabToggle');
-  const openAppBtnMenu = document.getElementById('openAppBtnMenu');
-  
-  const sideMenu = document.getElementById('sideMenu');
-  const openMenuBtn = document.getElementById('openMenuBtn');
-  const closeMenuBtn = document.getElementById('closeMenuBtn');
+  const openAppBtn = document.getElementById('openAppBtn');
   const streakText = document.getElementById('streakText');
 
   const wordCarousel = document.getElementById('wordCarousel');
@@ -20,12 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let learnedWords = [];
   let currentCarouselIndex = 0;
 
-  // Menu Toggles
-  openMenuBtn.addEventListener('click', () => { sideMenu.classList.add('open'); });
-  closeMenuBtn.addEventListener('click', () => { sideMenu.classList.remove('open'); });
-
   // Open App Button
-  openAppBtnMenu.addEventListener('click', () => {
+  openAppBtn.addEventListener('click', () => {
     chrome.tabs.create({ url: 'https://officiallygod.github.io/Deutschway/' });
   });
 

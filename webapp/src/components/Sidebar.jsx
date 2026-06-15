@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Check, Flame, Moon, Sun, BarChart2, X, Calendar as CalendarIcon } from 'lucide-react';
+import CalendarWidget from './CalendarWidget';
 
 const Sidebar = React.memo(({ 
   dailyWords, 
@@ -11,9 +12,11 @@ const Sidebar = React.memo(({
   toggleTheme,
   isOpen,
   onOpenStats,
-  onOpenCalendar
+  onSelectDate
 }) => {
   const [animateStreak, setAnimateStreak] = useState(false);
+  const [showCalendarPopup, setShowCalendarPopup] = useState(false);
+  const calendarRef = useRef(null);
 
   useEffect(() => {
     if (streak > 0) {
@@ -23,6 +26,21 @@ const Sidebar = React.memo(({
     }
   }, [streak]);
 
+  // Close calendar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target) && !event.target.closest('.calendar-btn-toggle')) {
+        setShowCalendarPopup(false);
+      }
+    };
+    if (showCalendarPopup) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showCalendarPopup]);
+
   const progressPercent = dailyWords.length > 0 ? (completedIndices.length / dailyWords.length) * 100 : 0;
   const xpEarned = completedIndices.length * 10;
   const totalXpGoal = dailyWords.length * 10;
@@ -31,7 +49,7 @@ const Sidebar = React.memo(({
     <aside className={`sidebar ${isOpen ? 'mobile-open' : 'collapsed'}`}>
       <div className="sidebar-header">
         <div className="brand">
-          <img src="/Deutschway/logo.svg" alt="Deutschway Logo" />
+          <img src="/Deutschway/logo.png" alt="Deutschway Logo" />
           Deutschway
         </div>
         {isOpen && (
@@ -68,22 +86,28 @@ const Sidebar = React.memo(({
         ))}
       </div>
 
-      <div className="sidebar-footer">
+      <div className="sidebar-footer" style={{ position: 'relative' }}>
         <div className={`streak-badge ${animateStreak ? 'animate-streak' : ''}`} title={`${streak} Days Streak`}>
           <Flame className="flame-icon" size={20} />
           {streak}
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button className="theme-btn" onClick={onOpenStats} aria-label="Statistiken">
+          <button className="theme-btn" onClick={() => { onOpenStats(); setShowCalendarPopup(false); }} aria-label="Statistiken">
             <BarChart2 size={20} />
           </button>
-          <button className="theme-btn" onClick={onOpenCalendar} aria-label="Kalender">
+          <button className="theme-btn calendar-btn-toggle" onClick={() => setShowCalendarPopup(!showCalendarPopup)} aria-label="Kalender">
             <CalendarIcon size={20} />
           </button>
           <button className="theme-btn" onClick={toggleTheme} aria-label="Theme wechseln">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
+
+        {showCalendarPopup && (
+          <div ref={calendarRef} style={{ position: 'absolute', bottom: '60px', right: '0', zIndex: 1000 }}>
+            <CalendarWidget onSelectDate={(d) => { onSelectDate(d); setShowCalendarPopup(false); }} />
+          </div>
+        )}
       </div>
     </aside>
   );

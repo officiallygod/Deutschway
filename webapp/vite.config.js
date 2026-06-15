@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'mascot.png'],
+      includeAssets: ['logo.png'],
       manifest: {
         name: 'Deutschway',
         short_name: 'Deutschway',
@@ -15,12 +15,12 @@ export default defineConfig({
         theme_color: '#f4f7f6',
         icons: [
           {
-            src: 'mascot.png',
+            src: 'logo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'mascot.png',
+            src: 'logo.png',
             sizes: '512x512',
             type: 'image/png'
           }

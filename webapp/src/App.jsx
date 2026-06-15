@@ -13,7 +13,6 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showStats, setShowStats] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
   
   const {
     loading,
@@ -59,19 +58,6 @@ function App() {
         </Suspense>
       );
     }
-    
-    if (showCalendar) {
-      return (
-        <Suspense fallback={<div>Lade Kalender...</div>}>
-          <CalendarWidget 
-            onSelectDate={(dateStr) => {
-              loadRevisionDay(dateStr);
-              setShowCalendar(false);
-            }} 
-          />
-        </Suspense>
-      );
-    }
 
     return (
       <>
@@ -104,13 +90,16 @@ function App() {
         dailyWords={dailyWords}
         currentIndex={currentIndex}
         completedIndices={completedIndices}
-        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); setShowStats(false); setShowCalendar(false); }}
+        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); setShowStats(false); }}
         streak={stats.streak}
         theme={theme}
         toggleTheme={toggleTheme}
         isOpen={sidebarOpen}
-        onOpenStats={() => { setShowStats(true); setShowCalendar(false); setSidebarOpen(false); }}
-        onOpenCalendar={() => { setShowCalendar(true); setShowStats(false); setSidebarOpen(false); }}
+        onOpenStats={() => { setShowStats(true); setSidebarOpen(false); }}
+        onSelectDate={(dateStr) => {
+          loadRevisionDay(dateStr);
+          setSidebarOpen(false);
+        }}
       />
 
       <main className="main-content">
@@ -120,8 +109,8 @@ function App() {
           </button>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {(showStats || showCalendar || isRevisionMode) && (
-              <button className="icon-btn" onClick={() => { setShowStats(false); setShowCalendar(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
+            {(showStats || isRevisionMode) && (
+              <button className="icon-btn" onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
                 <ArrowLeft size={24} />
               </button>
             )}

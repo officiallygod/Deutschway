@@ -42,13 +42,13 @@ const WordCard = React.memo(({
           <div className="translation">{word.exampleTranslation}</div>
           
           <div className="grammar-breakdown">
-            <strong>Grammar Note:</strong>
-            <span>{word.grammarNote || "Pay attention to the word's specific context."}</span>
+            <strong>Grammatik:</strong>
+            <span>{word.grammarNote || "Achten Sie auf den spezifischen Kontext des Wortes."}</span>
           </div>
 
           {word.synonyms && word.synonyms.length > 0 && (
             <div className="synonyms">
-              <strong>Similar:</strong>
+              <strong>Ähnlich:</strong>
               {word.synonyms.map(syn => (
                 <span key={syn} className="syn-tag">{syn}</span>
               ))}
@@ -63,10 +63,10 @@ const WordCard = React.memo(({
           onClick={handlePrev} 
           disabled={currentIndex === 0}
         >
-          <ChevronLeft size={20} /> Previous
+          <ChevronLeft size={20} /> Zurück
         </button>
         <button className="btn primary" onClick={handleNext}>
-          {currentIndex === totalWords - 1 ? 'Finish Session' : 'Next Word'} <ChevronRight size={20} />
+          {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Nächstes Wort'} <ChevronRight size={20} />
         </button>
       </div>
     </div>

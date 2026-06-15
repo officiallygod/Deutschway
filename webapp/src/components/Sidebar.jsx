@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Check, Flame, Moon, Sun } from 'lucide-react';
+import { Check, Flame, Moon, Sun, BarChart2 } from 'lucide-react';
 
 const Sidebar = React.memo(({ 
   dailyWords, 
@@ -9,7 +9,8 @@ const Sidebar = React.memo(({
   streak, 
   theme, 
   toggleTheme,
-  isOpen
+  isOpen,
+  onOpenStats
 }) => {
   const progressPercent = dailyWords.length > 0 ? (completedIndices.length / dailyWords.length) * 100 : 0;
   const xpEarned = completedIndices.length * 10;
@@ -24,7 +25,7 @@ const Sidebar = React.memo(({
 
       <div className="daily-progress">
         <div className="progress-header">
-          <span>Daily Goal</span>
+          <span>Tagesziel</span>
           <span>{xpEarned} / {totalXpGoal} XP</span>
         </div>
         <div className="progress-bar">
@@ -53,9 +54,14 @@ const Sidebar = React.memo(({
         <div className="streak-badge">
           <Flame size={18} /> {streak}
         </div>
-        <button className="theme-btn" onClick={toggleTheme} aria-label="Toggle Theme">
-          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button className="theme-btn" onClick={onOpenStats} aria-label="Statistiken">
+            <BarChart2 size={20} />
+          </button>
+          <button className="theme-btn" onClick={toggleTheme} aria-label="Theme wechseln">
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+        </div>
       </div>
     </aside>
   );

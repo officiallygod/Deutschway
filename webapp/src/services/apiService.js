@@ -1,15 +1,15 @@
 import wordsData from '../data/words.json';
 
 const STORAGE_KEYS = {
-  SEEN_INDICES: 'seenIndices',
-  CURRENT_DAILY: 'currentDaily',
-  LAST_VISIT: 'lastVisit',
-  COMPLETED_TODAY: 'completedToday',
-  COMPLETED_INDICES: 'completedIndicesToday',
-  XP: 'totalXp',
-  XP_HISTORY: 'xpHistory',
-  STREAK: 'streak',
-  LAST_STREAK: 'lastStreakDate',
+  SEEN_INDICES: 'deutschway_seenIndices',
+  CURRENT_DAILY: 'deutschway_currentDaily',
+  LAST_VISIT: 'deutschway_lastVisit',
+  COMPLETED_TODAY: 'deutschway_completedToday',
+  COMPLETED_INDICES: 'deutschway_completedIndicesToday',
+  XP: 'deutschway_totalXp',
+  XP_HISTORY: 'deutschway_xpHistory',
+  STREAK: 'deutschway_streak',
+  LAST_STREAK: 'deutschway_lastStreakDate',
 };
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));

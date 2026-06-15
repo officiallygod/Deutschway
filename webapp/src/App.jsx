@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, ArrowLeft } from 'lucide-react';
 import './App.scss';
 import { useDailySession } from './hooks/useDailySession';
 import Sidebar from './components/Sidebar';
@@ -11,6 +11,7 @@ const StatsModal = React.lazy(() => import('./components/StatsModal'));
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showStats, setShowStats] = useState(false);
   
   const {
     loading,
@@ -53,11 +54,12 @@ function App() {
         dailyWords={dailyWords}
         currentIndex={currentIndex}
         completedIndices={completedIndices}
-        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); }}
+        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); setShowStats(false); }}
         streak={stats.streak}
         theme={theme}
         toggleTheme={toggleTheme}
         isOpen={sidebarOpen}
+        onOpenStats={() => { setShowStats(true); setSidebarOpen(false); }}
       />
 
       <main className="main-content">
@@ -65,9 +67,14 @@ function App() {
           <button className="icon-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle Menu">
             <Menu size={24} />
           </button>
+          {showStats && !isSessionComplete && (
+            <button className="icon-btn" onClick={() => setShowStats(false)} aria-label="Back">
+              <ArrowLeft size={24} />
+            </button>
+          )}
         </div>
 
-        {!isSessionComplete ? (
+        {(!isSessionComplete && !showStats) ? (
           <WordCard 
             word={currentWord}
             currentIndex={currentIndex}
@@ -76,7 +83,7 @@ function App() {
             handlePrev={handlePrev}
           />
         ) : (
-          <Suspense fallback={<div>Loading Stats...</div>}>
+          <Suspense fallback={<div>Lade Statistiken...</div>}>
             <StatsModal 
               xpEarned={completedIndices.length * 10} 
               chartData={stats.chartData} 

@@ -7,12 +7,12 @@ const StatsModal = ({ xpEarned, chartData }) => {
     <div className="stats-modal glass">
       <h2>
         <Trophy color="var(--ger-gold)" size={48} style={{verticalAlign: 'middle', marginRight: '10px'}}/>
-        Session Complete!
+        Lektion abgeschlossen!
       </h2>
       
       <div className="xp-circle">
         <span className="xp-amount">+{xpEarned}</span>
-        <span className="xp-label">XP Earned</span>
+        <span className="xp-label">XP Verdient</span>
       </div>
 
       <div className="chart-container">

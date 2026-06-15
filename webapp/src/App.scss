@@ -30,13 +30,15 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: 'Playfair Display', Georgia, serif;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     letter-spacing: -0.03em;
+    color: var(--text-color);
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
     }
   }
@@ -62,7 +64,7 @@
 
       .progress-fill {
         height: 100%;
-        background: var(--primary-accent);
+        background: linear-gradient(to right, #111111 20%, #ff3b30 50%, #ffcc00 80%);
         transition: width 0.3s ease;
       }
     }

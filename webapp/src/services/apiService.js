@@ -1,0 +1,144 @@
+import wordsData from '../data/words.json';
+
+const STORAGE_KEYS = {
+  SEEN_INDICES: 'seenIndices',
+  CURRENT_DAILY: 'currentDaily',
+  LAST_VISIT: 'lastVisit',
+  COMPLETED_TODAY: 'completedToday',
+  COMPLETED_INDICES: 'completedIndicesToday',
+  XP: 'totalXp',
+  XP_HISTORY: 'xpHistory',
+  STREAK: 'streak',
+  LAST_STREAK: 'lastStreakDate',
+};
+
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+class ApiService {
+  /**
+   * Fetch today's 5 words. Generates new ones if a new day.
+   */
+  async getDailySession() {
+    await delay(300); // Simulate network latency
+    const today = new Date().toDateString();
+    const lastVisit = localStorage.getItem(STORAGE_KEYS.LAST_VISIT);
+    let currentDaily = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_DAILY) || 'null');
+    
+    if (lastVisit !== today || !currentDaily) {
+      // It's a new day, pick 5 new words
+      let seenIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEEN_INDICES) || '[]');
+      let availableIndices = wordsData.map((_, i) => i).filter(i => !seenIndices.includes(i));
+      
+      // Reset if we've seen all words
+      if (availableIndices.length < 5) {
+        seenIndices = [];
+        availableIndices = wordsData.map((_, i) => i);
+      }
+      
+      availableIndices.sort(() => 0.5 - Math.random());
+      currentDaily = availableIndices.slice(0, 5).map(idx => ({ ...wordsData[idx], originalIndex: idx }));
+      
+      localStorage.setItem(STORAGE_KEYS.CURRENT_DAILY, JSON.stringify(currentDaily));
+      localStorage.setItem(STORAGE_KEYS.LAST_VISIT, today);
+      localStorage.removeItem(STORAGE_KEYS.COMPLETED_INDICES);
+      localStorage.removeItem(STORAGE_KEYS.COMPLETED_TODAY);
+      
+      // Streak calculation
+      if (lastVisit) {
+        const diffDays = Math.ceil(Math.abs(new Date(today) - new Date(lastVisit)) / (1000 * 60 * 60 * 24));
+        if (diffDays > 1) localStorage.setItem(STORAGE_KEYS.STREAK, '0');
+      }
+    }
+    
+    const completedIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMPLETED_INDICES) || '[]');
+    const isSessionComplete = localStorage.getItem(STORAGE_KEYS.COMPLETED_TODAY) === today;
+    
+    return {
+      words: currentDaily,
+      completedIndices,
+      isSessionComplete
+    };
+  }
+
+  /**
+   * Mark a word index as completed and award XP
+   */
+  async markWordComplete(index) {
+    const completedIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMPLETED_INDICES) || '[]');
+    if (!completedIndices.includes(index)) {
+      completedIndices.push(index);
+      localStorage.setItem(STORAGE_KEYS.COMPLETED_INDICES, JSON.stringify(completedIndices));
+      await this.addXp(10);
+    }
+    return completedIndices;
+  }
+
+  /**
+   * Finish the daily session, update streak
+   */
+  async completeSession(dailyWords) {
+    const today = new Date().toDateString();
+    localStorage.setItem(STORAGE_KEYS.COMPLETED_TODAY, today);
+    
+    // Mark these words as seen
+    let seenIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEEN_INDICES) || '[]');
+    const newSeen = [...seenIndices, ...dailyWords.map(w => w.originalIndex)];
+    localStorage.setItem(STORAGE_KEYS.SEEN_INDICES, JSON.stringify([...new Set(newSeen)]));
+
+    // Update streak
+    const lastStreakDate = localStorage.getItem(STORAGE_KEYS.LAST_STREAK);
+    let currentStreak = parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0', 10);
+    if (lastStreakDate !== today) {
+      currentStreak += 1;
+      localStorage.setItem(STORAGE_KEYS.STREAK, currentStreak.toString());
+      localStorage.setItem(STORAGE_KEYS.LAST_STREAK, today);
+    }
+    
+    return currentStreak;
+  }
+
+  /**
+   * Add XP to total and today's history
+   */
+  async addXp(amount) {
+    const totalXp = parseInt(localStorage.getItem(STORAGE_KEYS.XP) || '0', 10) + amount;
+    localStorage.setItem(STORAGE_KEYS.XP, totalXp.toString());
+    
+    const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.XP_HISTORY) || '[]');
+    const todayStr = new Date().toDateString();
+    const todayIndex = history.findIndex(h => h.date === todayStr);
+    
+    if (todayIndex >= 0) {
+      history[todayIndex].xp += amount;
+    } else {
+      history.push({ date: todayStr, xp: amount });
+    }
+    localStorage.setItem(STORAGE_KEYS.XP_HISTORY, JSON.stringify(history));
+    
+    return totalXp;
+  }
+
+  /**
+   * Get user stats (streak, total XP, 7-day history)
+   */
+  async getUserStats() {
+    const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.XP_HISTORY) || '[]');
+    const last7Days = Array.from({length: 7}).map((_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (6 - i));
+      const found = history.find(h => h.date === d.toDateString());
+      return { 
+        name: d.toLocaleDateString('en-US', { weekday: 'short' }), 
+        xp: found ? found.xp : 0 
+      };
+    });
+
+    return {
+      streak: parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0', 10),
+      totalXp: parseInt(localStorage.getItem(STORAGE_KEYS.XP) || '0', 10),
+      chartData: last7Days
+    };
+  }
+}
+
+export const apiService = new ApiService();

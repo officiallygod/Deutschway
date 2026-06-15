@@ -1,15 +1,16 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { Menu } from 'lucide-react';
 import './App.scss';
 import { useDailySession } from './hooks/useDailySession';
 import Sidebar from './components/Sidebar';
 import WordCard from './components/WordCard';
 import FunFactWidget from './components/FunFactWidget';
 
-// Lazy load the StatsModal because it imports 'recharts' which is heavy
 const StatsModal = React.lazy(() => import('./components/StatsModal'));
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   const {
     loading,
@@ -42,17 +43,30 @@ function App() {
 
   return (
     <div className="app-layout">
+      {/* Mobile overlay */}
+      <div 
+        className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`} 
+        onClick={() => setSidebarOpen(false)}
+      />
+
       <Sidebar 
         dailyWords={dailyWords}
         currentIndex={currentIndex}
         completedIndices={completedIndices}
-        jumpToWord={jumpToWord}
+        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); }}
         streak={stats.streak}
         theme={theme}
         toggleTheme={toggleTheme}
+        isOpen={sidebarOpen}
       />
 
       <main className="main-content">
+        <div className="top-bar">
+          <button className="icon-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle Menu">
+            <Menu size={24} />
+          </button>
+        </div>
+
         {!isSessionComplete ? (
           <WordCard 
             word={currentWord}

@@ -8,16 +8,17 @@ const Sidebar = React.memo(({
   jumpToWord, 
   streak, 
   theme, 
-  toggleTheme 
+  toggleTheme,
+  isOpen
 }) => {
   const progressPercent = dailyWords.length > 0 ? (completedIndices.length / dailyWords.length) * 100 : 0;
   const xpEarned = completedIndices.length * 10;
   const totalXpGoal = dailyWords.length * 10;
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'mobile-open' : 'collapsed'}`}>
       <div className="brand">
-        <BookOpen className="icon" size={24} color="var(--primary-accent)" />
+        <img src="/Deutschway/logo.png" alt="Deutschway Logo" />
         Deutschway
       </div>
 

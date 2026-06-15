@@ -43,8 +43,17 @@ const WordCard = React.memo(({
           
           <div className="grammar-breakdown">
             <strong>Grammar Note:</strong>
-            <span>Notice how the verb is usually placed in the second position of the main clause. Pay attention to the article gender!</span>
+            <span>{word.grammarNote || "Pay attention to the word's specific context."}</span>
           </div>
+
+          {word.synonyms && word.synonyms.length > 0 && (
+            <div className="synonyms">
+              <strong>Similar:</strong>
+              {word.synonyms.map(syn => (
+                <span key={syn} className="syn-tag">{syn}</span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

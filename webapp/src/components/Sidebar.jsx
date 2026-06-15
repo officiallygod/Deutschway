@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Check, Flame, Moon, Sun, BarChart2, X } from 'lucide-react';
 
 const Sidebar = React.memo(({ 
@@ -12,6 +12,16 @@ const Sidebar = React.memo(({
   isOpen,
   onOpenStats
 }) => {
+  const [animateStreak, setAnimateStreak] = useState(false);
+
+  useEffect(() => {
+    if (streak > 0) {
+      setAnimateStreak(true);
+      const timer = setTimeout(() => setAnimateStreak(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [streak]);
+
   const progressPercent = dailyWords.length > 0 ? (completedIndices.length / dailyWords.length) * 100 : 0;
   const xpEarned = completedIndices.length * 10;
   const totalXpGoal = dailyWords.length * 10;
@@ -58,8 +68,9 @@ const Sidebar = React.memo(({
       </div>
 
       <div className="sidebar-footer">
-        <div className="streak-badge">
-          <Flame size={18} /> {streak}
+        <div className={`streak-badge ${animateStreak ? 'animate-streak' : ''}`} title={`${streak} Days Streak`}>
+          <Flame className="flame-icon" size={20} />
+          {streak}
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button className="theme-btn" onClick={onOpenStats} aria-label="Statistiken">

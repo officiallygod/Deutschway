@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Deutschway",
-  "version": "1.0",
-  "description": "Learn 5 German words daily when you open Chrome.",
+  "version": "1.1",
+  "description": "Learn 5 German words daily. Extension companion for Deutschway.",
   "permissions": [
     "storage",
     "tabs"
@@ -10,8 +10,15 @@
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://officiallygod.github.io/*"],
+      "js": ["content.js"]
+    }
+  ],
   "action": {
-    "default_title": "Open Deutschway"
+    "default_title": "Open Deutschway",
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "icon16.png",

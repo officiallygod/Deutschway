@@ -71,15 +71,16 @@
     }
 
     .progress-bar {
-      height: 6px;
+      height: 8px;
       background: rgba(0,0,0,0.05);
-      border-radius: 3px;
+      border-radius: 99px;
       overflow: hidden;
 
       .progress-fill {
         height: 100%;
-        background: linear-gradient(to right, #111111 20%, #ff3b30 50%, #ffcc00 80%);
-        transition: width 0.3s ease;
+        background: linear-gradient(to right, var(--ger-red), var(--ger-gold));
+        transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        border-radius: 99px;
       }
     }
   }
@@ -139,15 +140,37 @@
       gap: 0.5rem;
       font-weight: 700;
       color: var(--ger-red);
+
+      .flame-icon {
+        transition: transform 0.3s ease;
+      }
+      
+      &.animate-streak .flame-icon {
+        animation: flame-pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
     }
 
     .theme-btn {
+      background: transparent;
+      border: none;
       color: var(--text-secondary);
+      cursor: pointer;
       padding: 0.5rem;
       border-radius: 50%;
-      &:hover { background: var(--card-border); color: var(--text-color); }
+      transition: background 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-color);
+      }
     }
   }
+}
+
+@keyframes flame-pop {
+  0% { transform: scale(1); color: var(--ger-red); }
+  50% { transform: scale(1.5) rotate(15deg); color: var(--ger-gold); }
+  100% { transform: scale(1) rotate(0deg); color: var(--ger-red); }
 }
 
 .sidebar-overlay {

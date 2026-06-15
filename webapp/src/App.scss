@@ -29,12 +29,21 @@
       background: rgba(255, 255, 255, 0.9);
       padding: 0.8rem;
       border: 2px solid var(--card-border);
-      transition: var(--transition);
+      animation: float 4s ease-in-out infinite;
 
       &:hover {
-        transform: translateY(-5px) scale(1.05);
+        animation: none;
+        transform: translateY(-5px) scale(1.1) rotate(5deg);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
       }
     }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
   }
 
   h1 {

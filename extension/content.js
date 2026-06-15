@@ -1,3 +1,5 @@
+let syncInterval;
+
 function syncToExtension() {
   const daily = localStorage.getItem('deutschway_currentDaily');
   const xp = localStorage.getItem('deutschway_totalXp');
@@ -6,13 +8,21 @@ function syncToExtension() {
   const theme = localStorage.getItem('theme') || 'light';
   
   if (daily) {
-    chrome.storage.local.set({
-      currentDaily: daily,
-      totalXp: xp || '0',
-      streak: streak || '0',
-      completedIndices: completed || '[]',
-      theme: theme
-    });
+    try {
+      chrome.storage.local.set({
+        currentDaily: daily,
+        totalXp: xp || '0',
+        streak: streak || '0',
+        completedIndices: completed || '[]',
+        theme: theme
+      });
+    } catch (e) {
+      if (e.message && e.message.includes('Extension context invalidated')) {
+        console.warn('Deutschway Extension updated. Please refresh the page.');
+        if (syncInterval) clearInterval(syncInterval);
+        window.removeEventListener('storage', syncToExtension);
+      }
+    }
   }
 }
 
@@ -23,4 +33,4 @@ window.addEventListener('storage', syncToExtension);
 syncToExtension();
 
 // Periodic sync just in case
-setInterval(syncToExtension, 2000);
+syncInterval = setInterval(syncToExtension, 2000);

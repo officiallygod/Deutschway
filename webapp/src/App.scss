@@ -360,35 +360,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2rem;
 
   .btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 2rem;
     border-radius: 30px;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 
     &.primary {
-      background: var(--primary-accent);
-      color: white;
-      &:hover { background: var(--primary-accent-hover); transform: scale(1.05); }
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      color: var(--primary-accent);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      
+      &:hover { 
+        background: var(--primary-accent);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 86, 179, 0.2);
+      }
     }
 
     &.secondary {
-      background: var(--card-border);
-      color: var(--text-color);
-      backdrop-filter: blur(10px);
-      &:hover { background: rgba(0,0,0,0.1); }
-      [data-theme="dark"] &:hover { background: rgba(255,255,255,0.1); }
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      &:hover {
+        color: var(--text-color);
+        background: rgba(0,0,0,0.03);
+      }
     }
 
     &:disabled {
       opacity: 0.5;
-      pointer-events: none;
+      cursor: not-allowed;
+      &:hover { 
+        transform: none; 
+        box-shadow: none; 
+        background: var(--card-bg); 
+        color: var(--primary-accent); 
+      }
     }
   }
 }
@@ -566,8 +586,10 @@
       }
 
       &.today:not(.has-history) {
-        border: 2px solid var(--primary-accent);
-        color: var(--primary-accent);
+        background: var(--primary-accent);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       }
     }
   }
@@ -608,9 +630,26 @@
 /* Tablets & Small Laptops */
 @media (max-width: 1024px) {
   .sidebar {
-    position: absolute;
-    transform: translateX(-100%);
-    &.mobile-open { transform: translateX(0); box-shadow: 20px 0 50px rgba(0,0,0,0.1); }
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    z-index: 1000;
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    
+    &.mobile-open { 
+      left: 0; 
+      transform: none; 
+      box-shadow: 20px 0 50px rgba(0,0,0,0.1); 
+    }
+    
+    &.collapsed {
+      left: -100%;
+      transform: none;
+    }
   }
   .sidebar-overlay.active { display: block; }
   .fun-fact-corner { max-width: 250px; }

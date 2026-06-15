@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Check, Flame, Moon, Sun, BarChart2, X } from 'lucide-react';
+import { Check, Flame, Moon, Sun, BarChart2, X, Calendar as CalendarIcon } from 'lucide-react';
 
 const Sidebar = React.memo(({ 
   dailyWords, 
@@ -10,7 +10,8 @@ const Sidebar = React.memo(({
   theme, 
   toggleTheme,
   isOpen,
-  onOpenStats
+  onOpenStats,
+  onOpenCalendar
 }) => {
   const [animateStreak, setAnimateStreak] = useState(false);
 
@@ -75,6 +76,9 @@ const Sidebar = React.memo(({
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button className="theme-btn" onClick={onOpenStats} aria-label="Statistiken">
             <BarChart2 size={20} />
+          </button>
+          <button className="theme-btn" onClick={onOpenCalendar} aria-label="Kalender">
+            <CalendarIcon size={20} />
           </button>
           <button className="theme-btn" onClick={toggleTheme} aria-label="Theme wechseln">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}

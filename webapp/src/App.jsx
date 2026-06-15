@@ -125,9 +125,6 @@ function App() {
                 <ArrowLeft size={24} />
               </button>
             )}
-            <button className="icon-btn" onClick={() => { setShowCalendar(true); setShowStats(false); }} aria-label="Kalender" title="Historie">
-              <CalendarIcon size={24} />
-            </button>
           </div>
         </div>
 

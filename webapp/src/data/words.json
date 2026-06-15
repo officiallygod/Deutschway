@@ -1,102 +1,932 @@
 [
-  { "word": "der Alltag", "translation": "Everyday life", "example": "Der Alltag in Berlin ist oft sehr hektisch.", "exampleTranslation": "Everyday life in Berlin is often very hectic." },
-  { "word": "die Erfahrung", "translation": "Experience", "example": "Ich habe gute Erfahrungen damit gemacht.", "exampleTranslation": "I have had good experiences with it." },
-  { "word": "die Entscheidung", "translation": "Decision", "example": "Das war eine schwierige Entscheidung.", "exampleTranslation": "That was a difficult decision." },
-  { "word": "unterstützen", "translation": "To support", "example": "Meine Freunde unterstützen mich immer.", "exampleTranslation": "My friends always support me." },
-  { "word": "erfolgreich", "translation": "Successful", "example": "Sie ist eine sehr erfolgreiche Ärztin.", "exampleTranslation": "She is a very successful doctor." },
-  { "word": "die Gesellschaft", "translation": "Society", "example": "Wir leben in einer modernen Gesellschaft.", "exampleTranslation": "We live in a modern society." },
-  { "word": "das Unternehmen", "translation": "Company", "example": "Er arbeitet für ein internationales Unternehmen.", "exampleTranslation": "He works for an international company." },
-  { "word": "verantwortlich", "translation": "Responsible", "example": "Wer ist dafür verantwortlich?", "exampleTranslation": "Who is responsible for that?" },
-  { "word": "die Entwicklung", "translation": "Development", "example": "Die Entwicklung der Technik ist schnell.", "exampleTranslation": "The development of technology is fast." },
-  { "word": "die Beziehung", "translation": "Relationship", "example": "Sie haben eine gute Beziehung zueinander.", "exampleTranslation": "They have a good relationship with each other." },
-  { "word": "die Wirtschaft", "translation": "Economy", "example": "Die Wirtschaft wächst dieses Jahr.", "exampleTranslation": "The economy is growing this year." },
-  { "word": "das Ziel", "translation": "Goal", "example": "Mein Ziel ist es, fließend Deutsch zu sprechen.", "exampleTranslation": "My goal is to speak German fluently." },
-  { "word": "erreichen", "translation": "To achieve/reach", "example": "Wir haben unser Ziel erreicht.", "exampleTranslation": "We have achieved our goal." },
-  { "word": "die Ausbildung", "translation": "Education/Training", "example": "Eine gute Ausbildung ist wichtig für die Zukunft.", "exampleTranslation": "A good education is important for the future." },
-  { "word": "die Herausforderung", "translation": "Challenge", "example": "Das neue Projekt ist eine große Herausforderung.", "exampleTranslation": "The new project is a big challenge." },
-  { "word": "die Möglichkeit", "translation": "Possibility/Opportunity", "example": "Wir haben verschiedene Möglichkeiten.", "exampleTranslation": "We have different possibilities." },
-  { "word": "der Bereich", "translation": "Area/Field", "example": "In welchem Bereich arbeiten Sie?", "exampleTranslation": "In which field do you work?" },
-  { "word": "die Bedingung", "translation": "Condition", "example": "Unter diesen Bedingungen kann ich nicht arbeiten.", "exampleTranslation": "Under these conditions I cannot work." },
-  { "word": "die Regierung", "translation": "Government", "example": "Die Regierung hat neue Gesetze verabschiedet.", "exampleTranslation": "The government has passed new laws." },
-  { "word": "der Grund", "translation": "Reason", "example": "Was ist der Grund für deine Entscheidung?", "exampleTranslation": "What is the reason for your decision?" },
-  { "word": "der Vorteil", "translation": "Advantage", "example": "Das Auto hat viele Vorteile.", "exampleTranslation": "The car has many advantages." },
-  { "word": "der Nachteil", "translation": "Disadvantage", "example": "Gibt es auch Nachteile?", "exampleTranslation": "Are there also disadvantages?" },
-  { "word": "das Ergebnis", "translation": "Result", "example": "Das Ergebnis der Prüfung ist sehr gut.", "exampleTranslation": "The result of the exam is very good." },
-  { "word": "der Erfolg", "translation": "Success", "example": "Ich wünsche dir viel Erfolg!", "exampleTranslation": "I wish you much success!" },
-  { "word": "die Bedeutung", "translation": "Meaning/Importance", "example": "Kennst du die Bedeutung dieses Wortes?", "exampleTranslation": "Do you know the meaning of this word?" },
-  { "word": "vergleichen", "translation": "To compare", "example": "Man kann diese beiden Dinge nicht vergleichen.", "exampleTranslation": "You cannot compare these two things." },
-  { "word": "der Unterschied", "translation": "Difference", "example": "Es gibt einen großen Unterschied.", "exampleTranslation": "There is a big difference." },
-  { "word": "die Lösung", "translation": "Solution", "example": "Wir müssen eine Lösung für das Problem finden.", "exampleTranslation": "We must find a solution to the problem." },
-  { "word": "der Teilnehmer", "translation": "Participant", "example": "Die Teilnehmer waren sehr zufrieden.", "exampleTranslation": "The participants were very satisfied." },
-  { "word": "die Veranstaltung", "translation": "Event", "example": "Die Veranstaltung findet morgen statt.", "exampleTranslation": "The event takes place tomorrow." },
-  { "word": "das Verhalten", "translation": "Behavior", "example": "Sein Verhalten war nicht akzeptabel.", "exampleTranslation": "His behavior was not acceptable." },
-  { "word": "die Erinnerung", "translation": "Memory", "example": "Ich habe gute Erinnerungen an den Urlaub.", "exampleTranslation": "I have good memories of the vacation." },
-  { "word": "erwarten", "translation": "To expect", "example": "Was erwartest du von mir?", "exampleTranslation": "What do you expect from me?" },
-  { "word": "die Sicherheit", "translation": "Security/Safety", "example": "Sicherheit steht an erster Stelle.", "exampleTranslation": "Security comes first." },
-  { "word": "der Einfluss", "translation": "Influence", "example": "Das Wetter hat einen großen Einfluss auf meine Stimmung.", "exampleTranslation": "The weather has a big influence on my mood." },
-  { "word": "die Verbesserung", "translation": "Improvement", "example": "Wir sehen eine deutliche Verbesserung.", "exampleTranslation": "We see a clear improvement." },
-  { "word": "der Mitarbeiter", "translation": "Employee", "example": "Unsere Mitarbeiter sind hoch motiviert.", "exampleTranslation": "Our employees are highly motivated." },
-  { "word": "die Umgebung", "translation": "Environment/Surroundings", "example": "Die Umgebung des Hotels ist wunderschön.", "exampleTranslation": "The surroundings of the hotel are beautiful." },
-  { "word": "das Angebot", "translation": "Offer", "example": "Das ist ein sehr gutes Angebot.", "exampleTranslation": "That is a very good offer." },
-  { "word": "die Nachfrage", "translation": "Demand", "example": "Die Nachfrage nach diesem Produkt ist hoch.", "exampleTranslation": "The demand for this product is high." },
-  { "word": "die Gesundheit", "translation": "Health", "example": "Gesundheit ist das Wichtigste im Leben.", "exampleTranslation": "Health is the most important thing in life." },
-  { "word": "die Zukunft", "translation": "Future", "example": "Niemand kennt die Zukunft.", "exampleTranslation": "No one knows the future." },
-  { "word": "die Vergangenheit", "translation": "Past", "example": "Wir können die Vergangenheit nicht ändern.", "exampleTranslation": "We cannot change the past." },
-  { "word": "der Fehler", "translation": "Mistake", "example": "Jeder macht mal Fehler.", "exampleTranslation": "Everyone makes mistakes." },
-  { "word": "die Wahrheit", "translation": "Truth", "example": "Sag mir bitte die Wahrheit.", "exampleTranslation": "Please tell me the truth." },
-  { "word": "das Gefühl", "translation": "Feeling", "example": "Ich habe ein gutes Gefühl dabei.", "exampleTranslation": "I have a good feeling about it." },
-  { "word": "der Traum", "translation": "Dream", "example": "Es war nur ein Traum.", "exampleTranslation": "It was only a dream." },
-  { "word": "die Gefahr", "translation": "Danger", "example": "Es besteht keine Gefahr mehr.", "exampleTranslation": "There is no more danger." },
-  { "word": "die Leistung", "translation": "Performance/Achievement", "example": "Seine Leistung in der Schule ist hervorragend.", "exampleTranslation": "His performance in school is excellent." },
-  { "word": "der Anspruch", "translation": "Claim/Demand", "example": "Die Kunden haben hohe Ansprüche.", "exampleTranslation": "The customers have high demands." },
-  { "word": "bestätigen", "translation": "To confirm", "example": "Bitte bestätigen Sie Ihre E-Mail-Adresse.", "exampleTranslation": "Please confirm your email address." },
-  { "word": "vermuten", "translation": "To suspect/assume", "example": "Ich vermute, dass er später kommt.", "exampleTranslation": "I suspect that he will come later." },
-  { "word": "ablehnen", "translation": "To reject", "example": "Er hat das Angebot abgelehnt.", "exampleTranslation": "He rejected the offer." },
-  { "word": "zustimmen", "translation": "To agree", "example": "Ich stimme dir vollkommen zu.", "exampleTranslation": "I completely agree with you." },
-  { "word": "stattfinden", "translation": "To take place", "example": "Das Konzert findet morgen statt.", "exampleTranslation": "The concert takes place tomorrow." },
-  { "word": "teilnehmen", "translation": "To participate", "example": "Ich möchte an dem Kurs teilnehmen.", "exampleTranslation": "I would like to participate in the course." },
-  { "word": "die Ursache", "translation": "Cause", "example": "Die Ursache des Problems ist unklar.", "exampleTranslation": "The cause of the problem is unclear." },
-  { "word": "der Zweck", "translation": "Purpose", "example": "Was ist der Zweck dieses Treffens?", "exampleTranslation": "What is the purpose of this meeting?" },
-  { "word": "das Mittel", "translation": "Means/Agent", "example": "Das ist ein gutes Mittel gegen Kopfschmerzen.", "exampleTranslation": "That is a good remedy for headaches." },
-  { "word": "die Maßnahme", "translation": "Measure/Action", "example": "Die Regierung ergreift neue Maßnahmen.", "exampleTranslation": "The government is taking new measures." },
-  { "word": "die Regel", "translation": "Rule", "example": "Man muss die Regeln beachten.", "exampleTranslation": "One must observe the rules." },
-  { "word": "die Ausnahme", "translation": "Exception", "example": "Keine Regel ohne Ausnahme.", "exampleTranslation": "No rule without exception." },
-  { "word": "der Zufall", "translation": "Coincidence", "example": "Das war reiner Zufall.", "exampleTranslation": "That was pure coincidence." },
-  { "word": "die Absicht", "translation": "Intention", "example": "Es war nicht meine Absicht, dich zu verletzen.", "exampleTranslation": "It was not my intention to hurt you." },
-  { "word": "der Zweifel", "translation": "Doubt", "example": "Ich habe keine Zweifel an deiner Fähigkeit.", "exampleTranslation": "I have no doubts about your ability." },
-  { "word": "die Überzeugung", "translation": "Conviction", "example": "Es ist meine tiefe Überzeugung.", "exampleTranslation": "It is my deep conviction." },
-  { "word": "die Forderung", "translation": "Demand/Claim", "example": "Ihre Forderung ist nicht gerechtfertigt.", "exampleTranslation": "Your demand is not justified." },
-  { "word": "die Erwartung", "translation": "Expectation", "example": "Meine Erwartungen wurden erfüllt.", "exampleTranslation": "My expectations were met." },
-  { "word": "die Enttäuschung", "translation": "Disappointment", "example": "Die Enttäuschung war groß.", "exampleTranslation": "The disappointment was great." },
-  { "word": "die Hoffnung", "translation": "Hope", "example": "Die Hoffnung stirbt zuletzt.", "exampleTranslation": "Hope dies last." },
-  { "word": "die Sorge", "translation": "Worry", "example": "Mach dir keine Sorgen.", "exampleTranslation": "Don't worry." },
-  { "word": "die Angst", "translation": "Fear", "example": "Er hat Angst vor Spinnen.", "exampleTranslation": "He is afraid of spiders." },
-  { "word": "die Freude", "translation": "Joy", "example": "Es ist mir eine große Freude.", "exampleTranslation": "It is a great joy to me." },
-  { "word": "der Ärger", "translation": "Anger/Trouble", "example": "Ich will keinen Ärger.", "exampleTranslation": "I don't want any trouble." },
-  { "word": "der Respekt", "translation": "Respect", "example": "Wir sollten vor allen Menschen Respekt haben.", "exampleTranslation": "We should have respect for all people." },
-  { "word": "das Vertrauen", "translation": "Trust", "example": "Vertrauen ist die Basis einer Beziehung.", "exampleTranslation": "Trust is the basis of a relationship." },
-  { "word": "die Geduld", "translation": "Patience", "example": "Du musst etwas Geduld haben.", "exampleTranslation": "You have to have some patience." },
-  { "word": "die Mühe", "translation": "Effort/Trouble", "example": "Vielen Dank für deine Mühe.", "exampleTranslation": "Thank you for your effort." },
-  { "word": "die Verantwortung", "translation": "Responsibility", "example": "Er trägt eine große Verantwortung.", "exampleTranslation": "He bears a great responsibility." },
-  { "word": "das Gewissen", "translation": "Conscience", "example": "Ich habe ein ruhiges Gewissen.", "exampleTranslation": "I have a clear conscience." },
-  { "word": "die Vernunft", "translation": "Reason/Sense", "example": "Hör auf deine Vernunft.", "exampleTranslation": "Listen to your reason." },
-  { "word": "der Verstand", "translation": "Mind/Intellect", "example": "Das geht über meinen Verstand.", "exampleTranslation": "That is beyond my understanding." },
-  { "word": "die Einsicht", "translation": "Insight/Realization", "example": "Er kam zu der Einsicht, dass er falsch lag.", "exampleTranslation": "He came to the realization that he was wrong." },
-  { "word": "der Überblick", "translation": "Overview", "example": "Ich brauche zuerst einen Überblick.", "exampleTranslation": "I need an overview first." },
-  { "word": "der Eindruck", "translation": "Impression", "example": "Ich habe einen guten Eindruck von ihr.", "exampleTranslation": "I have a good impression of her." },
-  { "word": "der Ausdruck", "translation": "Expression", "example": "Das ist ein schöner Ausdruck.", "exampleTranslation": "That is a beautiful expression." },
-  { "word": "die Vermutung", "translation": "Assumption", "example": "Das ist nur eine Vermutung.", "exampleTranslation": "That is just an assumption." },
-  { "word": "die Behauptung", "translation": "Claim/Assertion", "example": "Diese Behauptung ist falsch.", "exampleTranslation": "This claim is false." },
-  { "word": "der Beweis", "translation": "Proof/Evidence", "example": "Hast du Beweise dafür?", "exampleTranslation": "Do you have evidence for that?" },
-  { "word": "das Argument", "translation": "Argument", "example": "Das ist ein starkes Argument.", "exampleTranslation": "That is a strong argument." },
-  { "word": "die Diskussion", "translation": "Discussion", "example": "Die Diskussion war sehr interessant.", "exampleTranslation": "The discussion was very interesting." },
-  { "word": "der Kompromiss", "translation": "Compromise", "example": "Wir müssen einen Kompromiss finden.", "exampleTranslation": "We must find a compromise." },
-  { "word": "der Vertrag", "translation": "Contract", "example": "Ich habe den Vertrag unterschrieben.", "exampleTranslation": "I signed the contract." },
-  { "word": "die Bedingung", "translation": "Condition", "example": "Ich akzeptiere die Bedingungen.", "exampleTranslation": "I accept the conditions." },
-  { "word": "die Voraussetzung", "translation": "Prerequisite", "example": "Ein Visum ist die Voraussetzung für die Reise.", "exampleTranslation": "A visa is a prerequisite for the trip." },
-  { "word": "die Konsequenz", "translation": "Consequence", "example": "Du musst die Konsequenzen tragen.", "exampleTranslation": "You must bear the consequences." },
-  { "word": "die Wirkung", "translation": "Effect", "example": "Das Medikament hat eine schnelle Wirkung.", "exampleTranslation": "The medication has a fast effect." },
-  { "word": "der Erfolg", "translation": "Success", "example": "Der Film war ein großer Erfolg.", "exampleTranslation": "The movie was a big success." },
-  { "word": "der Misserfolg", "translation": "Failure", "example": "Wir lernen aus unseren Misserfolgen.", "exampleTranslation": "We learn from our failures." },
-  { "word": "die Schuld", "translation": "Guilt/Debt", "example": "Es war nicht meine Schuld.", "exampleTranslation": "It was not my fault." }
+  {
+    "word": "der Alltag",
+    "translation": "Everyday life",
+    "example": "Der Alltag in Berlin ist oft sehr hektisch.",
+    "exampleTranslation": "Everyday life in Berlin is often very hectic."
+  },
+  {
+    "word": "die Erfahrung",
+    "translation": "Experience",
+    "example": "Ich habe gute Erfahrungen damit gemacht.",
+    "exampleTranslation": "I have had good experiences with it."
+  },
+  {
+    "word": "die Entscheidung",
+    "translation": "Decision",
+    "example": "Das war eine schwierige Entscheidung.",
+    "exampleTranslation": "That was a difficult decision."
+  },
+  {
+    "word": "unterstützen",
+    "translation": "To support",
+    "example": "Meine Freunde unterstützen mich immer.",
+    "exampleTranslation": "My friends always support me."
+  },
+  {
+    "word": "erfolgreich",
+    "translation": "Successful",
+    "example": "Sie ist eine sehr erfolgreiche Ärztin.",
+    "exampleTranslation": "She is a very successful doctor."
+  },
+  {
+    "word": "die Gesellschaft",
+    "translation": "Society",
+    "example": "Wir leben in einer modernen Gesellschaft.",
+    "exampleTranslation": "We live in a modern society."
+  },
+  {
+    "word": "das Unternehmen",
+    "translation": "Company",
+    "example": "Er arbeitet für ein internationales Unternehmen.",
+    "exampleTranslation": "He works for an international company."
+  },
+  {
+    "word": "verantwortlich",
+    "translation": "Responsible",
+    "example": "Wer ist dafür verantwortlich?",
+    "exampleTranslation": "Who is responsible for that?"
+  },
+  {
+    "word": "die Entwicklung",
+    "translation": "Development",
+    "example": "Die Entwicklung der Technik ist schnell.",
+    "exampleTranslation": "The development of technology is fast."
+  },
+  {
+    "word": "die Beziehung",
+    "translation": "Relationship",
+    "example": "Sie haben eine gute Beziehung zueinander.",
+    "exampleTranslation": "They have a good relationship with each other."
+  },
+  {
+    "word": "die Wirtschaft",
+    "translation": "Economy",
+    "example": "Die Wirtschaft wächst dieses Jahr.",
+    "exampleTranslation": "The economy is growing this year."
+  },
+  {
+    "word": "das Ziel",
+    "translation": "Goal",
+    "example": "Mein Ziel ist es, fließend Deutsch zu sprechen.",
+    "exampleTranslation": "My goal is to speak German fluently."
+  },
+  {
+    "word": "erreichen",
+    "translation": "To achieve/reach",
+    "example": "Wir haben unser Ziel erreicht.",
+    "exampleTranslation": "We have achieved our goal."
+  },
+  {
+    "word": "die Ausbildung",
+    "translation": "Education/Training",
+    "example": "Eine gute Ausbildung ist wichtig für die Zukunft.",
+    "exampleTranslation": "A good education is important for the future."
+  },
+  {
+    "word": "die Herausforderung",
+    "translation": "Challenge",
+    "example": "Das neue Projekt ist eine große Herausforderung.",
+    "exampleTranslation": "The new project is a big challenge."
+  },
+  {
+    "word": "die Möglichkeit",
+    "translation": "Possibility/Opportunity",
+    "example": "Wir haben verschiedene Möglichkeiten.",
+    "exampleTranslation": "We have different possibilities."
+  },
+  {
+    "word": "der Bereich",
+    "translation": "Area/Field",
+    "example": "In welchem Bereich arbeiten Sie?",
+    "exampleTranslation": "In which field do you work?"
+  },
+  {
+    "word": "die Bedingung",
+    "translation": "Condition",
+    "example": "Unter diesen Bedingungen kann ich nicht arbeiten.",
+    "exampleTranslation": "Under these conditions I cannot work."
+  },
+  {
+    "word": "die Regierung",
+    "translation": "Government",
+    "example": "Die Regierung hat neue Gesetze verabschiedet.",
+    "exampleTranslation": "The government has passed new laws."
+  },
+  {
+    "word": "der Grund",
+    "translation": "Reason",
+    "example": "Was ist der Grund für deine Entscheidung?",
+    "exampleTranslation": "What is the reason for your decision?"
+  },
+  {
+    "word": "der Vorteil",
+    "translation": "Advantage",
+    "example": "Das Auto hat viele Vorteile.",
+    "exampleTranslation": "The car has many advantages."
+  },
+  {
+    "word": "der Nachteil",
+    "translation": "Disadvantage",
+    "example": "Gibt es auch Nachteile?",
+    "exampleTranslation": "Are there also disadvantages?"
+  },
+  {
+    "word": "das Ergebnis",
+    "translation": "Result",
+    "example": "Das Ergebnis der Prüfung ist sehr gut.",
+    "exampleTranslation": "The result of the exam is very good."
+  },
+  {
+    "word": "der Erfolg",
+    "translation": "Success",
+    "example": "Ich wünsche dir viel Erfolg!",
+    "exampleTranslation": "I wish you much success!"
+  },
+  {
+    "word": "die Bedeutung",
+    "translation": "Meaning/Importance",
+    "example": "Kennst du die Bedeutung dieses Wortes?",
+    "exampleTranslation": "Do you know the meaning of this word?"
+  },
+  {
+    "word": "vergleichen",
+    "translation": "To compare",
+    "example": "Man kann diese beiden Dinge nicht vergleichen.",
+    "exampleTranslation": "You cannot compare these two things."
+  },
+  {
+    "word": "der Unterschied",
+    "translation": "Difference",
+    "example": "Es gibt einen großen Unterschied.",
+    "exampleTranslation": "There is a big difference."
+  },
+  {
+    "word": "die Lösung",
+    "translation": "Solution",
+    "example": "Wir müssen eine Lösung für das Problem finden.",
+    "exampleTranslation": "We must find a solution to the problem."
+  },
+  {
+    "word": "der Teilnehmer",
+    "translation": "Participant",
+    "example": "Die Teilnehmer waren sehr zufrieden.",
+    "exampleTranslation": "The participants were very satisfied."
+  },
+  {
+    "word": "die Veranstaltung",
+    "translation": "Event",
+    "example": "Die Veranstaltung findet morgen statt.",
+    "exampleTranslation": "The event takes place tomorrow."
+  },
+  {
+    "word": "das Verhalten",
+    "translation": "Behavior",
+    "example": "Sein Verhalten war nicht akzeptabel.",
+    "exampleTranslation": "His behavior was not acceptable."
+  },
+  {
+    "word": "die Erinnerung",
+    "translation": "Memory",
+    "example": "Ich habe gute Erinnerungen an den Urlaub.",
+    "exampleTranslation": "I have good memories of the vacation."
+  },
+  {
+    "word": "erwarten",
+    "translation": "To expect",
+    "example": "Was erwartest du von mir?",
+    "exampleTranslation": "What do you expect from me?"
+  },
+  {
+    "word": "die Sicherheit",
+    "translation": "Security/Safety",
+    "example": "Sicherheit steht an erster Stelle.",
+    "exampleTranslation": "Security comes first."
+  },
+  {
+    "word": "der Einfluss",
+    "translation": "Influence",
+    "example": "Das Wetter hat einen großen Einfluss auf meine Stimmung.",
+    "exampleTranslation": "The weather has a big influence on my mood."
+  },
+  {
+    "word": "die Verbesserung",
+    "translation": "Improvement",
+    "example": "Wir sehen eine deutliche Verbesserung.",
+    "exampleTranslation": "We see a clear improvement."
+  },
+  {
+    "word": "der Mitarbeiter",
+    "translation": "Employee",
+    "example": "Unsere Mitarbeiter sind hoch motiviert.",
+    "exampleTranslation": "Our employees are highly motivated."
+  },
+  {
+    "word": "die Umgebung",
+    "translation": "Environment/Surroundings",
+    "example": "Die Umgebung des Hotels ist wunderschön.",
+    "exampleTranslation": "The surroundings of the hotel are beautiful."
+  },
+  {
+    "word": "das Angebot",
+    "translation": "Offer",
+    "example": "Das ist ein sehr gutes Angebot.",
+    "exampleTranslation": "That is a very good offer."
+  },
+  {
+    "word": "die Nachfrage",
+    "translation": "Demand",
+    "example": "Die Nachfrage nach diesem Produkt ist hoch.",
+    "exampleTranslation": "The demand for this product is high."
+  },
+  {
+    "word": "die Gesundheit",
+    "translation": "Health",
+    "example": "Gesundheit ist das Wichtigste im Leben.",
+    "exampleTranslation": "Health is the most important thing in life."
+  },
+  {
+    "word": "die Zukunft",
+    "translation": "Future",
+    "example": "Niemand kennt die Zukunft.",
+    "exampleTranslation": "No one knows the future."
+  },
+  {
+    "word": "die Vergangenheit",
+    "translation": "Past",
+    "example": "Wir können die Vergangenheit nicht ändern.",
+    "exampleTranslation": "We cannot change the past."
+  },
+  {
+    "word": "der Fehler",
+    "translation": "Mistake",
+    "example": "Jeder macht mal Fehler.",
+    "exampleTranslation": "Everyone makes mistakes."
+  },
+  {
+    "word": "die Wahrheit",
+    "translation": "Truth",
+    "example": "Sag mir bitte die Wahrheit.",
+    "exampleTranslation": "Please tell me the truth."
+  },
+  {
+    "word": "das Gefühl",
+    "translation": "Feeling",
+    "example": "Ich habe ein gutes Gefühl dabei.",
+    "exampleTranslation": "I have a good feeling about it."
+  },
+  {
+    "word": "der Traum",
+    "translation": "Dream",
+    "example": "Es war nur ein Traum.",
+    "exampleTranslation": "It was only a dream."
+  },
+  {
+    "word": "die Gefahr",
+    "translation": "Danger",
+    "example": "Es besteht keine Gefahr mehr.",
+    "exampleTranslation": "There is no more danger."
+  },
+  {
+    "word": "die Leistung",
+    "translation": "Performance/Achievement",
+    "example": "Seine Leistung in der Schule ist hervorragend.",
+    "exampleTranslation": "His performance in school is excellent."
+  },
+  {
+    "word": "der Anspruch",
+    "translation": "Claim/Demand",
+    "example": "Die Kunden haben hohe Ansprüche.",
+    "exampleTranslation": "The customers have high demands."
+  },
+  {
+    "word": "bestätigen",
+    "translation": "To confirm",
+    "example": "Bitte bestätigen Sie Ihre E-Mail-Adresse.",
+    "exampleTranslation": "Please confirm your email address."
+  },
+  {
+    "word": "vermuten",
+    "translation": "To suspect/assume",
+    "example": "Ich vermute, dass er später kommt.",
+    "exampleTranslation": "I suspect that he will come later."
+  },
+  {
+    "word": "ablehnen",
+    "translation": "To reject",
+    "example": "Er hat das Angebot abgelehnt.",
+    "exampleTranslation": "He rejected the offer."
+  },
+  {
+    "word": "zustimmen",
+    "translation": "To agree",
+    "example": "Ich stimme dir vollkommen zu.",
+    "exampleTranslation": "I completely agree with you."
+  },
+  {
+    "word": "stattfinden",
+    "translation": "To take place",
+    "example": "Das Konzert findet morgen statt.",
+    "exampleTranslation": "The concert takes place tomorrow."
+  },
+  {
+    "word": "teilnehmen",
+    "translation": "To participate",
+    "example": "Ich möchte an dem Kurs teilnehmen.",
+    "exampleTranslation": "I would like to participate in the course."
+  },
+  {
+    "word": "die Ursache",
+    "translation": "Cause",
+    "example": "Die Ursache des Problems ist unklar.",
+    "exampleTranslation": "The cause of the problem is unclear."
+  },
+  {
+    "word": "der Zweck",
+    "translation": "Purpose",
+    "example": "Was ist der Zweck dieses Treffens?",
+    "exampleTranslation": "What is the purpose of this meeting?"
+  },
+  {
+    "word": "das Mittel",
+    "translation": "Means/Agent",
+    "example": "Das ist ein gutes Mittel gegen Kopfschmerzen.",
+    "exampleTranslation": "That is a good remedy for headaches."
+  },
+  {
+    "word": "die Maßnahme",
+    "translation": "Measure/Action",
+    "example": "Die Regierung ergreift neue Maßnahmen.",
+    "exampleTranslation": "The government is taking new measures."
+  },
+  {
+    "word": "die Regel",
+    "translation": "Rule",
+    "example": "Man muss die Regeln beachten.",
+    "exampleTranslation": "One must observe the rules."
+  },
+  {
+    "word": "die Ausnahme",
+    "translation": "Exception",
+    "example": "Keine Regel ohne Ausnahme.",
+    "exampleTranslation": "No rule without exception."
+  },
+  {
+    "word": "der Zufall",
+    "translation": "Coincidence",
+    "example": "Das war reiner Zufall.",
+    "exampleTranslation": "That was pure coincidence."
+  },
+  {
+    "word": "die Absicht",
+    "translation": "Intention",
+    "example": "Es war nicht meine Absicht, dich zu verletzen.",
+    "exampleTranslation": "It was not my intention to hurt you."
+  },
+  {
+    "word": "der Zweifel",
+    "translation": "Doubt",
+    "example": "Ich habe keine Zweifel an deiner Fähigkeit.",
+    "exampleTranslation": "I have no doubts about your ability."
+  },
+  {
+    "word": "die Überzeugung",
+    "translation": "Conviction",
+    "example": "Es ist meine tiefe Überzeugung.",
+    "exampleTranslation": "It is my deep conviction."
+  },
+  {
+    "word": "die Forderung",
+    "translation": "Demand/Claim",
+    "example": "Ihre Forderung ist nicht gerechtfertigt.",
+    "exampleTranslation": "Your demand is not justified."
+  },
+  {
+    "word": "die Erwartung",
+    "translation": "Expectation",
+    "example": "Meine Erwartungen wurden erfüllt.",
+    "exampleTranslation": "My expectations were met."
+  },
+  {
+    "word": "die Enttäuschung",
+    "translation": "Disappointment",
+    "example": "Die Enttäuschung war groß.",
+    "exampleTranslation": "The disappointment was great."
+  },
+  {
+    "word": "die Hoffnung",
+    "translation": "Hope",
+    "example": "Die Hoffnung stirbt zuletzt.",
+    "exampleTranslation": "Hope dies last."
+  },
+  {
+    "word": "die Sorge",
+    "translation": "Worry",
+    "example": "Mach dir keine Sorgen.",
+    "exampleTranslation": "Don't worry."
+  },
+  {
+    "word": "die Angst",
+    "translation": "Fear",
+    "example": "Er hat Angst vor Spinnen.",
+    "exampleTranslation": "He is afraid of spiders."
+  },
+  {
+    "word": "die Freude",
+    "translation": "Joy",
+    "example": "Es ist mir eine große Freude.",
+    "exampleTranslation": "It is a great joy to me."
+  },
+  {
+    "word": "der Ärger",
+    "translation": "Anger/Trouble",
+    "example": "Ich will keinen Ärger.",
+    "exampleTranslation": "I don't want any trouble."
+  },
+  {
+    "word": "der Respekt",
+    "translation": "Respect",
+    "example": "Wir sollten vor allen Menschen Respekt haben.",
+    "exampleTranslation": "We should have respect for all people."
+  },
+  {
+    "word": "das Vertrauen",
+    "translation": "Trust",
+    "example": "Vertrauen ist die Basis einer Beziehung.",
+    "exampleTranslation": "Trust is the basis of a relationship."
+  },
+  {
+    "word": "die Geduld",
+    "translation": "Patience",
+    "example": "Du musst etwas Geduld haben.",
+    "exampleTranslation": "You have to have some patience."
+  },
+  {
+    "word": "die Mühe",
+    "translation": "Effort/Trouble",
+    "example": "Vielen Dank für deine Mühe.",
+    "exampleTranslation": "Thank you for your effort."
+  },
+  {
+    "word": "die Verantwortung",
+    "translation": "Responsibility",
+    "example": "Er trägt eine große Verantwortung.",
+    "exampleTranslation": "He bears a great responsibility."
+  },
+  {
+    "word": "das Gewissen",
+    "translation": "Conscience",
+    "example": "Ich habe ein ruhiges Gewissen.",
+    "exampleTranslation": "I have a clear conscience."
+  },
+  {
+    "word": "die Vernunft",
+    "translation": "Reason/Sense",
+    "example": "Hör auf deine Vernunft.",
+    "exampleTranslation": "Listen to your reason."
+  },
+  {
+    "word": "der Verstand",
+    "translation": "Mind/Intellect",
+    "example": "Das geht über meinen Verstand.",
+    "exampleTranslation": "That is beyond my understanding."
+  },
+  {
+    "word": "die Einsicht",
+    "translation": "Insight/Realization",
+    "example": "Er kam zu der Einsicht, dass er falsch lag.",
+    "exampleTranslation": "He came to the realization that he was wrong."
+  },
+  {
+    "word": "der Überblick",
+    "translation": "Overview",
+    "example": "Ich brauche zuerst einen Überblick.",
+    "exampleTranslation": "I need an overview first."
+  },
+  {
+    "word": "der Eindruck",
+    "translation": "Impression",
+    "example": "Ich habe einen guten Eindruck von ihr.",
+    "exampleTranslation": "I have a good impression of her."
+  },
+  {
+    "word": "der Ausdruck",
+    "translation": "Expression",
+    "example": "Das ist ein schöner Ausdruck.",
+    "exampleTranslation": "That is a beautiful expression."
+  },
+  {
+    "word": "die Vermutung",
+    "translation": "Assumption",
+    "example": "Das ist nur eine Vermutung.",
+    "exampleTranslation": "That is just an assumption."
+  },
+  {
+    "word": "die Behauptung",
+    "translation": "Claim/Assertion",
+    "example": "Diese Behauptung ist falsch.",
+    "exampleTranslation": "This claim is false."
+  },
+  {
+    "word": "der Beweis",
+    "translation": "Proof/Evidence",
+    "example": "Hast du Beweise dafür?",
+    "exampleTranslation": "Do you have evidence for that?"
+  },
+  {
+    "word": "das Argument",
+    "translation": "Argument",
+    "example": "Das ist ein starkes Argument.",
+    "exampleTranslation": "That is a strong argument."
+  },
+  {
+    "word": "die Diskussion",
+    "translation": "Discussion",
+    "example": "Die Diskussion war sehr interessant.",
+    "exampleTranslation": "The discussion was very interesting."
+  },
+  {
+    "word": "der Kompromiss",
+    "translation": "Compromise",
+    "example": "Wir müssen einen Kompromiss finden.",
+    "exampleTranslation": "We must find a compromise."
+  },
+  {
+    "word": "der Vertrag",
+    "translation": "Contract",
+    "example": "Ich habe den Vertrag unterschrieben.",
+    "exampleTranslation": "I signed the contract."
+  },
+  {
+    "word": "die Voraussetzung",
+    "translation": "Prerequisite",
+    "example": "Ein Visum ist die Voraussetzung für die Reise.",
+    "exampleTranslation": "A visa is a prerequisite for the trip."
+  },
+  {
+    "word": "die Konsequenz",
+    "translation": "Consequence",
+    "example": "Du musst die Konsequenzen tragen.",
+    "exampleTranslation": "You must bear the consequences."
+  },
+  {
+    "word": "die Wirkung",
+    "translation": "Effect",
+    "example": "Das Medikament hat eine schnelle Wirkung.",
+    "exampleTranslation": "The medication has a fast effect."
+  },
+  {
+    "word": "der Misserfolg",
+    "translation": "Failure",
+    "example": "Wir lernen aus unseren Misserfolgen.",
+    "exampleTranslation": "We learn from our failures."
+  },
+  {
+    "word": "die Schuld",
+    "translation": "Guilt/Debt",
+    "example": "Es war nicht meine Schuld.",
+    "exampleTranslation": "It was not my fault."
+  },
+  {
+    "word": "abfahren",
+    "translation": "to depart",
+    "example": "Der Zug fährt um 8 Uhr ab.",
+    "exampleTranslation": "The train departs at 8 o'clock."
+  },
+  {
+    "word": "die Abfahrt",
+    "translation": "departure",
+    "example": "Die Abfahrt verzögert sich.",
+    "exampleTranslation": "The departure is delayed."
+  },
+  {
+    "word": "abgeben",
+    "translation": "to hand in",
+    "example": "Bitte geben Sie Ihre Arbeit ab.",
+    "exampleTranslation": "Please hand in your work."
+  },
+  {
+    "word": "abhängig",
+    "translation": "dependent",
+    "example": "Ich bin von meinen Eltern abhängig.",
+    "exampleTranslation": "I am dependent on my parents."
+  },
+  {
+    "word": "abholen",
+    "translation": "to pick up",
+    "example": "Ich hole dich vom Bahnhof ab.",
+    "exampleTranslation": "I will pick you up from the station."
+  },
+  {
+    "word": "der Absender",
+    "translation": "sender",
+    "example": "Der Absender fehlt auf dem Brief.",
+    "exampleTranslation": "The sender is missing on the letter."
+  },
+  {
+    "word": "die Achtung",
+    "translation": "attention/respect",
+    "example": "Achtung an der Bahnsteigkante!",
+    "exampleTranslation": "Attention at the platform edge!"
+  },
+  {
+    "word": "ähnlich",
+    "translation": "similar",
+    "example": "Die beiden Bilder sind sehr ähnlich.",
+    "exampleTranslation": "The two pictures are very similar."
+  },
+  {
+    "word": "akzeptieren",
+    "translation": "to accept",
+    "example": "Ich akzeptiere deine Entschuldigung.",
+    "exampleTranslation": "I accept your apology."
+  },
+  {
+    "word": "anbieten",
+    "translation": "to offer",
+    "example": "Darf ich Ihnen etwas zu trinken anbieten?",
+    "exampleTranslation": "May I offer you something to drink?"
+  },
+  {
+    "word": "andererseits",
+    "translation": "on the other hand",
+    "example": "Einerseits ist es gut, andererseits schlecht.",
+    "exampleTranslation": "On the one hand it's good, on the other hand bad."
+  },
+  {
+    "word": "ändern",
+    "translation": "to change",
+    "example": "Das Wetter wird sich ändern.",
+    "exampleTranslation": "The weather will change."
+  },
+  {
+    "word": "anerkennen",
+    "translation": "to recognize",
+    "example": "Sein Abschluss wurde anerkannt.",
+    "exampleTranslation": "His degree was recognized."
+  },
+  {
+    "word": "anfangen",
+    "translation": "to begin",
+    "example": "Wann fängt der Film an?",
+    "exampleTranslation": "When does the film begin?"
+  },
+  {
+    "word": "ankommen",
+    "translation": "to arrive",
+    "example": "Der Zug kommt um 10 Uhr an.",
+    "exampleTranslation": "The train arrives at 10 o'clock."
+  },
+  {
+    "word": "die Ankunft",
+    "translation": "arrival",
+    "example": "Die Ankunft ist für 15 Uhr geplant.",
+    "exampleTranslation": "The arrival is planned for 3 PM."
+  },
+  {
+    "word": "anmelden",
+    "translation": "to register",
+    "example": "Du musst dich für den Kurs anmelden.",
+    "exampleTranslation": "You have to register for the course."
+  },
+  {
+    "word": "der Antrag",
+    "translation": "application",
+    "example": "Ich habe einen Antrag gestellt.",
+    "exampleTranslation": "I submitted an application."
+  },
+  {
+    "word": "die Antwort",
+    "translation": "answer",
+    "example": "Ich warte auf deine Antwort.",
+    "exampleTranslation": "I am waiting for your answer."
+  },
+  {
+    "word": "anziehen",
+    "translation": "to put on (clothes)",
+    "example": "Zieh dir eine Jacke an.",
+    "exampleTranslation": "Put on a jacket."
+  },
+  {
+    "word": "der Arbeiter",
+    "translation": "worker",
+    "example": "Der Arbeiter streikt für mehr Lohn.",
+    "exampleTranslation": "The worker strikes for more wage."
+  },
+  {
+    "word": "die Aufgabe",
+    "translation": "task",
+    "example": "Das ist eine schwierige Aufgabe.",
+    "exampleTranslation": "That is a difficult task."
+  },
+  {
+    "word": "aufhören",
+    "translation": "to stop",
+    "example": "Hör auf zu weinen.",
+    "exampleTranslation": "Stop crying."
+  },
+  {
+    "word": "aufpassen",
+    "translation": "to pay attention",
+    "example": "Pass gut auf dich auf!",
+    "exampleTranslation": "Take good care of yourself!"
+  },
+  {
+    "word": "aufräumen",
+    "translation": "to clean up",
+    "example": "Ich muss mein Zimmer aufräumen.",
+    "exampleTranslation": "I have to clean up my room."
+  },
+  {
+    "word": "aufregen",
+    "translation": "to upset/excite",
+    "example": "Reg dich nicht auf!",
+    "exampleTranslation": "Don't get upset!"
+  },
+  {
+    "word": "aufstehen",
+    "translation": "to stand up / get up",
+    "example": "Ich stehe jeden Morgen um 6 Uhr auf.",
+    "exampleTranslation": "I get up every morning at 6 o'clock."
+  },
+  {
+    "word": "der Auftrag",
+    "translation": "order/task",
+    "example": "Ich habe diesen Auftrag erledigt.",
+    "exampleTranslation": "I have finished this task."
+  },
+  {
+    "word": "ausgeben",
+    "translation": "to spend (money)",
+    "example": "Er gibt viel Geld für Kleidung aus.",
+    "exampleTranslation": "He spends a lot of money on clothes."
+  },
+  {
+    "word": "ausgehen",
+    "translation": "to go out",
+    "example": "Wir gehen heute Abend aus.",
+    "exampleTranslation": "We are going out tonight."
+  },
+  {
+    "word": "ausruhen",
+    "translation": "to rest",
+    "example": "Du solltest dich etwas ausruhen.",
+    "exampleTranslation": "You should rest a bit."
+  },
+  {
+    "word": "aussehen",
+    "translation": "to look (appear)",
+    "example": "Du siehst heute gut aus.",
+    "exampleTranslation": "You look good today."
+  },
+  {
+    "word": "die Aussage",
+    "translation": "statement",
+    "example": "Ihre Aussage ist sehr wichtig.",
+    "exampleTranslation": "Her statement is very important."
+  },
+  {
+    "word": "außerdem",
+    "translation": "besides / furthermore",
+    "example": "Es ist kalt und außerdem regnet es.",
+    "exampleTranslation": "It is cold and furthermore it is raining."
+  },
+  {
+    "word": "die Aussicht",
+    "translation": "view / prospect",
+    "example": "Wir haben eine schöne Aussicht auf das Meer.",
+    "exampleTranslation": "We have a beautiful view of the sea."
+  },
+  {
+    "word": "aussprechen",
+    "translation": "to pronounce",
+    "example": "Wie spricht man dieses Wort aus?",
+    "exampleTranslation": "How do you pronounce this word?"
+  },
+  {
+    "word": "die Ausstellung",
+    "translation": "exhibition",
+    "example": "Wir besuchen morgen eine Kunstausstellung.",
+    "exampleTranslation": "We are visiting an art exhibition tomorrow."
+  },
+  {
+    "word": "auswählen",
+    "translation": "to choose / select",
+    "example": "Sie können aus drei Menüs auswählen.",
+    "exampleTranslation": "You can choose from three menus."
+  },
+  {
+    "word": "der Ausweis",
+    "translation": "ID card",
+    "example": "Zeigen Sie mir bitte Ihren Ausweis.",
+    "exampleTranslation": "Please show me your ID."
+  },
+  {
+    "word": "das Auto",
+    "translation": "car",
+    "example": "Mein Auto ist kaputt.",
+    "exampleTranslation": "My car is broken."
+  },
+  {
+    "word": "backen",
+    "translation": "to bake",
+    "example": "Ich backe heute einen Kuchen.",
+    "exampleTranslation": "I am baking a cake today."
+  },
+  {
+    "word": "baden",
+    "translation": "to bathe",
+    "example": "Wir baden gerne im See.",
+    "exampleTranslation": "We like to bathe in the lake."
+  },
+  {
+    "word": "die Bahn",
+    "translation": "train / railway",
+    "example": "Ich fahre mit der Bahn zur Arbeit.",
+    "exampleTranslation": "I travel to work by train."
+  },
+  {
+    "word": "bald",
+    "translation": "soon",
+    "example": "Bis bald!",
+    "exampleTranslation": "See you soon!"
+  },
+  {
+    "word": "bauen",
+    "translation": "to build",
+    "example": "Sie bauen ein neues Haus.",
+    "exampleTranslation": "They are building a new house."
+  },
+  {
+    "word": "beantworten",
+    "translation": "to answer",
+    "example": "Bitte beantworten Sie die Fragen.",
+    "exampleTranslation": "Please answer the questions."
+  },
+  {
+    "word": "bedeuten",
+    "translation": "to mean",
+    "example": "Was bedeutet das Wort?",
+    "exampleTranslation": "What does the word mean?"
+  },
+  {
+    "word": "das Fenster",
+    "translation": "window",
+    "example": "Bitte schließ das Fenster.",
+    "exampleTranslation": "Please close the window."
+  },
+  {
+    "word": "die Tür",
+    "translation": "door",
+    "example": "Die Tür ist offen.",
+    "exampleTranslation": "The door is open."
+  },
+  {
+    "word": "der Tisch",
+    "translation": "table",
+    "example": "Das Buch liegt auf dem Tisch.",
+    "exampleTranslation": "The book lies on the table."
+  },
+  {
+    "word": "der Stuhl",
+    "translation": "chair",
+    "example": "Dieser Stuhl ist sehr bequem.",
+    "exampleTranslation": "This chair is very comfortable."
+  },
+  {
+    "word": "die Wand",
+    "translation": "wall",
+    "example": "Das Bild hängt an der Wand.",
+    "exampleTranslation": "The picture hangs on the wall."
+  },
+  {
+    "word": "das Bett",
+    "translation": "bed",
+    "example": "Ich gehe jetzt ins Bett.",
+    "exampleTranslation": "I am going to bed now."
+  },
+  {
+    "word": "das Zimmer",
+    "translation": "room",
+    "example": "Mein Zimmer ist groß.",
+    "exampleTranslation": "My room is big."
+  },
+  {
+    "word": "die Küche",
+    "translation": "kitchen",
+    "example": "Wir kochen in der Küche.",
+    "exampleTranslation": "We cook in the kitchen."
+  },
+  {
+    "word": "das Bad",
+    "translation": "bathroom",
+    "example": "Das Bad ist neu renoviert.",
+    "exampleTranslation": "The bathroom is newly renovated."
+  },
+  {
+    "word": "der Balkon",
+    "translation": "balcony",
+    "example": "Wir sitzen oft auf dem Balkon.",
+    "exampleTranslation": "We often sit on the balcony."
+  }
 ]

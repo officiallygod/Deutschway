@@ -10,6 +10,7 @@ const STORAGE_KEYS = {
   XP_HISTORY: 'deutschway_xpHistory',
   STREAK: 'deutschway_streak',
   LAST_STREAK: 'deutschway_lastStreakDate',
+  DAILY_HISTORY: 'deutschway_dailyHistory'
 };
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -85,6 +86,11 @@ class ApiService {
     const newSeen = [...seenIndices, ...dailyWords.map(w => w.originalIndex)];
     localStorage.setItem(STORAGE_KEYS.SEEN_INDICES, JSON.stringify([...new Set(newSeen)]));
 
+    // Save to daily history
+    const historyMap = JSON.parse(localStorage.getItem(STORAGE_KEYS.DAILY_HISTORY) || '{}');
+    historyMap[today] = dailyWords.map(w => w.originalIndex);
+    localStorage.setItem(STORAGE_KEYS.DAILY_HISTORY, JSON.stringify(historyMap));
+
     // Update streak
     const lastStreakDate = localStorage.getItem(STORAGE_KEYS.LAST_STREAK);
     let currentStreak = parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0', 10);
@@ -138,6 +144,17 @@ class ApiService {
       totalXp: parseInt(localStorage.getItem(STORAGE_KEYS.XP) || '0', 10),
       chartData: last7Days
     };
+  }
+
+  async getHistoryMap() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.DAILY_HISTORY) || '{}');
+  }
+
+  async getRevisionWords(dateStr) {
+    const historyMap = await this.getHistoryMap();
+    const indices = historyMap[dateStr];
+    if (!indices) return null;
+    return indices.map(idx => ({ ...wordsData[idx], originalIndex: idx }));
   }
 }
 

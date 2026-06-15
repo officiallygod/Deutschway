@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Menu, ArrowLeft } from 'lucide-react';
+import { Menu, ArrowLeft, Calendar as CalendarIcon } from 'lucide-react';
 import './App.scss';
 import { useDailySession } from './hooks/useDailySession';
 import Sidebar from './components/Sidebar';
@@ -7,11 +7,13 @@ import WordCard from './components/WordCard';
 import FunFactWidget from './components/FunFactWidget';
 
 const StatsModal = React.lazy(() => import('./components/StatsModal'));
+const CalendarWidget = React.lazy(() => import('./components/CalendarWidget'));
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   
   const {
     loading,
@@ -20,9 +22,13 @@ function App() {
     completedIndices,
     isSessionComplete,
     stats,
+    isRevisionMode,
+    revisionDate,
     handleNext,
     handlePrev,
-    jumpToWord
+    jumpToWord,
+    loadRevisionDay,
+    exitRevisionMode
   } = useDailySession();
 
   useEffect(() => {
@@ -42,6 +48,50 @@ function App() {
 
   const currentWord = dailyWords[currentIndex];
 
+  const renderMainContent = () => {
+    if (showStats) {
+      return (
+        <Suspense fallback={<div>Lade Statistiken...</div>}>
+          <StatsModal 
+            xpEarned={completedIndices.length * 10} 
+            chartData={stats.chartData} 
+          />
+        </Suspense>
+      );
+    }
+    
+    if (showCalendar) {
+      return (
+        <Suspense fallback={<div>Lade Kalender...</div>}>
+          <CalendarWidget 
+            onSelectDate={(dateStr) => {
+              loadRevisionDay(dateStr);
+              setShowCalendar(false);
+            }} 
+          />
+        </Suspense>
+      );
+    }
+
+    return (
+      <>
+        {isRevisionMode && (
+          <div className="revision-banner" style={{ background: 'var(--primary-accent)', color: 'white', padding: '0.5rem 1rem', borderRadius: '12px', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontWeight: 600 }}>Revision: {new Date(revisionDate).toLocaleDateString()}</span>
+            <button onClick={exitRevisionMode} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: 'white', padding: '0.3rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Zurück zu Heute</button>
+          </div>
+        )}
+        <WordCard 
+          word={currentWord}
+          currentIndex={currentIndex}
+          totalWords={dailyWords.length}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+        />
+      </>
+    );
+  };
+
   return (
     <div className="app-layout">
       {/* Mobile overlay */}
@@ -54,12 +104,13 @@ function App() {
         dailyWords={dailyWords}
         currentIndex={currentIndex}
         completedIndices={completedIndices}
-        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); setShowStats(false); }}
+        jumpToWord={(idx) => { jumpToWord(idx); setSidebarOpen(false); setShowStats(false); setShowCalendar(false); }}
         streak={stats.streak}
         theme={theme}
         toggleTheme={toggleTheme}
         isOpen={sidebarOpen}
-        onOpenStats={() => { setShowStats(true); setSidebarOpen(false); }}
+        onOpenStats={() => { setShowStats(true); setShowCalendar(false); setSidebarOpen(false); }}
+        onOpenCalendar={() => { setShowCalendar(true); setShowStats(false); setSidebarOpen(false); }}
       />
 
       <main className="main-content">
@@ -67,29 +118,20 @@ function App() {
           <button className="icon-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle Menu">
             <Menu size={24} />
           </button>
-          {showStats && !isSessionComplete && (
-            <button className="icon-btn" onClick={() => setShowStats(false)} aria-label="Back">
-              <ArrowLeft size={24} />
+          
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            {(showStats || showCalendar || isRevisionMode) && (
+              <button className="icon-btn" onClick={() => { setShowStats(false); setShowCalendar(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
+                <ArrowLeft size={24} />
+              </button>
+            )}
+            <button className="icon-btn" onClick={() => { setShowCalendar(true); setShowStats(false); }} aria-label="Kalender" title="Historie">
+              <CalendarIcon size={24} />
             </button>
-          )}
+          </div>
         </div>
 
-        {(!isSessionComplete && !showStats) ? (
-          <WordCard 
-            word={currentWord}
-            currentIndex={currentIndex}
-            totalWords={dailyWords.length}
-            handleNext={handleNext}
-            handlePrev={handlePrev}
-          />
-        ) : (
-          <Suspense fallback={<div>Lade Statistiken...</div>}>
-            <StatsModal 
-              xpEarned={completedIndices.length * 10} 
-              chartData={stats.chartData} 
-            />
-          </Suspense>
-        )}
+        {renderMainContent()}
 
         <FunFactWidget />
       </main>

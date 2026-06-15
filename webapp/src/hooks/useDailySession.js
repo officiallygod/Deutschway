@@ -65,6 +65,34 @@ export const useDailySession = () => {
     setCurrentIndex(index);
   };
 
+  const [isRevisionMode, setIsRevisionMode] = useState(false);
+  const [revisionDate, setRevisionDate] = useState(null);
+
+  const loadRevisionDay = useCallback(async (dateStr) => {
+    setLoading(true);
+    try {
+      const words = await apiService.getRevisionWords(dateStr);
+      if (words) {
+        setDailyWords(words);
+        setCompletedIndices(words.map((_, i) => i)); // All completed in revision
+        setIsSessionComplete(true);
+        setIsRevisionMode(true);
+        setRevisionDate(dateStr);
+        setCurrentIndex(0);
+      }
+    } catch (err) {
+      console.error("Failed to load revision", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const exitRevisionMode = useCallback(() => {
+    setIsRevisionMode(false);
+    setRevisionDate(null);
+    loadData(); // reload today's normal session
+  }, [loadData]);
+
   return {
     loading,
     dailyWords,
@@ -72,8 +100,12 @@ export const useDailySession = () => {
     completedIndices,
     isSessionComplete,
     stats,
+    isRevisionMode,
+    revisionDate,
     handleNext,
     handlePrev,
-    jumpToWord
+    jumpToWord,
+    loadRevisionDay,
+    exitRevisionMode
   };
 };

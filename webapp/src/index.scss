@@ -1,48 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap');
 
 :root {
   /* Default: Computer Theme (Light) */
-  --bg-color: #f9fbfc;
-  --text-color: #111827;
-  --card-bg: #ffffff;
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  --primary-accent: #2563eb;
+  --bg-color: #f4f7f6;
+  --text-color: #1a1a1a;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.5);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --primary-accent: #005bb5;
+  --bg-gradient: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
   
   /* German Flag Accents (Light) */
-  --ger-black: #2b2b2b;
-  --ger-red: #d00000;
-  --ger-gold: #ffcc00;
+  --ger-black: #111111;
+  --ger-red: #cc0000;
+  --ger-gold: #ffce00;
 
-  --border-radius: 20px;
-  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --border-radius: 24px;
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 [data-theme='dark'] {
   /* Dark Mode with Neon Accents */
-  --bg-color: #0b0f19;
-  --text-color: #f3f4f6;
-  --card-bg: #111827;
-  --card-shadow: 0 10px 40px rgba(0, 255, 204, 0.08);
-  --primary-accent: #00ffcc; /* Neon cyan accent */
+  --bg-color: #0f111a;
+  --text-color: #e2e8f0;
+  --card-bg: rgba(15, 23, 42, 0.6);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 8px 32px 0 rgba(0, 255, 204, 0.05);
+  --primary-accent: #00ffcc;
+  --bg-gradient: radial-gradient(circle at top right, #1a202c 0%, #0f111a 100%);
 
   /* German Flag Accents (Neon/Dark) */
   --ger-black: #000000;
-  --ger-red: #ff3333;
-  --ger-gold: #ffea00;
+  --ger-red: #ff4d4d;
+  --ger-gold: #ffe600;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  background-color: var(--bg-color);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-color);
   min-height: 100vh;
-  transition: var(--transition);
+  transition: background 0.5s ease, color 0.5s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +56,7 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -59,13 +64,14 @@ body {
 }
 
 .flag-accent-bar {
-  height: 6px;
+  height: 8px;
   width: 100%;
   background: linear-gradient(to right, var(--ger-black) 33%, var(--ger-red) 33%, var(--ger-red) 66%, var(--ger-gold) 66%);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 
 button {
@@ -78,20 +84,26 @@ button {
 
 .theme-toggle {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 2.5rem;
+  right: 2.5rem;
   background: var(--card-bg);
-  padding: 0.8rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  padding: 1rem;
   border-radius: 50%;
   box-shadow: var(--card-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--text-color);
   
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(15deg);
     box-shadow: 0 10px 40px var(--primary-accent);
   }
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
 }

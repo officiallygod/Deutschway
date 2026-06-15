@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Flame, Moon, Sun, BarChart2 } from 'lucide-react';
+import { Check, Flame, Moon, Sun, BarChart2, X } from 'lucide-react';
 
 const Sidebar = React.memo(({ 
   dailyWords, 
@@ -18,9 +18,16 @@ const Sidebar = React.memo(({
 
   return (
     <aside className={`sidebar ${isOpen ? 'mobile-open' : 'collapsed'}`}>
-      <div className="brand">
-        <img src="/Deutschway/logo.png" alt="Deutschway Logo" />
-        Deutschway
+      <div className="sidebar-header">
+        <div className="brand">
+          <img src="/Deutschway/logo.svg" alt="Deutschway Logo" />
+          Deutschway
+        </div>
+        {isOpen && (
+          <button className="theme-btn" onClick={() => jumpToWord(currentIndex)} aria-label="Schließen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <X size={24} />
+          </button>
+        )}
       </div>
 
       <div className="daily-progress">

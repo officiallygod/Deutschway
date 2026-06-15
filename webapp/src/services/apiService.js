@@ -24,8 +24,8 @@ class ApiService {
     const lastVisit = localStorage.getItem(STORAGE_KEYS.LAST_VISIT);
     let currentDaily = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_DAILY) || 'null');
     
-    if (lastVisit !== today || !currentDaily) {
-      // It's a new day, pick 5 new words
+    if (lastVisit !== today || !currentDaily || !currentDaily[0] || !currentDaily[0].synonyms) {
+      // It's a new day (or legacy cache detected), pick 5 new words
       let seenIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEEN_INDICES) || '[]');
       let availableIndices = wordsData.map((_, i) => i).filter(i => !seenIndices.includes(i));
       

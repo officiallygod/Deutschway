@@ -6,6 +6,15 @@
   overflow: hidden;
 }
 
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius);
+}
+
 .sidebar {
   width: 320px;
   min-width: 320px;
@@ -26,20 +35,25 @@
     height: 100%;
   }
 
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .brand {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.03em;
+    gap: 0.8rem;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.04em;
     color: var(--text-color);
 
     img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 32px;
+      height: 32px;
     }
   }
 
@@ -421,6 +435,25 @@
   }
 }
 
+.fun-fact-toggle {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 40;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 /* Responsiveness (320px to 4K) */
 
 /* 4K Ultra Wide */
@@ -443,7 +476,14 @@
 
 /* Mobile Devices (iPhone etc. down to 320px) */
 @media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+
   .app-layout { flex-direction: column; }
+  .stats-modal {
+    padding: 2rem 1.5rem;
+    h2 { font-size: 1.8rem; }
+    .xp-circle { width: 120px; height: 120px; .xp-amount { font-size: 2rem; } }
+  }
   .main-content { padding: 1rem; justify-content: flex-start; }
   .card-container { margin-top: 4rem; }
   .word-card { padding: 2rem 1.5rem; }

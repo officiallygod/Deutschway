@@ -76,9 +76,9 @@ function App() {
     return (
       <>
         {isRevisionMode && (
-          <div className="revision-banner" style={{ background: 'transparent', color: 'var(--primary-accent)', border: '1px solid var(--primary-accent)', padding: '0.5rem 1rem', borderRadius: '12px', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="revision-banner" style={{ background: 'var(--primary-accent)', color: 'white', padding: '0.5rem 1rem', borderRadius: '12px', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontWeight: 600 }}>Revision: {new Date(revisionDate).toLocaleDateString()}</span>
-            <button onClick={exitRevisionMode} style={{ background: 'var(--primary-accent)', border: 'none', color: 'white', padding: '0.3rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Zurück zu Heute</button>
+            <button onClick={exitRevisionMode} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: 'white', padding: '0.3rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Zurück zu Heute</button>
           </div>
         )}
         <WordCard 
@@ -130,7 +130,6 @@ function App() {
 
         {renderMainContent()}
 
-        <FunFactWidget />
       </main>
     </div>
   );

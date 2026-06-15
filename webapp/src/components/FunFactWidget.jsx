@@ -27,7 +27,7 @@ const FunFactWidget = React.memo(() => {
   return (
     <div className="fun-fact-corner glass">
       <div className="fact-header">
-        <h4><Lightbulb size={16} /> Wusstest du schon?</h4>
+        <h2><Lightbulb size={16} /> Wusstest du schon?</h2>
         <button className="close-btn" onClick={() => setIsExpanded(false)} aria-label="Schließen">
           <X size={16} />
         </button>

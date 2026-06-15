@@ -2,19 +2,19 @@
   /* Default Light: iOS Aesthetic */
   --bg-color: #f2f2f7;
   --mesh-bg: radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0) 0, transparent 50%);
-  --mesh-bg-light: radial-gradient(at 40% 20%, hsla(28,100%,74%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 80% 0%, hsla(189,100%,56%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 0% 50%, hsla(355,100%,93%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 80% 50%, hsla(340,100%,76%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 0% 100%, hsla(22,100%,77%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 80% 100%, hsla(242,100%,70%,0.4) 0px, transparent 50%),
-                   radial-gradient(at 0% 0%, hsla(343,100%,76%,0.4) 0px, transparent 50%);
+  --mesh-bg-light: radial-gradient(at 40% 20%, hsla(28,100%,74%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, hsla(189,100%,56%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, hsla(355,100%,93%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 80% 50%, hsla(340,100%,76%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 100%, hsla(22,100%,77%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 80% 100%, hsla(242,100%,70%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 0%, hsla(343,100%,76%,0.1) 0px, transparent 50%);
 
   --text-color: #000000;
   --text-secondary: #8e8e93;
-  --card-bg: rgba(255, 255, 255, 0.65);
-  --card-border: rgba(255, 255, 255, 0.5);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.25);
+  --card-border: rgba(255, 255, 255, 0.4);
+  --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
   --primary-accent: #0056b3;
   --primary-accent-hover: #004494;
   --success: #34c759;
@@ -30,19 +30,19 @@
 [data-theme='dark'] {
   /* Dark Mode: iOS Aesthetic */
   --bg-color: #000000;
-  --mesh-bg-light: radial-gradient(at 40% 20%, hsla(28,100%,74%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 0% 50%, hsla(355,100%,93%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 80% 50%, hsla(340,100%,76%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 0% 100%, hsla(22,100%,77%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 80% 100%, hsla(242,100%,70%,0.15) 0px, transparent 50%),
-                   radial-gradient(at 0% 0%, hsla(343,100%,76%,0.15) 0px, transparent 50%);
+  --mesh-bg-light: radial-gradient(at 40% 20%, hsla(28,100%,74%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, hsla(189,100%,56%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, hsla(355,100%,93%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 80% 50%, hsla(340,100%,76%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 0% 100%, hsla(22,100%,77%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 80% 100%, hsla(242,100%,70%,0.05) 0px, transparent 50%),
+                   radial-gradient(at 0% 0%, hsla(343,100%,76%,0.05) 0px, transparent 50%);
 
   --text-color: #ffffff;
   --text-secondary: #8e8e93;
-  --card-bg: rgba(28, 28, 30, 0.65);
+  --card-bg: rgba(40, 40, 42, 0.35);
   --card-border: rgba(255, 255, 255, 0.08);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   --primary-accent: #0056b3;
   --primary-accent-hover: #004494;
   --success: #30d158;

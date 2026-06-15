@@ -8,11 +8,11 @@
 
 .glass {
   background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
-  border-radius: var(--border-radius);
+  border-radius: 28px;
 }
 
 .sidebar {
@@ -24,8 +24,8 @@
   flex-direction: column;
   gap: 2rem;
   background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
   z-index: 100;
   
@@ -72,7 +72,7 @@
 
     .progress-bar {
       height: 6px;
-      background: var(--card-border);
+      background: rgba(0,0,0,0.05);
       border-radius: 3px;
       overflow: hidden;
 
@@ -94,26 +94,34 @@
     .word-item {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 1rem;
+      gap: 0.8rem;
+      padding: 0.8rem 1rem;
       border-radius: 12px;
-      transition: var(--transition);
-      color: var(--text-color);
-      font-weight: 500;
+      background: transparent;
+      border: none;
+      text-align: left;
       font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
 
       &:hover {
-        background: var(--card-border);
+        background: rgba(0, 0, 0, 0.03);
+        color: var(--text-color);
       }
 
       &.active {
-        background: rgba(255, 255, 255, 0.4);
-        border: 1px solid var(--primary-accent);
+        background: var(--primary-accent);
+        color: #ffffff;
       }
-      [data-theme="dark"] &.active { background: rgba(0,0,0,0.4); }
 
       &.completed {
-        color: var(--text-secondary);
+        color: var(--success);
+        &.active {
+          background: var(--success);
+          color: #ffffff;
+        }
       }
     }
   }
@@ -122,18 +130,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
 
     .streak-badge {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--ger-red);
-      background: var(--card-bg);
-      padding: 0.5rem 0.8rem;
-      border-radius: 20px;
-      border: 1px solid var(--card-border);
     }
 
     .theme-btn {

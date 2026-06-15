@@ -1,27 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
   const xpText = document.getElementById('xpText');
   const progressFill = document.getElementById('progressFill');
-  const wordList = document.getElementById('wordList');
   const toggle = document.getElementById('openOnNewTabToggle');
-  const openAppBtn = document.getElementById('openAppBtn');
+  const openAppBtnMenu = document.getElementById('openAppBtnMenu');
+  
+  const sideMenu = document.getElementById('sideMenu');
+  const openMenuBtn = document.getElementById('openMenuBtn');
+  const closeMenuBtn = document.getElementById('closeMenuBtn');
+  const streakText = document.getElementById('streakText');
+
+  const wordCarousel = document.getElementById('wordCarousel');
+  const fallbackMsg = document.getElementById('fallbackMsg');
+  const wordTitle = document.getElementById('wordTitle');
+  const wordTrans = document.getElementById('wordTrans');
+  const wordCounter = document.getElementById('wordCounter');
+  const prevWordBtn = document.getElementById('prevWordBtn');
+  const nextWordBtn = document.getElementById('nextWordBtn');
+
+  let learnedWords = [];
+  let currentCarouselIndex = 0;
+
+  // Menu Toggles
+  openMenuBtn.addEventListener('click', () => { sideMenu.classList.add('open'); });
+  closeMenuBtn.addEventListener('click', () => { sideMenu.classList.remove('open'); });
 
   // Open App Button
-  openAppBtn.addEventListener('click', () => {
+  openAppBtnMenu.addEventListener('click', () => {
     chrome.tabs.create({ url: 'https://officiallygod.github.io/Deutschway/' });
   });
 
   // Settings
-  chrome.storage.local.get(['openOnNewTab'], (result) => {
-    // Default to true if not set
+  chrome.storage.local.get(['openOnNewTab', 'theme', 'streak', 'currentDaily', 'completedIndices'], (result) => {
+    // Theme
+    if (result.theme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+
+    // Toggle
     toggle.checked = result.openOnNewTab !== false;
-  });
 
-  toggle.addEventListener('change', (e) => {
-    chrome.storage.local.set({ openOnNewTab: e.target.checked });
-  });
+    // Streak
+    streakText.textContent = `${result.streak || 0} Days`;
 
-  // Hydrate Stats & Words
-  chrome.storage.local.get(['currentDaily', 'completedIndices'], (result) => {
+    // Hydrate Stats & Words
     if (result.currentDaily) {
       try {
         const words = JSON.parse(result.currentDaily);
@@ -34,28 +55,45 @@ document.addEventListener('DOMContentLoaded', () => {
         progressFill.style.width = `${(xp / totalXp) * 100}%`;
 
         if (completed.length > 0) {
-          wordList.innerHTML = ''; // Clear fallback
-          words.forEach((w, i) => {
-            if (completed.includes(i)) {
-              const div = document.createElement('div');
-              div.className = 'word-item';
-              
-              const spanWord = document.createElement('span');
-              spanWord.textContent = w.word;
-              
-              const spanTrans = document.createElement('span');
-              spanTrans.className = 'word-translation';
-              spanTrans.textContent = w.translation;
-
-              div.appendChild(spanWord);
-              div.appendChild(spanTrans);
-              wordList.appendChild(div);
-            }
-          });
+          fallbackMsg.style.display = 'none';
+          wordCarousel.style.display = 'flex';
+          
+          learnedWords = words.filter((w, i) => completed.includes(i));
+          currentCarouselIndex = 0;
+          updateCarousel();
         }
       } catch (e) {
         console.error("Error parsing storage data:", e);
       }
+    }
+  });
+
+  toggle.addEventListener('change', (e) => {
+    chrome.storage.local.set({ openOnNewTab: e.target.checked });
+  });
+
+  function updateCarousel() {
+    if (learnedWords.length === 0) return;
+    const w = learnedWords[currentCarouselIndex];
+    wordTitle.textContent = w.word;
+    wordTrans.textContent = w.translation;
+    wordCounter.textContent = `${currentCarouselIndex + 1} / ${learnedWords.length}`;
+
+    prevWordBtn.disabled = currentCarouselIndex === 0;
+    nextWordBtn.disabled = currentCarouselIndex === learnedWords.length - 1;
+  }
+
+  prevWordBtn.addEventListener('click', () => {
+    if (currentCarouselIndex > 0) {
+      currentCarouselIndex--;
+      updateCarousel();
+    }
+  });
+
+  nextWordBtn.addEventListener('click', () => {
+    if (currentCarouselIndex < learnedWords.length - 1) {
+      currentCarouselIndex++;
+      updateCarousel();
     }
   });
 });

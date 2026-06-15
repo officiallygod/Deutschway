@@ -3,13 +3,15 @@ function syncToExtension() {
   const xp = localStorage.getItem('deutschway_totalXp');
   const streak = localStorage.getItem('deutschway_streak');
   const completed = localStorage.getItem('deutschway_completedIndices');
+  const theme = localStorage.getItem('theme') || 'light';
   
   if (daily) {
     chrome.storage.local.set({
       currentDaily: daily,
       totalXp: xp || '0',
       streak: streak || '0',
-      completedIndices: completed || '[]'
+      completedIndices: completed || '[]',
+      theme: theme
     });
   }
 }

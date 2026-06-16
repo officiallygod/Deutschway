@@ -11,9 +11,13 @@ const WordCard = React.memo(({
   handleNext, 
   handlePrev,
   dailyWords,
-  jumpToWord
+  jumpToWord,
+  isSessionComplete
 }) => {
   if (!word) return null;
+
+  const isLastWord = currentIndex === totalWords - 1;
+  const hideNextButton = isLastWord && isSessionComplete;
 
   const genderInfo = getGenderInfo(word.word);
 

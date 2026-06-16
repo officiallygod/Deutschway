@@ -215,8 +215,7 @@
 }
 
 .card-container {
-  width: 100%;
-  max-width: 600px;
+  width: min(100%, 600px);
   perspective: 1000px;
 }
 

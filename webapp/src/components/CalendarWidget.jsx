@@ -76,10 +76,10 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
           return (
             <button
               key={i}
-              onClick={() => !isFuture && item.isCurrentMonth && onSelectDate && onSelectDate(item.fullDate.toDateString())}
-              disabled={isFuture || !item.isCurrentMonth}
-              className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all
-                ${!item.isCurrentMonth || isFuture ? 'opacity-30 cursor-not-allowed text-foreground/50' : 'hover:bg-foreground/10 cursor-pointer text-foreground'}
+              onClick={() => onSelectDate && onSelectDate(item.fullDate.toDateString())}
+              className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all cursor-pointer hover:bg-foreground/10
+                ${!item.isCurrentMonth ? 'text-foreground/30' : 'text-foreground'}
+                ${isFuture ? 'text-foreground/50' : ''}
                 ${isToday && !hasHistory ? 'border-2 border-primary text-primary font-bold' : ''}
                 ${hasHistory ? 'bg-primary text-white font-bold shadow-md' : ''}
               `}

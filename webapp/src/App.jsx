@@ -126,8 +126,11 @@ function App() {
           </div>
         </div>
 
-        {renderMainContent()}
-
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-4 z-10">
+          <div className="w-full max-w-[600px] pointer-events-auto flex flex-col gap-6">
+            {renderMainContent()}
+          </div>
+        </div>
       </main>
       
       <FunFactWidget />

@@ -18,8 +18,7 @@ const WordCard = React.memo(({
   const genderInfo = getGenderInfo(word.word);
 
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="card-container flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       {dailyWords && dailyWords.length > 0 && (
         <div className="md:hidden flex justify-center w-full mb-2">
           <div className="flex bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm p-1 gap-1 w-full">
@@ -132,7 +131,6 @@ const WordCard = React.memo(({
         <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
           {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Weiter'} <ChevronRight size={20} />
         </button>
-      </div>
       </div>
     </div>
   );

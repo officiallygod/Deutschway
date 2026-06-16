@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Menu, ArrowLeft, Calendar as CalendarIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './App.scss';
 import { useDailySession } from './hooks/useDailySession';
 import Sidebar from './components/Sidebar';
@@ -73,6 +74,8 @@ function App() {
           totalWords={dailyWords.length}
           handleNext={handleNext}
           handlePrev={handlePrev}
+          dailyWords={dailyWords}
+          jumpToWord={jumpToWord}
         />
       </>
     );
@@ -105,15 +108,20 @@ function App() {
 
       <main className="main-content">
         <div className="top-bar">
-          <button className="icon-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle Menu">
+          <motion.button 
+            whileTap={{ scale: 0.9 }}
+            className="icon-btn" 
+            onClick={() => setSidebarOpen(!sidebarOpen)} 
+            aria-label="Toggle Menu"
+          >
             <Menu size={24} />
-          </button>
+          </motion.button>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             {(showStats || isRevisionMode) && (
-              <button className="icon-btn" onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
+              <motion.button whileTap={{ scale: 0.9 }} className="icon-btn" onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
                 <ArrowLeft size={24} />
-              </button>
+              </motion.button>
             )}
           </div>
         </div>

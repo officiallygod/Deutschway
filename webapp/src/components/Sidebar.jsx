@@ -57,7 +57,7 @@ const Sidebar = React.memo(({
             Deutschway
           </div>
           {isOpen && (
-            <button className="theme-btn" onClick={onClose} aria-label="Schließen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button className="theme-btn text-foreground" onClick={onClose} aria-label="Schließen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <X size={24} />
             </button>
           )}

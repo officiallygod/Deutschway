@@ -101,7 +101,7 @@ const WordCard = React.memo(({
       </AnimatePresence>
 
       {/* Unified Controls for all screens */}
-      <div className="flex flex-col items-center justify-center mt-6 w-full gap-6">
+      <div className="controls flex flex-col items-center justify-center mt-6 w-full gap-6">
         <div className="flex w-full justify-between items-center gap-4">
           <button 
             className="btn secondary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 

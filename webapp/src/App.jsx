@@ -33,6 +33,11 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -112,7 +117,7 @@ function App() {
             {(showStats || isRevisionMode) ? (
               <motion.button 
                 whileTap={{ scale: 0.9 }} 
-                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-full shadow-sm" 
+                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-white/10 backdrop-blur-md rounded-full shadow-sm text-foreground hover:bg-black/5 dark:hover:bg-white/20 transition-colors" 
                 onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} 
                 aria-label="Back"
               >
@@ -121,7 +126,7 @@ function App() {
             ) : (
               <motion.button 
                 whileTap={{ scale: 0.9 }}
-                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-full shadow-sm" 
+                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-white/10 backdrop-blur-md rounded-full shadow-sm text-foreground hover:bg-black/5 dark:hover:bg-white/20 transition-colors" 
                 onClick={() => setSidebarOpen(!sidebarOpen)} 
                 aria-label="Toggle Menu"
               >
@@ -135,7 +140,7 @@ function App() {
           </div>
         </div>
 
-        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16 self-center">
+        <div className="w-full max-w-[800px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16 self-center">
           {renderMainContent()}
         </div>
       </main>

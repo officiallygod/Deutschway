@@ -395,6 +395,9 @@
         color: var(--text-color);
         background: rgba(0,0,0,0.03);
       }
+      [data-theme="dark"] &:hover {
+        background: rgba(255,255,255,0.05);
+      }
     }
 
     &:disabled {

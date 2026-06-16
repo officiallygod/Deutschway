@@ -106,7 +106,7 @@ function App() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="main-content flex-1 w-full min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto">
+      <main className="main-content flex-1 min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto overflow-x-hidden">
         <div className="top-bar flex justify-between items-center w-full px-4 pt-4 absolute top-0 left-0 z-50">
           <div className="left-controls">
             {(showStats || isRevisionMode) ? (
@@ -135,7 +135,7 @@ function App() {
           </div>
         </div>
 
-        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16">
+        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16 self-center">
           {renderMainContent()}
         </div>
       </main>

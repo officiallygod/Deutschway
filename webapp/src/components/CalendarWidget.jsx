@@ -12,18 +12,34 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
         aria-label="Daily revision calendar"
         minValue={localToday}
         showOutsideDays={false}
-        showMonthAndYearPickers={true}
         onChange={(date) => {
           if (onSelectDate) {
             onSelectDate(new Date(date.year, date.month - 1, date.day).toDateString());
           }
         }}
-        classNames={{
-          base: "bg-transparent shadow-none",
-          header: "pt-2 pb-4",
-          gridBody: "gap-2",
-        }}
-      />
+      >
+        <Calendar.Header>
+          <Calendar.YearPickerTrigger>
+            <Calendar.YearPickerTriggerHeading />
+            <Calendar.YearPickerTriggerIndicator />
+          </Calendar.YearPickerTrigger>
+          <Calendar.NavButton slot="previous" />
+          <Calendar.NavButton slot="next" />
+        </Calendar.Header>
+        <Calendar.Grid>
+          <Calendar.GridHeader>
+            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+          </Calendar.GridHeader>
+          <Calendar.GridBody>
+            {(date) => <Calendar.Cell date={date} />}
+          </Calendar.GridBody>
+        </Calendar.Grid>
+        <Calendar.YearPickerGrid>
+          <Calendar.YearPickerGridBody className="grid grid-cols-4 gap-2 text-center text-sm">
+            {({year}) => <Calendar.YearPickerCell year={year} className="p-2 hover:bg-primary/20 rounded-lg cursor-pointer" />}
+          </Calendar.YearPickerGridBody>
+        </Calendar.YearPickerGrid>
+      </Calendar>
     </div>
   );
 });

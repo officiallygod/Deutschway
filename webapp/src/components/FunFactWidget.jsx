@@ -33,10 +33,10 @@ const FunFactWidget = React.memo(() => {
             <Lightbulb size={24} color="var(--primary-accent)" />
           </motion.button>
         ) : (
-          <div className="w-[calc(100vw-3rem)] max-w-[320px] bg-white/70 dark:bg-black/50 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-white/30 dark:border-white/10 rounded-[28px] p-5">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-sm font-semibold opacity-70">
-                <Lightbulb size={16} color="var(--primary-accent)" />
+          <div className="w-[calc(100vw-3rem)] max-w-[260px] bg-white/70 dark:bg-black/50 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-white/30 dark:border-white/10 rounded-2xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-semibold opacity-70">
+                <Lightbulb size={14} color="var(--primary-accent)" />
                 <span>Wusstest du schon?</span>
               </div>
               <button 
@@ -44,10 +44,10 @@ const FunFactWidget = React.memo(() => {
                 onClick={() => setIsExpanded(false)} 
                 aria-label="Schließen"
               >
-                <X size={14} />
+                <X size={12} />
               </button>
             </div>
-            <p className="text-[15px] leading-relaxed font-medium">
+            <p className="text-[13px] leading-relaxed font-medium">
               {fact}
             </p>
           </div>

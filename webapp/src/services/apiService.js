@@ -1,6 +1,6 @@
 import wordsData from '../data/words.json';
 
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   SEEN_INDICES: 'deutschway_seenIndices',
   CURRENT_DAILY: 'deutschway_currentDaily',
   LAST_VISIT: 'deutschway_lastVisit',

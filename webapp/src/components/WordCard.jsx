@@ -18,7 +18,7 @@ const WordCard = React.memo(({
   const genderInfo = getGenderInfo(word.word);
 
   return (
-    <div className="card-container flex flex-col gap-4">
+    <div className="card-container flex flex-col gap-4 w-full max-w-lg mx-auto">
       {dailyWords && dailyWords.length > 0 && (
         <div className="md:hidden flex justify-center w-full mb-2">
           <div className="flex bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm p-1 gap-1 w-full">

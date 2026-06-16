@@ -106,7 +106,7 @@ function App() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="main-content">
+      <main className="main-content flex-1 w-full lg:w-[calc(100vw-320px)] h-full flex flex-col items-center justify-center relative overflow-y-auto">
         <div className="top-bar">
           <motion.button 
             whileTap={{ scale: 0.9 }}

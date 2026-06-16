@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Check, Flame, Moon, Sun, BarChart2, X, Calendar as CalendarIcon } from 'lucide-react';
 import CalendarWidget from './CalendarWidget';
+import Logo from './Logo';
 
 const Sidebar = React.memo(({ 
   dailyWords, 
@@ -12,7 +13,8 @@ const Sidebar = React.memo(({
   toggleTheme,
   isOpen,
   onOpenStats,
-  onSelectDate
+  onSelectDate,
+  onClose
 }) => {
   const [animateStreak, setAnimateStreak] = useState(false);
   const [showCalendarPopup, setShowCalendarPopup] = useState(false);
@@ -46,28 +48,30 @@ const Sidebar = React.memo(({
   const totalXpGoal = dailyWords.length * 10;
 
   return (
-    <aside className={`sidebar ${isOpen ? 'mobile-open' : 'collapsed'}`}>
-      <div className="sidebar-header">
-        <div className="brand">
-          <img src="/Deutschway/logo.png" alt="Deutschway Logo" />
-          Deutschway
+    <>
+      <div className={`sidebar-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}></div>
+      <aside className={`sidebar ${isOpen ? 'mobile-open' : 'collapsed'}`}>
+        <div className="sidebar-header">
+          <div className="brand">
+            <Logo width={32} height={32} />
+            Deutschway
+          </div>
+          {isOpen && (
+            <button className="theme-btn" onClick={onClose} aria-label="Schließen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <X size={24} />
+            </button>
+          )}
         </div>
-        {isOpen && (
-          <button className="theme-btn" onClick={() => jumpToWord(currentIndex)} aria-label="Schließen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <X size={24} />
-          </button>
-        )}
-      </div>
 
-      <div className="daily-progress">
-        <div className="progress-header">
-          <span>Tagesziel</span>
-          <span>{xpEarned} / {totalXpGoal} XP</span>
+        <div className="daily-progress">
+          <div className="progress-header">
+            <span>Tagesziel</span>
+            <span>{xpEarned} / {totalXpGoal} XP</span>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
+          </div>
         </div>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
-        </div>
-      </div>
 
       <div className="word-list">
         {dailyWords.map((w, idx) => (
@@ -110,6 +114,7 @@ const Sidebar = React.memo(({
         )}
       </div>
     </aside>
+    </>
   );
 });
 

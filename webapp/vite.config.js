@@ -7,22 +7,25 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['logo.png'],
+      includeAssets: ['logo.svg'],
       manifest: {
         name: 'Deutschway',
         short_name: 'Deutschway',
         description: 'Learn 5 German words daily',
-        theme_color: '#f4f7f6',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
         icons: [
           {
-            src: 'logo.png',
+            src: 'logo.svg',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           },
           {
-            src: 'logo.png',
+            src: 'logo.svg',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg+xml'
           }
         ]
       }

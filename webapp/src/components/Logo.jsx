@@ -1,0 +1,23 @@
+import React from 'react';
+
+const Logo = ({ width = 32, height = 32, className = '' }) => {
+  return (
+    <svg 
+      width={width} 
+      height={height} 
+      viewBox="0 0 120 120" 
+      xmlns="http://www.w3.org/2000/svg" 
+      fill="currentColor"
+      className={`deutschway-logo ${className}`}
+    >
+      {/* Left Wing */}
+      <polygon points="50,45 10,25 35,65 50,85" opacity="0.75" />
+      {/* Right Wing */}
+      <polygon points="70,45 110,25 85,65 70,85" opacity="0.75" />
+      {/* Head and Body */}
+      <polygon points="60,10 75,50 60,110 45,50" />
+    </svg>
+  );
+};
+
+export default Logo;

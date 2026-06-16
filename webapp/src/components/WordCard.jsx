@@ -120,10 +120,11 @@ const WordCard = React.memo(({
           color="primary"
           radius="full"
           size="sm"
+          items={dailyWords.map((_, idx) => ({ id: idx.toString(), label: `Wort ${idx + 1}` }))}
         >
-          {dailyWords.map((_, idx) => (
-            <Tab key={idx.toString()} title={`Wort ${idx + 1}`} />
-          ))}
+          {(item) => (
+            <Tab key={item.id} title={item.label} />
+          )}
         </Tabs>
         
         <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>

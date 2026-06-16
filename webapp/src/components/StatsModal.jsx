@@ -43,7 +43,7 @@ const StatsModal = ({ xpEarned, chartData }) => {
                   tick={{ fill: 'var(--text-secondary)', fontSize: 12, fontWeight: 500 }} 
                   dy={10}
                 />
-                <YAxis hide domain={['dataMin - 10', 'dataMax + 10']} />
+                <YAxis hide />
                 <Tooltip 
                   cursor={{ stroke: 'var(--primary-accent)', strokeWidth: 1, strokeDasharray: '4 4' }}
                   contentStyle={{ 

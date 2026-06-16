@@ -21,12 +21,31 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
   const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
 
+  const daysInPrevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+  const prevMonthStart = daysInPrevMonth - startOffset + 1;
+
   const days = [];
   for (let i = 0; i < startOffset; i++) {
-    days.push(null);
+    days.push({
+      date: prevMonthStart + i,
+      isCurrentMonth: false,
+      fullDate: new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, prevMonthStart + i)
+    });
   }
   for (let i = 1; i <= daysInMonth; i++) {
-    days.push(new Date(currentDate.getFullYear(), currentDate.getMonth(), i));
+    days.push({
+      date: i,
+      isCurrentMonth: true,
+      fullDate: new Date(currentDate.getFullYear(), currentDate.getMonth(), i)
+    });
+  }
+  const remainingCells = 42 - days.length;
+  for (let i = 1; i <= remainingCells; i++) {
+    days.push({
+      date: i,
+      isCurrentMonth: false,
+      fullDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, i)
+    });
   }
 
   const today = new Date();
@@ -49,25 +68,23 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
       </div>
 
       <div className="grid grid-cols-7 gap-1">
-        {days.map((date, i) => {
-          if (!date) return <div key={i} className="aspect-square"></div>;
-          
-          const isToday = date.toDateString() === new Date().toDateString();
-          const hasHistory = !!historyMap[date.toDateString()];
-          const isFuture = date > today;
+        {days.map((item, i) => {
+          const isToday = item.fullDate.toDateString() === new Date().toDateString();
+          const hasHistory = !!historyMap[item.fullDate.toDateString()];
+          const isFuture = item.fullDate > today;
 
           return (
             <button
               key={i}
-              onClick={() => !isFuture && onSelectDate && onSelectDate(date.toDateString())}
-              disabled={isFuture}
+              onClick={() => !isFuture && item.isCurrentMonth && onSelectDate && onSelectDate(item.fullDate.toDateString())}
+              disabled={isFuture || !item.isCurrentMonth}
               className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all
-                ${isFuture ? 'opacity-20 cursor-not-allowed text-foreground/30' : 'hover:bg-white/20 cursor-pointer text-foreground'}
-                ${isToday ? 'border border-primary text-primary' : ''}
+                ${!item.isCurrentMonth || isFuture ? 'opacity-30 cursor-not-allowed text-foreground/50' : 'hover:bg-foreground/10 cursor-pointer text-foreground'}
+                ${isToday && !hasHistory ? 'border-2 border-primary text-primary font-bold' : ''}
                 ${hasHistory ? 'bg-primary text-white font-bold shadow-md' : ''}
               `}
             >
-              {date.getDate()}
+              {item.date}
             </button>
           );
         })}

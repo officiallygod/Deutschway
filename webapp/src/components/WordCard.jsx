@@ -26,6 +26,7 @@ const WordCard = React.memo(({
             aria-label="Wörter" 
             selectedKey={currentIndex.toString()} 
             onSelectionChange={(key) => jumpToWord(Number(key))}
+            items={dailyWords.map((w, idx) => ({ id: idx.toString(), label: String(idx + 1) }))}
             color="primary"
             variant="light"
             classNames={{
@@ -35,9 +36,9 @@ const WordCard = React.memo(({
               tabContent: "group-data-[selected=true]:text-primary"
             }}
           >
-            {dailyWords.map((w, idx) => (
-              <Tab key={idx.toString()} title={`${idx + 1}`} />
-            ))}
+            {(item) => (
+              <Tab key={item.id} title={item.label} />
+            )}
           </Tabs>
         </div>
       )}

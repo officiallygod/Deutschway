@@ -107,31 +107,38 @@ function App() {
       />
 
       <main className="main-content flex-1 w-[100vw] min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto">
-        <div className="top-bar">
-          <motion.button 
-            whileTap={{ scale: 0.9 }}
-            className="icon-btn" 
-            onClick={() => setSidebarOpen(!sidebarOpen)} 
-            aria-label="Toggle Menu"
-          >
-            <Menu size={24} />
-          </motion.button>
-          
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {(showStats || isRevisionMode) && (
-              <motion.button whileTap={{ scale: 0.9 }} className="icon-btn" onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} aria-label="Back">
+        <div className="top-bar flex justify-between items-center w-full px-4 pt-4 absolute top-0 left-0 z-50">
+          <div className="left-controls">
+            {(showStats || isRevisionMode) ? (
+              <motion.button 
+                whileTap={{ scale: 0.9 }} 
+                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-full shadow-sm" 
+                onClick={() => { setShowStats(false); if(isRevisionMode) exitRevisionMode(); }} 
+                aria-label="Back"
+              >
                 <ArrowLeft size={24} />
+              </motion.button>
+            ) : (
+              <motion.button 
+                whileTap={{ scale: 0.9 }}
+                className="icon-btn flex items-center justify-center w-11 h-11 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-full shadow-sm" 
+                onClick={() => setSidebarOpen(!sidebarOpen)} 
+                aria-label="Toggle Menu"
+              >
+                <Menu size={24} />
               </motion.button>
             )}
           </div>
+          
+          <div className="right-controls flex items-center gap-2">
+            <FunFactWidget />
+          </div>
         </div>
 
-        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4">
+        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16">
           {renderMainContent()}
         </div>
       </main>
-      
-      <FunFactWidget />
     </div>
   );
 }

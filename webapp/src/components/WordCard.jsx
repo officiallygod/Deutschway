@@ -58,10 +58,12 @@ const WordCard = React.memo(({
         >
           <div className="card-top">
             {genderInfo ? (
-              <div className="gender-badge" title={genderInfo.rule}>
+              <span className={`gender-badge ${genderInfo.color}`}>
                 {genderInfo.label}
-              </div>
-            ) : <div />}
+              </span>
+            ) : (
+              <span className="gender-badge opacity-0">...</span>
+            )}
             <motion.button 
               whileTap={{ scale: 0.9 }}
               className="audio-btn" 
@@ -71,7 +73,7 @@ const WordCard = React.memo(({
               <Volume2 size={24} />
             </motion.button>
           </div>
-
+          
           <div className="word-title">
             <h2>{word.word}</h2>
             <p>{word.translation}</p>
@@ -98,39 +100,54 @@ const WordCard = React.memo(({
         </motion.div>
       </AnimatePresence>
 
-      <div className="controls hidden md:flex justify-between items-center w-full mt-8">
-        <button 
-          className="btn secondary flex items-center justify-center gap-2 px-6 py-3" 
-          onClick={handlePrev} 
-          disabled={currentIndex === 0}
-        >
-          <ChevronLeft size={20} /> Zurück
-        </button>
-        <button className="btn primary flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
-          {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Nächstes Wort'} <ChevronRight size={20} />
-        </button>
-      </div>
-      
-      <div className="controls flex flex-col md:hidden items-center justify-center mt-6 w-full gap-4">
-        <div className="flex bg-default-100 p-1 rounded-full w-full max-w-full overflow-x-auto no-scrollbar">
-          {dailyWords.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => jumpToWord(idx)}
-              className={`flex-1 py-1.5 px-3 text-sm font-medium rounded-full transition-all whitespace-nowrap ${
-                currentIndex === idx 
-                  ? 'bg-primary text-white shadow-sm' 
-                  : 'text-default-500 hover:text-default-700'
-              }`}
-            >
-              Wort {idx + 1}
-            </button>
-          ))}
+      {/* Unified Controls for all screens */}
+      <div className="flex flex-col items-center justify-center mt-6 w-full gap-6">
+        {/* Pagination Tabs */}
+        {dailyWords && dailyWords.length > 0 && (
+          <div className="flex justify-center w-full max-w-[400px]">
+            <div className="flex bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm p-1 gap-1 w-full">
+              {dailyWords.map((w, idx) => {
+                const isSelected = currentIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => jumpToWord(idx)}
+                    className={`relative flex-1 h-12 rounded-xl text-sm font-medium transition-colors ${
+                      isSelected ? 'text-white' : 'text-foreground hover:bg-white/20'
+                    }`}
+                  >
+                    {isSelected && (
+                      <motion.div
+                        layoutId="unified-tab-indicator"
+                        className="absolute inset-0 bg-primary rounded-xl shadow-sm"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="relative z-10">{idx + 1}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div className="flex w-full justify-between items-center gap-4">
+          <button 
+            className="btn secondary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
+            onClick={handlePrev} 
+            disabled={currentIndex === 0}
+          >
+            <ChevronLeft size={20} /> <span className="hidden md:inline">Zurück</span>
+          </button>
+          
+          <button 
+            className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
+            onClick={handleNext}
+          >
+            {currentIndex === totalWords - 1 ? 'Lektion beenden' : <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span></>} 
+            <ChevronRight size={20} />
+          </button>
         </div>
-        
-        <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
-          {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Weiter'} <ChevronRight size={20} />
-        </button>
       </div>
     </div>
   );

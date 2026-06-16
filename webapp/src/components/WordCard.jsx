@@ -3,7 +3,6 @@ import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getGenderInfo } from '../utils/grammarEngine';
 import { playAudio } from '../utils/audioService';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Tabs, Tab } from "@heroui/react";
 
 const WordCard = React.memo(({ 
   word, 
@@ -22,24 +21,29 @@ const WordCard = React.memo(({
     <div className="card-container flex flex-col gap-4">
       {dailyWords && dailyWords.length > 0 && (
         <div className="md:hidden flex justify-center w-full mb-2">
-          <Tabs 
-            aria-label="Wörter" 
-            selectedKey={currentIndex.toString()} 
-            onSelectionChange={(key) => jumpToWord(Number(key))}
-            items={dailyWords.map((w, idx) => ({ id: idx.toString(), label: String(idx + 1) }))}
-            color="primary"
-            variant="light"
-            classNames={{
-              tabList: "bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm",
-              cursor: "w-full bg-primary",
-              tab: "h-10 text-sm font-medium",
-              tabContent: "group-data-[selected=true]:text-primary"
-            }}
-          >
-            {(item) => (
-              <Tab key={item.id} title={item.label} />
-            )}
-          </Tabs>
+          <div className="flex bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm p-1 gap-1 w-full">
+            {dailyWords.map((w, idx) => {
+              const isSelected = currentIndex === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => jumpToWord(idx)}
+                  className={`relative flex-1 h-10 rounded-xl text-sm font-medium transition-colors ${
+                    isSelected ? 'text-white' : 'text-foreground hover:bg-white/20'
+                  }`}
+                >
+                  {isSelected && (
+                    <motion.div
+                      layoutId="mobile-tab-indicator"
+                      className="absolute inset-0 bg-primary rounded-xl shadow-sm"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{idx + 1}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 

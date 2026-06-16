@@ -457,7 +457,10 @@
 }
 
 /* Tablets & Small Laptops */
-@media (max-width: 1024px) {
+/* Mobile Devices (iPhone etc. down to 320px) */
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -480,12 +483,6 @@
     }
   }
   .sidebar-overlay.active { display: block; }
-
-}
-
-/* Mobile Devices (iPhone etc. down to 320px) */
-@media (max-width: 768px) {
-  .desktop-only { display: none !important; }
 
   .app-layout { flex-direction: column; }
   .stats-modal {

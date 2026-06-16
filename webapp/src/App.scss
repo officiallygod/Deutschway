@@ -11,6 +11,7 @@
 .sidebar {
   width: 320px;
   min-width: 320px;
+  position: relative;
   border-right: 1px solid var(--card-border);
   padding: 2rem 1.5rem;
   display: flex;

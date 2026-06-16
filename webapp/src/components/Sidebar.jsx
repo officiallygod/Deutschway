@@ -108,7 +108,7 @@ const Sidebar = React.memo(({
         </div>
 
         {showCalendarPopup && (
-          <div ref={calendarRef} style={{ position: 'absolute', bottom: '60px', right: '0', zIndex: 1000 }}>
+          <div ref={calendarRef} className="fixed md:absolute z-[1000] bottom-[80px] md:bottom-[60px] left-[50%] md:left-[100%] -translate-x-1/2 md:translate-x-4">
             <CalendarWidget onSelectDate={(d) => { onSelectDate(d); setShowCalendarPopup(false); }} />
           </div>
         )}

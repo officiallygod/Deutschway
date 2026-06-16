@@ -1,6 +1,5 @@
 import React from 'react';
 import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Tabs, Tab } from '@heroui/react';
 import { getGenderInfo } from '../utils/grammarEngine';
 import { playAudio } from '../utils/audioService';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -113,19 +112,21 @@ const WordCard = React.memo(({
       </div>
       
       <div className="controls flex flex-col md:hidden items-center justify-center mt-6 w-full gap-4">
-        <Tabs 
-          aria-label="Wort Navigation" 
-          selectedKey={currentIndex.toString()} 
-          onSelectionChange={(key) => jumpToWord(parseInt(key, 10))}
-          color="primary"
-          radius="full"
-          size="sm"
-          items={dailyWords.map((_, idx) => ({ id: idx.toString(), label: `Wort ${idx + 1}` }))}
-        >
-          {(item) => (
-            <Tab key={item.id} title={item.label} />
-          )}
-        </Tabs>
+        <div className="flex bg-default-100 p-1 rounded-full w-full max-w-full overflow-x-auto no-scrollbar">
+          {dailyWords.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => jumpToWord(idx)}
+              className={`flex-1 py-1.5 px-3 text-sm font-medium rounded-full transition-all whitespace-nowrap ${
+                currentIndex === idx 
+                  ? 'bg-primary text-white shadow-sm' 
+                  : 'text-default-500 hover:text-default-700'
+              }`}
+            >
+              Wort {idx + 1}
+            </button>
+          ))}
+        </div>
         
         <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
           {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Weiter'} <ChevronRight size={20} />

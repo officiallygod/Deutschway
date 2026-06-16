@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Card, CardHeader, CardBody, Alert } from '@heroui/react';
+import { Card, CardHeader, Alert } from '@heroui/react';
 import { motion } from 'framer-motion';
 
 const StatsModal = ({ xpEarned, chartData }) => {
@@ -31,7 +31,7 @@ const StatsModal = ({ xpEarned, chartData }) => {
           />
         </CardHeader>
         
-        <CardBody className="pb-8">
+        <div className="flex flex-col pb-8 px-4">
           <div className="w-full h-64 mt-4">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
@@ -64,7 +64,7 @@ const StatsModal = ({ xpEarned, chartData }) => {
               </BarChart>
             </ResponsiveContainer>
           </div>
-        </CardBody>
+        </div>
       </Card>
     </motion.div>
   );

@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@heroui/theme";
 
 :root {
   /* Default Light: iOS Aesthetic */

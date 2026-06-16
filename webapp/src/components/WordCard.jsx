@@ -98,21 +98,21 @@ const WordCard = React.memo(({
         </motion.div>
       </AnimatePresence>
 
-      <div className="controls hidden md:flex">
+      <div className="controls hidden md:flex justify-between items-center w-full mt-8">
         <button 
-          className="btn secondary" 
+          className="btn secondary flex items-center justify-center gap-2 px-6 py-3" 
           onClick={handlePrev} 
           disabled={currentIndex === 0}
         >
           <ChevronLeft size={20} /> Zurück
         </button>
-        <button className="btn primary" onClick={handleNext}>
+        <button className="btn primary flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
           {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Nächstes Wort'} <ChevronRight size={20} />
         </button>
       </div>
       
-      <div className="controls flex md:hidden justify-center mt-2">
-        <button className="btn primary w-full" onClick={handleNext}>
+      <div className="controls flex md:hidden justify-center mt-2 w-full">
+        <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
           {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Weiter'} <ChevronRight size={20} />
         </button>
       </div>

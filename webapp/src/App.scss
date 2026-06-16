@@ -357,9 +357,6 @@
 }
 
 .controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 2rem;
 
   .btn {
@@ -500,6 +497,6 @@
   .card-container { margin-top: 4rem; }
   .word-card { padding: 2rem 1.5rem; }
   .word-card .word-title h2 { font-size: 2.5rem; }
-  .controls { flex-direction: column-reverse; gap: 1rem; .btn { width: 100%; justify-content: center; } }
+
 
 }

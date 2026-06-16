@@ -18,10 +18,10 @@ const CalendarWidget = ({ onSelectDate }) => {
   });
 
   return (
-    <div className="calendar-widget glass w-full p-6 flex flex-col items-center gap-4 rounded-[28px]">
+    <div className="calendar-widget glass w-[280px] p-5 flex flex-col items-center gap-4 rounded-[24px]">
       <h3 className="text-xs font-extrabold uppercase tracking-widest text-primary opacity-80">Aktivität (28 Tage)</h3>
       
-      <div className="grid grid-rows-4 grid-flow-col gap-1.5 md:gap-2">
+      <div className="grid grid-cols-7 gap-1.5 md:gap-2">
         {days.map((date, idx) => {
           const dateStr = date.toDateString();
           const hasHistory = !!historyMap[dateStr];

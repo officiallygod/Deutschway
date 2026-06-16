@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trophy } from 'lucide-react';
-import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Card, CardHeader, Alert } from '@heroui/react';
 import { motion } from 'framer-motion';
 
@@ -11,7 +11,7 @@ const StatsModal = ({ xpEarned, chartData }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="w-full max-w-lg mx-auto flex items-center justify-center h-full p-4"
+      className="w-full max-w-lg mx-auto flex flex-col justify-center h-full p-4"
     >
       <Card className="w-full shadow-2xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
         <CardHeader className="flex flex-col items-center gap-4 pt-6 pb-2">
@@ -43,6 +43,7 @@ const StatsModal = ({ xpEarned, chartData }) => {
                   tick={{ fill: 'var(--text-secondary)', fontSize: 12, fontWeight: 500 }} 
                   dy={10}
                 />
+                <YAxis hide domain={['dataMin - 10', 'dataMax + 10']} />
                 <Tooltip 
                   cursor={{ stroke: 'var(--primary-accent)', strokeWidth: 1, strokeDasharray: '4 4' }}
                   contentStyle={{ 

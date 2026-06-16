@@ -1,5 +1,6 @@
 import React from 'react';
 import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Tabs, Tab } from '@heroui/react';
 import { getGenderInfo } from '../utils/grammarEngine';
 import { playAudio } from '../utils/audioService';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -111,7 +112,20 @@ const WordCard = React.memo(({
         </button>
       </div>
       
-      <div className="controls flex md:hidden justify-center mt-2 w-full">
+      <div className="controls flex flex-col md:hidden items-center justify-center mt-6 w-full gap-4">
+        <Tabs 
+          aria-label="Wort Navigation" 
+          selectedKey={currentIndex.toString()} 
+          onSelectionChange={(key) => jumpToWord(parseInt(key, 10))}
+          color="primary"
+          radius="full"
+          size="sm"
+        >
+          {dailyWords.map((_, idx) => (
+            <Tab key={idx.toString()} title={`Wort ${idx + 1}`} />
+          ))}
+        </Tabs>
+        
         <button className="btn primary w-full flex items-center justify-center gap-2 px-6 py-3" onClick={handleNext}>
           {currentIndex === totalWords - 1 ? 'Lektion beenden' : 'Weiter'} <ChevronRight size={20} />
         </button>

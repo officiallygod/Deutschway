@@ -129,6 +129,8 @@ function App() {
         {renderMainContent()}
 
       </main>
+      
+      <FunFactWidget />
     </div>
   );
 }

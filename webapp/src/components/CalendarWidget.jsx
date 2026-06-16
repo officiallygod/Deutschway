@@ -1,140 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Calendar } from "@heroui/react";
+import { parseDate, today, getLocalTimeZone, CalendarDate } from "@internationalized/date";
 import { apiService } from '../services/apiService';
 
 const CalendarWidget = ({ onSelectDate }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [historyMap, setHistoryMap] = useState({});
-  const [viewState, setViewState] = useState('days'); // 'days', 'months', 'years'
-  const [yearGridStart, setYearGridStart] = useState(new Date().getFullYear() - 4);
 
   useEffect(() => {
     apiService.getHistoryMap().then(setHistoryMap);
   }, []);
 
-  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-  const startOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-
-  const monthNames = [
-    "Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember"
-  ];
-
-  const prevAction = () => {
-    if (viewState === 'days') setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
-    else if (viewState === 'months') setCurrentDate(new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), 1));
-    else setYearGridStart(yearGridStart - 12);
-  };
-
-  const nextAction = () => {
-    if (viewState === 'days') setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
-    else if (viewState === 'months') setCurrentDate(new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), 1));
-    else setYearGridStart(yearGridStart + 12);
-  };
-
-  const setMonth = (monthIdx) => {
-    setCurrentDate(new Date(currentDate.getFullYear(), monthIdx, 1));
-    setViewState('days');
-  };
-
-  const setYear = (year) => {
-    setCurrentDate(new Date(year, currentDate.getMonth(), 1));
-    setViewState('months');
-  };
-
-  const renderDays = () => {
-    const days = [];
-    for (let i = 0; i < startOffset; i++) {
-      days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
-    }
-    for (let i = 1; i <= daysInMonth; i++) {
-      const d = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
-      const dateStr = d.toDateString();
-      const hasHistory = !!historyMap[dateStr];
-      const isToday = d.toDateString() === new Date().toDateString();
-      days.push(
-        <button 
-          key={i} 
-          className={`calendar-day ${hasHistory ? 'has-history' : ''} ${isToday ? 'today' : ''}`}
-          onClick={() => hasHistory && onSelectDate(dateStr)}
-          disabled={!hasHistory && !isToday} // ensure only history or today are valid, wait today is disabled if no history? No, today should be visible but disabled if not history
-        >
-          {i}
-        </button>
-      );
-    }
-    return (
-      <div className="calendar-grid">
-        <div className="weekday">Mo</div><div className="weekday">Di</div><div className="weekday">Mi</div>
-        <div className="weekday">Do</div><div className="weekday">Fr</div><div className="weekday">Sa</div><div className="weekday">So</div>
-        {days}
-      </div>
+  const timeZone = getLocalTimeZone();
+  const currentDateObj = today(timeZone);
+  
+  // Calculate minValue (oldest date in history)
+  const minValue = useMemo(() => {
+    const dates = Object.keys(historyMap);
+    if (dates.length === 0) return undefined;
+    
+    // Sort dates to find the oldest
+    const sortedDates = dates.map(d => new Date(d)).sort((a, b) => a.getTime() - b.getTime());
+    const oldest = sortedDates[0];
+    
+    return new CalendarDate(
+      oldest.getFullYear(),
+      oldest.getMonth() + 1,
+      oldest.getDate()
     );
+  }, [historyMap]);
+
+  // isDateUnavailable logic (disable dates without history, unless it's today)
+  const isDateUnavailable = (date) => {
+    const d = date.toDate(timeZone);
+    const dateStr = d.toDateString();
+    const hasHistory = !!historyMap[dateStr];
+    const isTodayDate = d.toDateString() === new Date().toDateString();
+    
+    // Unavailable if it has no history AND it's not today
+    return !hasHistory && !isTodayDate;
   };
 
-  const renderMonths = () => {
-    return (
-      <div className="calendar-grid months-grid">
-        {monthNames.map((m, i) => (
-          <button key={m} className={`calendar-day month-yr-btn ${currentDate.getMonth() === i ? 'today' : ''}`} onClick={() => setMonth(i)}>
-            {m.substring(0, 3)}
-          </button>
-        ))}
-      </div>
-    );
-  };
-
-  const renderYears = () => {
-    const years = [];
-    for (let i = 0; i < 12; i++) {
-      const y = yearGridStart + i;
-      years.push(
-        <button key={y} className={`calendar-day month-yr-btn ${currentDate.getFullYear() === y ? 'today' : ''}`} onClick={() => setYear(y)}>
-          {y}
-        </button>
-      );
+  const handleDateChange = (date) => {
+    const d = date.toDate(timeZone);
+    const dateStr = d.toDateString();
+    const hasHistory = !!historyMap[dateStr];
+    
+    if (hasHistory) {
+      onSelectDate(dateStr);
     }
-    return <div className="calendar-grid years-grid">{years}</div>;
-  };
-
-  const getHeaderLabel = () => {
-    if (viewState === 'days') return (
-      <div className="header-labels">
-        <span onClick={() => setViewState('months')} className="clickable-label">{monthNames[currentDate.getMonth()]}</span>
-        <span onClick={() => setViewState('years')} className="clickable-label">{currentDate.getFullYear()}</span>
-      </div>
-    );
-    if (viewState === 'months') return <span onClick={() => setViewState('years')} className="clickable-label">{currentDate.getFullYear()}</span>;
-    return <span>{yearGridStart} - {yearGridStart + 11}</span>;
   };
 
   return (
-    <div className="calendar-widget glass">
-      <div className="calendar-header">
-        <button className="nav-btn" onClick={prevAction}><ChevronLeft size={24} /></button>
-        <h2>{getHeaderLabel()}</h2>
-        <button className="nav-btn" onClick={nextAction}><ChevronRight size={24} /></button>
-      </div>
-
-      <div className="calendar-body">
-        {viewState === 'days' && renderDays()}
-        {viewState === 'months' && renderMonths()}
-        {viewState === 'years' && renderYears()}
-      </div>
+    <div className="calendar-widget glass" style={{ width: '100%', minHeight: 340, padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Calendar 
+        aria-label="History Calendar"
+        isDateUnavailable={isDateUnavailable}
+        minValue={minValue}
+        maxValue={currentDateObj}
+        onChange={handleDateChange}
+        classNames={{
+          base: "bg-transparent shadow-none w-full",
+          headerWrapper: "pt-2 pb-4",
+          title: "text-lg font-bold text-foreground",
+          grid: "w-full border-none",
+          cell: "py-1",
+          cellButton: [
+            "w-10 h-10 text-sm",
+            // Disabled state (no history)
+            "data-[disabled=true]:opacity-20",
+            // Available state (has history)
+            "data-[disabled=false]:font-bold data-[disabled=false]:text-primary data-[disabled=false]:bg-primary/10",
+            // Hover state
+            "data-[disabled=false]:hover:bg-primary/20",
+            // Selected state
+            "data-[selected=true]:bg-primary data-[selected=true]:text-white",
+          ]
+        }}
+      />
       
-      {viewState === 'days' && (
-        <div className="calendar-footer">
-          <div className="legend-item">
-            <div className="legend-dot highlight"></div>
-            <span>Gelernt</span>
-          </div>
-          <div className="legend-item">
-            <div className="legend-dot today"></div>
-            <span>Heute</span>
-          </div>
+      <div className="calendar-footer flex gap-6 mt-4 text-sm font-medium text-default-500">
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full bg-primary"></div>
+          <span>Gelernt</span>
         </div>
-      )}
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full border-2 border-primary"></div>
+          <span>Heute</span>
+        </div>
+      </div>
     </div>
   );
 };

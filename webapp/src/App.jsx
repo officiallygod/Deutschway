@@ -100,6 +100,7 @@ function App() {
           loadRevisionDay(dateStr);
           setSidebarOpen(false);
         }}
+        onClose={() => setSidebarOpen(false)}
       />
 
       <main className="main-content">

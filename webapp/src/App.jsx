@@ -106,7 +106,7 @@ function App() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="main-content flex-1 min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto">
+      <main className="main-content flex-1 w-[100vw] min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto">
         <div className="top-bar">
           <motion.button 
             whileTap={{ scale: 0.9 }}
@@ -126,10 +126,8 @@ function App() {
           </div>
         </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-4 z-10">
-          <div className="w-full max-w-[600px] pointer-events-auto flex flex-col gap-6">
-            {renderMainContent()}
-          </div>
+        <div className="w-full max-w-[600px] flex flex-col gap-6 z-10 mx-auto px-4">
+          {renderMainContent()}
         </div>
       </main>
       

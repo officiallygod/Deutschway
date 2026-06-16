@@ -5,7 +5,10 @@
     "example": "Der Alltag in Berlin ist oft sehr hektisch.",
     "exampleTranslation": "Everyday life in Berlin is often very hectic.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das tägliche Leben",
+      "die Routine"
+    ]
   },
   {
     "word": "die Erfahrung",
@@ -13,7 +16,10 @@
     "example": "Ich habe gute Erfahrungen damit gemacht.",
     "exampleTranslation": "I have had good experiences with it.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Erlebnis",
+      "die Praxis"
+    ]
   },
   {
     "word": "die Entscheidung",
@@ -22,8 +28,7 @@
     "exampleTranslation": "That was a difficult decision.",
     "grammarNote": "Feminine noun (die). Plural: die Entscheidungen. All nouns ending in '-ung' are strictly feminine.",
     "synonyms": [
-      "der Beschluss",
-      "das Urteil",
+      "der Entschluss",
       "die Wahl"
     ]
   },
@@ -33,7 +38,10 @@
     "example": "Meine Freunde unterstützen mich immer.",
     "exampleTranslation": "My friends always support me.",
     "grammarNote": "Verbs typically go in the second position in a main clause.",
-    "synonyms": []
+    "synonyms": [
+      "helfen",
+      "fördern"
+    ]
   },
   {
     "word": "erfolgreich",
@@ -41,7 +49,11 @@
     "example": "Sie ist eine sehr erfolgreiche Ärztin.",
     "exampleTranslation": "She is a very successful doctor.",
     "grammarNote": "Pay attention to the word's specific context.",
-    "synonyms": []
+    "synonyms": [
+      "siegreich",
+      "gewinnreich",
+      "gelungen"
+    ]
   },
   {
     "word": "die Gesellschaft",
@@ -49,7 +61,10 @@
     "example": "Wir leben in einer modernen Gesellschaft.",
     "exampleTranslation": "We live in a modern society.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Gemeinschaft",
+      "die Sozietät"
+    ]
   },
   {
     "word": "das Unternehmen",
@@ -59,8 +74,7 @@
     "grammarNote": "Neuter noun (das). Plural: die Unternehmen. Nouns ending in '-en' (derived from infinitives) are always neuter.",
     "synonyms": [
       "die Firma",
-      "der Betrieb",
-      "die Gesellschaft"
+      "der Betrieb"
     ]
   },
   {
@@ -69,7 +83,10 @@
     "example": "Wer ist dafür verantwortlich?",
     "exampleTranslation": "Who is responsible for that?",
     "grammarNote": "Pay attention to the word's specific context.",
-    "synonyms": []
+    "synonyms": [
+      "zuständig",
+      "haftbar"
+    ]
   },
   {
     "word": "die Entwicklung",
@@ -77,7 +94,10 @@
     "example": "Die Entwicklung der Technik ist schnell.",
     "exampleTranslation": "The development of technology is fast.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "der Fortschritt",
+      "die Entfaltung"
+    ]
   },
   {
     "word": "die Beziehung",
@@ -87,8 +107,7 @@
     "grammarNote": "Feminine noun (die). Plural: die Beziehungen. The suffix '-ung' forces feminine gender and takes '-en' in plural.",
     "synonyms": [
       "das Verhältnis",
-      "die Verbindung",
-      "der Kontakt"
+      "die Verbindung"
     ]
   },
   {
@@ -97,7 +116,9 @@
     "example": "Die Wirtschaft wächst dieses Jahr.",
     "exampleTranslation": "The economy is growing this year.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Ökonomie"
+    ]
   },
   {
     "word": "das Ziel",
@@ -105,7 +126,11 @@
     "example": "Mein Ziel ist es, fließend Deutsch zu sprechen.",
     "exampleTranslation": "My goal is to speak German fluently.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "der Zweck",
+      "die Absicht",
+      "das Ende"
+    ]
   },
   {
     "word": "erreichen",
@@ -113,7 +138,10 @@
     "example": "Wir haben unser Ziel erreicht.",
     "exampleTranslation": "We have achieved our goal.",
     "grammarNote": "Verbs typically go in the second position in a main clause.",
-    "synonyms": []
+    "synonyms": [
+      "erlangen",
+      "schaffen"
+    ]
   },
   {
     "word": "die Ausbildung",
@@ -121,7 +149,10 @@
     "example": "Eine gute Ausbildung ist wichtig für die Zukunft.",
     "exampleTranslation": "A good education is important for the future.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Lehre",
+      "das Studium"
+    ]
   },
   {
     "word": "die Herausforderung",
@@ -129,7 +160,10 @@
     "example": "Das neue Projekt ist eine große Herausforderung.",
     "exampleTranslation": "The new project is a big challenge.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Aufgabe",
+      "das Problem"
+    ]
   },
   {
     "word": "die Möglichkeit",
@@ -137,7 +171,10 @@
     "example": "Wir haben verschiedene Möglichkeiten.",
     "exampleTranslation": "We have different possibilities.",
     "grammarNote": "Nouns ending in '-keit' or '-heit' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Chance",
+      "die Gelegenheit"
+    ]
   },
   {
     "word": "der Bereich",
@@ -145,7 +182,10 @@
     "example": "In welchem Bereich arbeiten Sie?",
     "exampleTranslation": "In which field do you work?",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Gebiet",
+      "der Sektor"
+    ]
   },
   {
     "word": "die Bedingung",
@@ -153,7 +193,10 @@
     "example": "Unter diesen Bedingungen kann ich nicht arbeiten.",
     "exampleTranslation": "Under these conditions I cannot work.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Voraussetzung",
+      "die Anforderung"
+    ]
   },
   {
     "word": "die Regierung",
@@ -161,7 +204,10 @@
     "example": "Die Regierung hat neue Gesetze verabschiedet.",
     "exampleTranslation": "The government has passed new laws.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Kabinett",
+      "die Staatsführung"
+    ]
   },
   {
     "word": "der Grund",
@@ -169,7 +215,10 @@
     "example": "Was ist der Grund für deine Entscheidung?",
     "exampleTranslation": "What is the reason for your decision?",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Ursache",
+      "das Motiv"
+    ]
   },
   {
     "word": "der Vorteil",
@@ -177,7 +226,10 @@
     "example": "Das Auto hat viele Vorteile.",
     "exampleTranslation": "The car has many advantages.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "der Nutzen",
+      "das Plus"
+    ]
   },
   {
     "word": "der Nachteil",
@@ -185,7 +237,10 @@
     "example": "Gibt es auch Nachteile?",
     "exampleTranslation": "Are there also disadvantages?",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Manko",
+      "der Schaden"
+    ]
   },
   {
     "word": "das Ergebnis",
@@ -193,7 +248,10 @@
     "example": "Das Ergebnis der Prüfung ist sehr gut.",
     "exampleTranslation": "The result of the exam is very good.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Resultat",
+      "die Folge"
+    ]
   },
   {
     "word": "der Erfolg",
@@ -201,7 +259,10 @@
     "example": "Ich wünsche dir viel Erfolg!",
     "exampleTranslation": "I wish you much success!",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "der Triumph",
+      "der Sieg"
+    ]
   },
   {
     "word": "die Bedeutung",
@@ -209,7 +270,10 @@
     "example": "Kennst du die Bedeutung dieses Wortes?",
     "exampleTranslation": "Do you know the meaning of this word?",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "der Sinn",
+      "die Wichtigkeit"
+    ]
   },
   {
     "word": "vergleichen",
@@ -217,7 +281,10 @@
     "example": "Man kann diese beiden Dinge nicht vergleichen.",
     "exampleTranslation": "You cannot compare these two things.",
     "grammarNote": "Verbs typically go in the second position in a main clause.",
-    "synonyms": []
+    "synonyms": [
+      "gegenüberstellen",
+      "abwägen"
+    ]
   },
   {
     "word": "der Unterschied",
@@ -225,7 +292,10 @@
     "example": "Es gibt einen großen Unterschied.",
     "exampleTranslation": "There is a big difference.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Differenz",
+      "die Abweichung"
+    ]
   },
   {
     "word": "die Lösung",
@@ -233,7 +303,10 @@
     "example": "Wir müssen eine Lösung für das Problem finden.",
     "exampleTranslation": "We must find a solution to the problem.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Antwort",
+      "die Klärung"
+    ]
   },
   {
     "word": "der Teilnehmer",
@@ -241,7 +314,10 @@
     "example": "Die Teilnehmer waren sehr zufrieden.",
     "exampleTranslation": "The participants were very satisfied.",
     "grammarNote": "Nouns ending in '-er' often refer to a male person or agent (der).",
-    "synonyms": []
+    "synonyms": [
+      "der Mitwirkende",
+      "der Anwesende"
+    ]
   },
   {
     "word": "die Veranstaltung",
@@ -249,7 +325,10 @@
     "example": "Die Veranstaltung findet morgen statt.",
     "exampleTranslation": "The event takes place tomorrow.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Event",
+      "das Ereignis"
+    ]
   },
   {
     "word": "das Verhalten",
@@ -257,7 +336,10 @@
     "example": "Sein Verhalten war nicht akzeptabel.",
     "exampleTranslation": "His behavior was not acceptable.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Benehmen",
+      "die Attitüde"
+    ]
   },
   {
     "word": "die Erinnerung",
@@ -265,7 +347,10 @@
     "example": "Ich habe gute Erinnerungen an den Urlaub.",
     "exampleTranslation": "I have good memories of the vacation.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Andenken",
+      "das Gedächtnis"
+    ]
   },
   {
     "word": "erwarten",
@@ -273,7 +358,10 @@
     "example": "Was erwartest du von mir?",
     "exampleTranslation": "What do you expect from me?",
     "grammarNote": "Verbs typically go in the second position in a main clause.",
-    "synonyms": []
+    "synonyms": [
+      "hoffen",
+      "entgegensehen"
+    ]
   },
   {
     "word": "die Sicherheit",
@@ -281,7 +369,10 @@
     "example": "Sicherheit steht an erster Stelle.",
     "exampleTranslation": "Security comes first.",
     "grammarNote": "Nouns ending in '-keit' or '-heit' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "der Schutz",
+      "die Gewissheit"
+    ]
   },
   {
     "word": "der Einfluss",
@@ -289,7 +380,10 @@
     "example": "Das Wetter hat einen großen Einfluss auf meine Stimmung.",
     "exampleTranslation": "The weather has a big influence on my mood.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Wirkung",
+      "die Macht"
+    ]
   },
   {
     "word": "die Verbesserung",
@@ -297,7 +391,10 @@
     "example": "Wir sehen eine deutliche Verbesserung.",
     "exampleTranslation": "We see a clear improvement.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Optimierung",
+      "die Korrektur"
+    ]
   },
   {
     "word": "der Mitarbeiter",
@@ -305,7 +402,10 @@
     "example": "Unsere Mitarbeiter sind hoch motiviert.",
     "exampleTranslation": "Our employees are highly motivated.",
     "grammarNote": "Nouns ending in '-er' often refer to a male person or agent (der).",
-    "synonyms": []
+    "synonyms": [
+      "der Angestellte",
+      "der Kollege"
+    ]
   },
   {
     "word": "die Umgebung",
@@ -313,7 +413,10 @@
     "example": "Die Umgebung des Hotels ist wunderschön.",
     "exampleTranslation": "The surroundings of the hotel are beautiful.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Umfeld",
+      "die Nachbarschaft"
+    ]
   },
   {
     "word": "das Angebot",
@@ -321,7 +424,10 @@
     "example": "Das ist ein sehr gutes Angebot.",
     "exampleTranslation": "That is a very good offer.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Offerte",
+      "der Vorschlag"
+    ]
   },
   {
     "word": "die Nachfrage",
@@ -329,7 +435,10 @@
     "example": "Die Nachfrage nach diesem Produkt ist hoch.",
     "exampleTranslation": "The demand for this product is high.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "der Bedarf",
+      "das Interesse"
+    ]
   },
   {
     "word": "die Gesundheit",
@@ -337,7 +446,9 @@
     "example": "Gesundheit ist das Wichtigste im Leben.",
     "exampleTranslation": "Health is the most important thing in life.",
     "grammarNote": "Nouns ending in '-keit' or '-heit' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Wohlbefinden"
+    ]
   },
   {
     "word": "die Zukunft",
@@ -345,7 +456,10 @@
     "example": "Niemand kennt die Zukunft.",
     "exampleTranslation": "No one knows the future.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Morgen",
+      "die kommende Zeit"
+    ]
   },
   {
     "word": "die Vergangenheit",
@@ -353,7 +467,10 @@
     "example": "Wir können die Vergangenheit nicht ändern.",
     "exampleTranslation": "We cannot change the past.",
     "grammarNote": "Nouns ending in '-keit' or '-heit' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Gestern",
+      "die Historie"
+    ]
   },
   {
     "word": "der Fehler",
@@ -361,7 +478,10 @@
     "example": "Jeder macht mal Fehler.",
     "exampleTranslation": "Everyone makes mistakes.",
     "grammarNote": "Nouns ending in '-er' often refer to a male person or agent (der).",
-    "synonyms": []
+    "synonyms": [
+      "der Irrtum",
+      "der Makel"
+    ]
   },
   {
     "word": "die Wahrheit",
@@ -369,7 +489,10 @@
     "example": "Sag mir bitte die Wahrheit.",
     "exampleTranslation": "Please tell me the truth.",
     "grammarNote": "Nouns ending in '-keit' or '-heit' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "die Realität",
+      "die Tatsache"
+    ]
   },
   {
     "word": "das Gefühl",
@@ -377,7 +500,10 @@
     "example": "Ich habe ein gutes Gefühl dabei.",
     "exampleTranslation": "I have a good feeling about it.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Emotion",
+      "die Empfindung"
+    ]
   },
   {
     "word": "der Traum",
@@ -385,7 +511,10 @@
     "example": "Es war nur ein Traum.",
     "exampleTranslation": "It was only a dream.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Vision",
+      "die Fantasie"
+    ]
   },
   {
     "word": "die Gefahr",
@@ -393,7 +522,10 @@
     "example": "Es besteht keine Gefahr mehr.",
     "exampleTranslation": "There is no more danger.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "das Risiko",
+      "die Bedrohung"
+    ]
   },
   {
     "word": "die Leistung",
@@ -401,7 +533,10 @@
     "example": "Seine Leistung in der Schule ist hervorragend.",
     "exampleTranslation": "His performance in school is excellent.",
     "grammarNote": "Nouns ending in '-ung' are always feminine (die).",
-    "synonyms": []
+    "synonyms": [
+      "das Resultat",
+      "das Werk"
+    ]
   },
   {
     "word": "der Anspruch",
@@ -409,7 +544,10 @@
     "example": "Die Kunden haben hohe Ansprüche.",
     "exampleTranslation": "The customers have high demands.",
     "grammarNote": "Memorize the article along with the noun.",
-    "synonyms": []
+    "synonyms": [
+      "die Forderung",
+      "das Recht"
+    ]
   },
   {
     "word": "bestätigen",

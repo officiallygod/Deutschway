@@ -16,7 +16,12 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  [data-theme="dark"] & {
+    background: rgba(40, 40, 42, 0.5);
+  }
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
   z-index: 100;
   
@@ -515,7 +520,32 @@
     align-items: center;
     margin-bottom: 1.5rem;
     
-    h2 { font-size: 1.2rem; font-weight: 700; color: var(--text-color); }
+    h2 { 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+      color: var(--text-color); 
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .header-labels {
+        display: flex;
+        gap: 0.2rem;
+      }
+
+      .clickable-label {
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+        border-radius: 8px;
+        transition: background 0.2s;
+        &:hover {
+          background: rgba(0,0,0,0.05);
+        }
+        [data-theme="dark"] &:hover {
+          background: rgba(255,255,255,0.1);
+        }
+      }
+    }
     
     .nav-btn {
       background: transparent;
@@ -544,6 +574,32 @@
     text-align: center;
     margin-bottom: 1.5rem;
 
+    &.months-grid, &.years-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      
+      .month-yr-btn {
+        aspect-ratio: auto;
+        padding: 1rem 0;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 1px solid transparent;
+        &:hover {
+          background: rgba(0,0,0,0.05);
+        }
+        [data-theme="dark"] &:hover {
+          background: rgba(255,255,255,0.1);
+        }
+        &.today {
+          border: 2px solid var(--primary-accent);
+          color: var(--primary-accent);
+          background: transparent;
+          box-shadow: none;
+        }
+      }
+    }
+
     .weekday {
       font-size: 0.8rem;
       font-weight: 700;
@@ -552,7 +608,9 @@
     }
 
     .calendar-day {
-      aspect-ratio: 1;
+      width: 38px;
+      height: 38px;
+      margin: 0 auto;
       border: none;
       background: transparent;
       border-radius: 50%;
@@ -564,6 +622,13 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        background: rgba(0,0,0,0.05);
+      }
+      [data-theme="dark"] &:hover:not(:disabled) {
+        background: rgba(255,255,255,0.1);
+      }
 
       &.empty {
         background: transparent;

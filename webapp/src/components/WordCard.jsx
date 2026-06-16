@@ -102,35 +102,6 @@ const WordCard = React.memo(({
 
       {/* Unified Controls for all screens */}
       <div className="flex flex-col items-center justify-center mt-6 w-full gap-6">
-        {/* Pagination Tabs */}
-        {dailyWords && dailyWords.length > 0 && (
-          <div className="flex justify-center w-full max-w-[400px]">
-            <div className="flex bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-2xl shadow-sm p-1 gap-1 w-full">
-              {dailyWords.map((w, idx) => {
-                const isSelected = currentIndex === idx;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => jumpToWord(idx)}
-                    className={`relative flex-1 h-12 rounded-xl text-sm font-medium transition-colors ${
-                      isSelected ? 'text-white' : 'text-foreground hover:bg-white/20'
-                    }`}
-                  >
-                    {isSelected && (
-                      <motion.div
-                        layoutId="unified-tab-indicator"
-                        className="absolute inset-0 bg-primary rounded-xl shadow-sm"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                    <span className="relative z-10">{idx + 1}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         <div className="flex w-full justify-between items-center gap-4">
           <button 
             className="btn secondary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
@@ -144,10 +115,36 @@ const WordCard = React.memo(({
             className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
             onClick={handleNext}
           >
-            {currentIndex === totalWords - 1 ? 'Lektion beenden' : <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span></>} 
-            <ChevronRight size={20} />
+            {currentIndex === totalWords - 1 ? (
+              <span className="font-semibold tracking-wide uppercase text-sm">Lektion beenden</span>
+            ) : (
+              <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span> <ChevronRight size={20} /></>
+            )} 
           </button>
         </div>
+
+        {/* Minimal Pagination Dots */}
+        {dailyWords && dailyWords.length > 0 && (
+          <div className="flex justify-center w-full mt-2">
+            <div className="flex items-center gap-2">
+              {dailyWords.map((w, idx) => {
+                const isSelected = currentIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => jumpToWord(idx)}
+                    className={`relative rounded-full transition-all duration-300 ${
+                      isSelected 
+                        ? 'w-6 h-2 bg-primary' 
+                        : 'w-2 h-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
+                    }`}
+                    aria-label={`Gehe zu Wort ${idx + 1}`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

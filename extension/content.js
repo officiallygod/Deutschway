@@ -7,6 +7,12 @@ function syncToExtension() {
   const completed = localStorage.getItem('deutschway_completedIndices');
   const theme = localStorage.getItem('theme') || 'light';
   
+  if (!chrome.runtime?.id) {
+    if (syncInterval) clearInterval(syncInterval);
+    window.removeEventListener('storage', syncToExtension);
+    return;
+  }
+
   if (daily) {
     try {
       chrome.storage.local.set({
@@ -18,7 +24,6 @@ function syncToExtension() {
       });
     } catch (e) {
       if (e.message && e.message.includes('Extension context invalidated')) {
-        console.warn('Deutschway Extension updated. Please refresh the page.');
         if (syncInterval) clearInterval(syncInterval);
         window.removeEventListener('storage', syncToExtension);
       }

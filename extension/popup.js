@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const xpText = document.getElementById('xpText');
-  const progressFill = document.getElementById('progressFill');
+  const xpCircle = document.getElementById('xpCircle');
+  const xpCircleFill = document.getElementById('xpCircleFill');
   const toggle = document.getElementById('openOnNewTabToggle');
   const openAppBtn = document.getElementById('openAppBtn');
   const streakText = document.getElementById('streakText');
@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const xp = completed.length * 10;
         const totalXp = words.length * 10;
         
-        xpText.textContent = `${xp} / ${totalXp} XP`;
-        progressFill.style.width = `${(xp / totalXp) * 100}%`;
+        const pct = totalXp > 0 ? (xp / totalXp) * 100 : 0;
+        xpCircleFill.style.strokeDasharray = `${pct}, 100`;
+        xpCircle.title = `${xp} / ${totalXp} XP`;
 
         if (completed.length > 0) {
           fallbackMsg.style.display = 'none';

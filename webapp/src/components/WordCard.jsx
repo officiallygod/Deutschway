@@ -111,16 +111,18 @@ const WordCard = React.memo(({
             <ChevronLeft size={20} /> <span className="hidden md:inline">Zurück</span>
           </button>
           
-          <button 
-            className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
-            onClick={handleNext}
-          >
-            {currentIndex === totalWords - 1 ? (
-              <span className="font-semibold tracking-wide uppercase text-sm">Lektion beenden</span>
-            ) : (
-              <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span> <ChevronRight size={20} /></>
-            )} 
-          </button>
+          {!hideNextButton && (
+            <button 
+              className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
+              onClick={handleNext}
+            >
+              {isLastWord ? (
+                <span className="font-semibold tracking-wide uppercase text-sm">Lektion beenden</span>
+              ) : (
+                <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span> <ChevronRight size={20} /></>
+              )} 
+            </button>
+          )}
         </div>
 
         {/* Minimal Pagination Dots */}

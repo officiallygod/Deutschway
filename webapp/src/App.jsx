@@ -81,6 +81,7 @@ function App() {
           handlePrev={handlePrev}
           dailyWords={dailyWords}
           jumpToWord={jumpToWord}
+          isSessionComplete={isSessionComplete}
         />
       </>
     );

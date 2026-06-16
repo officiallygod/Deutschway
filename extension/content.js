@@ -4,7 +4,7 @@ function syncToExtension() {
   const daily = localStorage.getItem('deutschway_currentDaily');
   const xp = localStorage.getItem('deutschway_totalXp');
   const streak = localStorage.getItem('deutschway_streak');
-  const completed = localStorage.getItem('deutschway_completedIndices');
+  const completed = localStorage.getItem('deutschway_completedIndicesToday');
   const theme = localStorage.getItem('theme') || 'light';
   
   if (!chrome.runtime?.id) {

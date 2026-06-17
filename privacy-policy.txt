@@ -1,0 +1,95 @@
+# Privacy Policy for Deutschway Chrome Extension
+
+**Last Updated:** June 2026
+
+## Introduction
+
+Deutschway ("we", "our", or "us") provides a Chrome browser extension designed to help users learn German vocabulary by displaying daily words and opening the Deutschway website for learning activities.
+
+This Privacy Policy explains what information is collected, how it is used, and your rights regarding your data.
+
+## Information We Collect
+
+### Information Stored Locally
+
+The extension may store the following information locally within your browser:
+
+* Daily learning progress
+* Word completion status
+* User preferences and settings
+* Date of the last automatic website opening
+
+This information is stored only on your device using Chrome's storage functionality.
+
+### Information We Do Not Collect
+
+The extension does **not** collect:
+
+* Names
+* Email addresses
+* Passwords
+* Financial information
+* Government identification numbers
+* Health information
+* Personal messages
+* Browsing history
+* Website content viewed by users
+
+## How the Extension Works
+
+The extension:
+
+1. Displays German vocabulary words to help users learn German.
+2. Opens the Deutschway website once per day to provide learning content.
+3. Stores learning progress locally in the browser.
+
+## Website Data
+
+When the extension opens the Deutschway website, standard web server logs may be collected by the website hosting provider, including:
+
+* IP address
+* Browser type
+* Device information
+* Date and time of access
+
+This information is used for security, analytics, and website operation purposes.
+
+## Data Sharing
+
+We do not sell, rent, or share personal information with third parties except where required by law or necessary to operate the website and hosting services.
+
+## Data Security
+
+We take reasonable measures to protect information and maintain the security of our services.
+
+## Third-Party Services
+
+The Deutschway website may use third-party services such as:
+
+* Website hosting providers
+* Analytics providers
+
+These services may process technical information necessary for their operation.
+
+## Your Choices
+
+You can:
+
+* Disable or remove the extension at any time through Chrome.
+* Clear locally stored extension data through your browser settings.
+
+## Children's Privacy
+
+The extension is not specifically directed toward children under 13 years of age.
+
+## Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. Updates will be posted on this page with a revised "Last Updated" date.
+
+## Contact
+
+If you have questions regarding this Privacy Policy, please contact:
+
+**Email:** [allen.officially@gmail.com](mailto:allen.officially@gmail.com)
+
+**Website:** [https://allenbenny.me/](https://allenbenny.me/)

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="webapp/public/logo.svg" alt="Deutschway Mascot" width="150" style="border-radius: 20%; box-shadow: 0 10px 20px rgba(0,0,0,0.1)"/>
+  <img src="webapp/public/logo.png" alt="Deutschway Mascot" width="150" style="border-radius: 20%; box-shadow: 0 10px 20px rgba(0,0,0,0.1)"/>
   <h1>Deutschway</h1>
   <p><em>Learn 5 German words daily, seamlessly integrated into your routine.</em></p>
 </div>

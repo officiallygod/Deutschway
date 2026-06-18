@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;900&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .promo-container {
+      position: relative;
+      overflow: hidden;
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f0f11 0%, #1a1a1e 100%);
+      color: white;
+    }
+
+    /* Soft glowing orbs for background depth */
+    .promo-container::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -10%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255, 59, 48, 0.18) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .promo-container::after {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      right: -10%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255, 204, 0, 0.15) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .marquee {
+      width: 1400px;
+      height: 560px;
+    }
+
+    .small-promo {
+      width: 440px;
+      height: 280px;
+    }
+
+    .marquee .logo { 
+      width: 160px; 
+      height: 160px; 
+      margin-bottom: 30px; 
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6)); 
+    }
+    .small-promo .logo { 
+      width: 80px; 
+      height: 80px; 
+      margin-bottom: 16px; 
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); 
+    }
+
+    .marquee h1 { 
+      font-size: 96px; 
+      font-weight: 900; 
+      margin: 0; 
+      letter-spacing: -0.03em; 
+    }
+    .marquee p { 
+      font-size: 34px; 
+      font-weight: 400; 
+      margin: 16px 0 0 0; 
+      color: #b0b0b0; 
+    }
+    
+    .small-promo h1 { 
+      font-size: 46px; 
+      font-weight: 900; 
+      margin: 0; 
+      letter-spacing: -0.03em; 
+    }
+    .small-promo p { 
+      font-size: 18px; 
+      font-weight: 400; 
+      margin: 8px 0 0 0; 
+      color: #b0b0b0; 
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #ffffff, #eaeaea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .highlight {
+      color: #ffcc00;
+      font-weight: 600;
+    }
+
+    .tagline-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 24px;
+      border-radius: 100px;
+      backdrop-filter: blur(10px);
+    }
+    .marquee .tagline-container {
+      gap: 16px;
+      margin-top: 32px;
+      padding: 16px 32px;
+    }
+    .tagline-text {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .marquee .tagline-text {
+      font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Marquee Promo Tile -->
+  <div id="marquee" class="promo-container marquee">
+    <div class="content">
+      <img src="./webapp/public/logo.png" class="logo" />
+      <h1><span class="gradient-text">DeutschWay</span></h1>
+      <p>Master German Vocabulary Effortlessly</p>
+      <div class="tagline-container">
+        <span class="tagline-text"><span class="highlight">A2-B1</span> Level</span>
+        <span style="color: rgba(255,255,255,0.2)">|</span>
+        <span class="tagline-text">Daily Micro-learning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small Promo Tile -->
+  <div id="small" class="promo-container small-promo">
+    <div class="content">
+      <img src="./webapp/public/logo.png" class="logo" />
+      <h1><span class="gradient-text">DeutschWay</span></h1>
+      <p>Learn German Daily</p>
+    </div>
+  </div>
+
+</body>
+</html>

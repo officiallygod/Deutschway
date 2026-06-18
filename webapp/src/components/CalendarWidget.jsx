@@ -102,23 +102,22 @@ const CalendarWidget = React.memo(({ onSelectDate, isTodayCompleted }) => {
 
             let customStyles = '';
             if (hasHistory) {
-              customStyles = 'bg-sky-200 text-sky-800 dark:bg-sky-500/30 dark:text-sky-300 font-bold shadow-sm hover:bg-sky-300 dark:hover:bg-sky-500/50';
+              customStyles = 'bg-sky-200 text-sky-800 dark:bg-sky-500/30 dark:text-sky-300 font-bold shadow-sm hover:bg-sky-300 dark:hover:bg-sky-500/50 cursor-pointer';
             } else if (isToday) {
-              customStyles = 'border-2 border-solid border-sky-300 text-sky-600 dark:border-sky-500/60 dark:text-sky-300 font-bold';
-            } else if (!isDisabled && item.isCurrentMonth) {
-              customStyles = 'text-foreground hover:bg-black/5 dark:hover:bg-white/10';
+              customStyles = 'border-2 border-solid border-sky-300 text-sky-600 dark:border-sky-500/60 dark:text-sky-300 font-bold hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer';
+            } else if (isDisabled) {
+              customStyles = 'text-foreground/40 dark:text-foreground/50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent';
             } else {
-              customStyles = 'text-foreground/30';
+              customStyles = 'text-foreground hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer';
             }
 
             return (
               <button
                 key={i}
-                disabled={isDisabled}
+                disabled={isDisabled || !item.isCurrentMonth}
                 onClick={() => onSelectDate && onSelectDate(item.fullDate.toDateString())}
-                className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all cursor-pointer 
-                  ${isDisabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}
-                  ${customStyles}
+                className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all
+                  ${!item.isCurrentMonth ? 'invisible' : customStyles}
                 `}
               >
                 {item.date}

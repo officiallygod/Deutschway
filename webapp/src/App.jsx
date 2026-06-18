@@ -24,12 +24,21 @@ function App() {
     stats,
     isRevisionMode,
     revisionDate,
+    showWelcomeBack,
+    setShowWelcomeBack,
     handleNext,
     handlePrev,
     jumpToWord,
     loadRevisionDay,
     exitRevisionMode
   } = useDailySession();
+
+  useEffect(() => {
+    if (showWelcomeBack) {
+      const timer = setTimeout(() => setShowWelcomeBack(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showWelcomeBack, setShowWelcomeBack]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -119,6 +128,27 @@ function App() {
       />
 
       <main className="main-content flex-1 min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto overflow-x-hidden">
+        
+        <AnimatePresence>
+          {showWelcomeBack && (
+            <motion.div
+              initial={{ opacity: 0, y: -50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.9 }}
+              className="absolute top-6 left-1/2 -translate-x-1/2 z-[100] glass px-6 py-3 shadow-xl border-sky-300 dark:border-sky-500/50 flex items-center gap-3"
+            >
+              <span className="text-2xl">🎉</span>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-foreground">Willkommen zurück!</span>
+                <span className="text-xs text-foreground/70 font-medium">Es ist schön, dich wiederzusehen.</span>
+              </div>
+              <button onClick={() => setShowWelcomeBack(false)} className="ml-4 text-foreground/50 hover:text-foreground">
+                ✕
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="top-bar flex justify-between items-center w-full px-4 pt-4 absolute top-0 left-0 z-50">
           <div className="left-controls">
             {(showStats || isRevisionMode) ? (

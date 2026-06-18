@@ -7,6 +7,7 @@ export const useDailySession = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [completedIndices, setCompletedIndices] = useState([]);
   const [isSessionComplete, setIsSessionComplete] = useState(false);
+  const [showWelcomeBack, setShowWelcomeBack] = useState(false);
   const [stats, setStats] = useState({ streak: 0, totalXp: 0, chartData: [] });
 
   const loadData = useCallback(async () => {
@@ -16,6 +17,9 @@ export const useDailySession = () => {
       setDailyWords(session.words);
       setCompletedIndices(session.completedIndices);
       setIsSessionComplete(session.isSessionComplete);
+      if (session.showWelcomeBack) {
+        setShowWelcomeBack(true);
+      }
 
       const userStats = await apiService.getUserStats();
       setStats(userStats);
@@ -102,6 +106,8 @@ export const useDailySession = () => {
     stats,
     isRevisionMode,
     revisionDate,
+    showWelcomeBack,
+    setShowWelcomeBack,
     handleNext,
     handlePrev,
     jumpToWord,

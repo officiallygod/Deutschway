@@ -24,6 +24,7 @@ class ApiService {
     const today = new Date().toDateString();
     const lastVisit = localStorage.getItem(STORAGE_KEYS.LAST_VISIT);
     let currentDaily = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_DAILY) || 'null');
+    let showWelcomeBack = false;
     
     if (lastVisit !== today || !currentDaily || !currentDaily[0] || !currentDaily[0].synonyms) {
       // It's a new day (or legacy cache detected), pick 5 new words
@@ -48,8 +49,12 @@ class ApiService {
       if (lastVisit) {
         const diffDays = Math.ceil(Math.abs(new Date(today) - new Date(lastVisit)) / (1000 * 60 * 60 * 24));
         if (diffDays > 1) localStorage.setItem(STORAGE_KEYS.STREAK, '0');
+        if (diffDays >= 7) showWelcomeBack = true;
       }
     }
+    
+    // We should also check on normal loads if diffDays >= 7 was triggered, but we only want to show it once. 
+    // Wait, if it's a new day and diffDays >= 7, we show it. If it's the same day, we don't.
     
     const completedIndices = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMPLETED_INDICES) || '[]');
     const isSessionComplete = localStorage.getItem(STORAGE_KEYS.COMPLETED_TODAY) === today;
@@ -57,7 +62,8 @@ class ApiService {
     return {
       words: currentDaily,
       completedIndices,
-      isSessionComplete
+      isSessionComplete,
+      showWelcomeBack
     };
   }
 

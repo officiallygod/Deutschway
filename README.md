@@ -1,9 +1,6 @@
 <div align="center">
   <img src="marquee_promo.png" alt="Deutschway Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px;" />
   <br />
-  <img src="webapp/public/logo.png" alt="Deutschway Logo" width="100" />
-  <h1>Deutschway</h1>
-  <p><em>Master German Vocabulary Effortlessly. Daily Micro-learning.</em></p>
   
   <div>
     <img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version" />

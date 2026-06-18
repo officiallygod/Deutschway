@@ -3,7 +3,7 @@
   <br />
   <img src="webapp/public/logo.png" alt="Deutschway Logo" width="100" />
   <h1>Deutschway</h1>
-  <p><em>Master German Vocabulary Effortlessly. A2-B1 Level Daily Micro-learning.</em></p>
+  <p><em>Master German Vocabulary Effortlessly. Daily Micro-learning.</em></p>
   
   <div>
     <img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version" />
@@ -17,14 +17,14 @@
 
 ## 🌟 Overview
 
-**Deutschway** is a beautifully crafted Progressive Web App (PWA) and Chrome Extension designed to help you build a consistent German learning habit. Every single day, the first time you open Google Chrome, Deutschway automatically opens a tab presenting you with 5 carefully curated German words (A2-B1 level) to learn and write down. 
+**Deutschway** is a beautifully crafted Progressive Web App (PWA) and Chrome Extension designed to help you build a consistent German learning habit. Every single day, the first time you open Google Chrome, Deutschway automatically opens a tab presenting you with 5 carefully curated German words to learn and write down. 
 
 No more forgetting to practice!
 
 ## ✨ Features
 
 - **Daily Automation**: Chrome extension automatically launches the app once a day.
-- **Curated Database**: Over 150+ high-quality A2-B1 German words with translations, sample sentences, and sentence translations.
+- **Curated Database**: Over 150+ high-quality German words with translations, sample sentences, and sentence translations.
 - **Streak Tracking**: Built-in Duolingo-style streak tracker to keep you motivated.
 - **Premium UI/UX**: Sleek glassmorphism design, smooth micro-animations, and rich typography (`Playfair Display` + `Inter`).
 - **Dark/Light Mode**: Beautiful themes accented with subtle German flag colors.

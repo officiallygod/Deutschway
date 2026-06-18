@@ -51,41 +51,39 @@
     <!-- The overall shape -->
     <path id="arrow-shape" d="M 256 60 L 410 214 L 350 250 L 350 420 L 256 340 L 162 420 L 162 250 L 102 214 Z" />
     <clipPath id="clip-black">
-      <rect x="0" y="0" width="512" height="185" />
+      <rect x="0" y="0" width="512" height="180" />
     </clipPath>
     <clipPath id="clip-red">
-      <rect x="0" y="185" width="512" height="105" />
+      <rect x="0" y="180" width="512" height="110" />
     </clipPath>
     <clipPath id="clip-yellow">
       <rect x="0" y="290" width="512" height="222" />
     </clipPath>
   </defs>
 
-  <!-- We use stroke-linejoin round on a thick stroke to round the corners of the shape, 
-       then fill it, and apply the bevel + shadow -->
   <g filter="url(#shadow)">
     <g filter="url(#bevel)">
-      <!-- Base shape rounded using stroke -->
-      <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
-            fill="white" stroke="white" stroke-width="40" stroke-linejoin="round" id="base-white"/>
-
       <!-- Black Top Section -->
       <g clip-path="url(#clip-black)">
         <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
-              fill="url(#black-grad)" stroke="url(#black-grad)" stroke-width="40" stroke-linejoin="round"/>
+              fill="url(#black-grad)" stroke="url(#black-grad)" stroke-width="30" stroke-linejoin="round"/>
       </g>
       
       <!-- Red Middle Section -->
       <g clip-path="url(#clip-red)">
         <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
-              fill="url(#red-grad)" stroke="url(#red-grad)" stroke-width="40" stroke-linejoin="round"/>
+              fill="url(#red-grad)" stroke="url(#red-grad)" stroke-width="30" stroke-linejoin="round"/>
       </g>
       
       <!-- Yellow Bottom Section -->
       <g clip-path="url(#clip-yellow)">
         <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
-              fill="url(#yellow-grad)" stroke="url(#yellow-grad)" stroke-width="40" stroke-linejoin="round"/>
+              fill="url(#yellow-grad)" stroke="url(#yellow-grad)" stroke-width="30" stroke-linejoin="round"/>
       </g>
+
+      <!-- Black Outline around the whole shape -->
+      <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
+            fill="none" stroke="#151515" stroke-width="30" stroke-linejoin="round" />
     </g>
   </g>
 </svg>

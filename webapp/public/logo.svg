@@ -1,0 +1,91 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Drop shadow for the 3D floating effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="15" stdDeviation="15" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Inner shadow/bevel for 3D thickness -->
+    <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feOffset dx="-3" dy="-3"/>
+      <feComposite operator="in" in2="SourceAlpha"/>
+      <feComposite operator="arithmetic" k2="-1" k3="1" result="shadowDiff"/>
+      
+      <feFlood flood-color="black" flood-opacity="0.4"/>
+      <feComposite operator="in" in2="shadowDiff"/>
+      <feComposite operator="over" in2="SourceGraphic"/>
+      
+      <!-- Highlight -->
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation="3" result="blur2"/>
+      <feOffset dx="3" dy="3"/>
+      <feComposite operator="in" in2="SourceAlpha"/>
+      <feComposite operator="arithmetic" k2="-1" k3="1" result="highlightDiff"/>
+      
+      <feFlood flood-color="white" flood-opacity="0.4"/>
+      <feComposite operator="in" in2="highlightDiff"/>
+      <feComposite operator="over" in2="SourceGraphic" result="final"/>
+    </filter>
+
+    <!-- Gradients to give it a slightly rounded/lit surface -->
+    <linearGradient id="black-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="red-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff2a2a"/>
+      <stop offset="100%" stop-color="#cc0000"/>
+    </linearGradient>
+    <linearGradient id="yellow-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#d4a000"/>
+    </linearGradient>
+
+    <!-- Clip paths for the 3 sections -->
+    <!-- The overall shape -->
+    <path id="arrow-shape" d="M 256 60 L 410 214 L 350 250 L 350 420 L 256 340 L 162 420 L 162 250 L 102 214 Z" />
+    <clipPath id="clip-black">
+      <rect x="0" y="0" width="512" height="185" />
+    </clipPath>
+    <clipPath id="clip-red">
+      <rect x="0" y="185" width="512" height="105" />
+    </clipPath>
+    <clipPath id="clip-yellow">
+      <rect x="0" y="290" width="512" height="222" />
+    </clipPath>
+  </defs>
+
+  <!-- We use stroke-linejoin round on a thick stroke to round the corners of the shape, 
+       then fill it, and apply the bevel + shadow -->
+  <g filter="url(#shadow)">
+    <g filter="url(#bevel)">
+      <!-- Base shape rounded using stroke -->
+      <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
+            fill="white" stroke="white" stroke-width="40" stroke-linejoin="round" id="base-white"/>
+
+      <!-- Black Top Section -->
+      <g clip-path="url(#clip-black)">
+        <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
+              fill="url(#black-grad)" stroke="url(#black-grad)" stroke-width="40" stroke-linejoin="round"/>
+      </g>
+      
+      <!-- Red Middle Section -->
+      <g clip-path="url(#clip-red)">
+        <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
+              fill="url(#red-grad)" stroke="url(#red-grad)" stroke-width="40" stroke-linejoin="round"/>
+      </g>
+      
+      <!-- Yellow Bottom Section -->
+      <g clip-path="url(#clip-yellow)">
+        <path d="M 256 70 L 400 214 L 340 250 L 340 400 L 256 330 L 172 400 L 172 250 L 112 214 Z" 
+              fill="url(#yellow-grad)" stroke="url(#yellow-grad)" stroke-width="40" stroke-linejoin="round"/>
+      </g>
+    </g>
+  </g>
+</svg>

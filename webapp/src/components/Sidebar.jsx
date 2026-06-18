@@ -63,16 +63,16 @@ const Sidebar = React.memo(({
           )}
         </div>
 
-        <div className="daily-progress" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--card-border)', marginBottom: '1.5rem' }}>
-          <div className="flex flex-col">
-            <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Tagesziel</span>
-            <span className="text-sm font-semibold text-foreground">{xpEarned} / {totalXpGoal} XP</span>
-          </div>
-          <div className="relative w-11 h-11 flex items-center justify-center">
+        <div className="daily-progress" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '1rem', padding: '1rem', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--card-border)', marginBottom: '1.5rem' }}>
+          <div className="relative w-11 h-11 flex-shrink-0 flex items-center justify-center">
             <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
               <path className="fill-none stroke-black/5 dark:stroke-white/10" strokeWidth="3.5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
               <path className="fill-none stroke-primary" strokeWidth="3.5" strokeLinecap="round" strokeDasharray={`${progressPercent}, 100`} style={{ transition: 'stroke-dasharray 0.5s ease' }} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
             </svg>
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Tagesziel</span>
+            <span className="text-sm font-semibold text-foreground">{xpEarned} / {totalXpGoal} XP</span>
           </div>
         </div>
 

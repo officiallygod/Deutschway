@@ -20,8 +20,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #0f0f11 0%, #1a1a1e 100%);
-      color: white;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #111;
     }
 
     /* Soft glowing orbs for background depth */
@@ -87,9 +87,9 @@
     }
     .marquee p { 
       font-size: 34px; 
-      font-weight: 400; 
+      font-weight: 500; 
       margin: 16px 0 0 0; 
-      color: #b0b0b0; 
+      color: #555; 
     }
     
     .small-promo h1 { 
@@ -100,13 +100,13 @@
     }
     .small-promo p { 
       font-size: 18px; 
-      font-weight: 400; 
+      font-weight: 500; 
       margin: 8px 0 0 0; 
-      color: #b0b0b0; 
+      color: #555; 
     }
     
     .gradient-text {
-      background: linear-gradient(to right, #ffffff, #eaeaea);
+      background: linear-gradient(to right, #111, #333);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -121,8 +121,8 @@
       align-items: center;
       gap: 12px;
       margin-top: 24px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.1);
       padding: 12px 24px;
       border-radius: 100px;
       backdrop-filter: blur(10px);
@@ -135,10 +135,13 @@
     .tagline-text {
       font-size: 20px;
       font-weight: 600;
-      color: #fff;
+      color: #333;
     }
     .marquee .tagline-text {
       font-size: 28px;
+    }
+    .divider {
+      color: rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -152,7 +155,7 @@
       <p>Master German Vocabulary Effortlessly</p>
       <div class="tagline-container">
         <span class="tagline-text"><span class="highlight">A2-B1</span> Level</span>
-        <span style="color: rgba(255,255,255,0.2)">|</span>
+        <span class="divider">|</span>
         <span class="tagline-text">Daily Micro-learning</span>
       </div>
     </div>

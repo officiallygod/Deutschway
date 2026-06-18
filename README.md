@@ -1,7 +1,16 @@
 <div align="center">
-  <img src="webapp/public/logo.png" alt="Deutschway Mascot" width="150" style="border-radius: 20%; box-shadow: 0 10px 20px rgba(0,0,0,0.1)"/>
+  <img src="marquee_promo.png" alt="Deutschway Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px;" />
+  <br />
+  <img src="webapp/public/logo.png" alt="Deutschway Logo" width="100" />
   <h1>Deutschway</h1>
-  <p><em>Learn 5 German words daily, seamlessly integrated into your routine.</em></p>
+  <p><em>Master German Vocabulary Effortlessly. A2-B1 Level Daily Micro-learning.</em></p>
+  
+  <div>
+    <img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version" />
+    <img src="https://img.shields.io/badge/language-German-red.svg" alt="German" />
+    <img src="https://img.shields.io/badge/framework-React-61dafb.svg" alt="React" />
+    <img src="https://img.shields.io/badge/platform-Chrome_Extension-yellow.svg" alt="Chrome Extension" />
+  </div>
 </div>
 
 ---

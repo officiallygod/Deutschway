@@ -100,7 +100,7 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
                   ${!item.isCurrentMonth ? 'text-foreground/30' : 'text-foreground hover:bg-black/5 dark:hover:bg-white/10'}
                   ${isFuture ? 'opacity-30 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}
                   ${isToday && !hasHistory ? 'border-2 border-primary text-primary font-bold' : ''}
-                  ${hasHistory ? 'bg-primary text-white font-bold shadow-md hover:bg-primary/90 dark:hover:bg-primary/90' : ''}
+                  ${hasHistory ? 'bg-blue-500 text-white font-bold shadow-md hover:bg-blue-600 dark:hover:bg-blue-600' : ''}
                 `}
               >
                 {item.date}

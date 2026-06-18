@@ -9,7 +9,7 @@ const CalendarWidget = React.memo(({ onSelectDate, isTodayCompleted }) => {
 
   useEffect(() => {
     try {
-      const historyStr = localStorage.getItem(STORAGE_KEYS.LEARNING_HISTORY);
+      const historyStr = localStorage.getItem(STORAGE_KEYS.DAILY_HISTORY);
       if (historyStr) {
         setHistoryMap(JSON.parse(historyStr));
       }
@@ -104,7 +104,7 @@ const CalendarWidget = React.memo(({ onSelectDate, isTodayCompleted }) => {
             if (hasHistory) {
               customStyles = 'bg-sky-200 text-sky-800 dark:bg-sky-500/30 dark:text-sky-300 font-bold shadow-sm hover:bg-sky-300 dark:hover:bg-sky-500/50';
             } else if (isToday) {
-              customStyles = 'ring-2 ring-inset ring-sky-300 text-sky-600 dark:ring-sky-500/60 dark:text-sky-300 font-bold';
+              customStyles = 'border-2 border-solid border-sky-300 text-sky-600 dark:border-sky-500/60 dark:text-sky-300 font-bold';
             } else if (!isDisabled && item.isCurrentMonth) {
               customStyles = 'text-foreground hover:bg-black/5 dark:hover:bg-white/10';
             } else {
@@ -126,13 +126,13 @@ const CalendarWidget = React.memo(({ onSelectDate, isTodayCompleted }) => {
             );
           })}
         </div>
-        <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-solid border-black/5 dark:border-white/10 text-xs text-foreground/60 font-medium">
+        <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-0 border-t border-solid border-black/5 dark:border-white/10 text-xs text-foreground/60 font-medium">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full ring-2 ring-inset ring-sky-300 dark:ring-sky-500/60"></div>
+            <div className="w-3 h-3 rounded-full border-2 border-solid border-sky-300 dark:border-sky-500/60"></div>
             <span>Heute</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-sky-200 dark:bg-sky-500/30 ring-1 ring-inset ring-sky-300 dark:ring-sky-500/50"></div>
+            <div className="w-3 h-3 rounded-full bg-sky-200 dark:bg-sky-500/30 border border-solid border-sky-300 dark:border-sky-500/50"></div>
             <span>Gelernt</span>
           </div>
         </div>

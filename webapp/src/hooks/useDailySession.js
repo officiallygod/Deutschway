@@ -8,6 +8,7 @@ export const useDailySession = () => {
   const [completedIndices, setCompletedIndices] = useState([]);
   const [isSessionComplete, setIsSessionComplete] = useState(false);
   const [showWelcomeBack, setShowWelcomeBack] = useState(false);
+  const [showSessionCompleteToast, setShowSessionCompleteToast] = useState(false);
   const [stats, setStats] = useState({ streak: 0, totalXp: 0, chartData: [] });
 
   const loadData = useCallback(async () => {
@@ -53,6 +54,7 @@ export const useDailySession = () => {
       // Completed all words
       const newStreak = await apiService.completeSession(dailyWords);
       setIsSessionComplete(true);
+      setShowSessionCompleteToast(true);
       setStats(prev => ({ ...prev, streak: newStreak }));
       
       // Reload stats to get fresh chart data
@@ -108,6 +110,8 @@ export const useDailySession = () => {
     revisionDate,
     showWelcomeBack,
     setShowWelcomeBack,
+    showSessionCompleteToast,
+    setShowSessionCompleteToast,
     handleNext,
     handlePrev,
     jumpToWord,

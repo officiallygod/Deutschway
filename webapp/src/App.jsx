@@ -26,6 +26,8 @@ function App() {
     revisionDate,
     showWelcomeBack,
     setShowWelcomeBack,
+    showSessionCompleteToast,
+    setShowSessionCompleteToast,
     handleNext,
     handlePrev,
     jumpToWord,
@@ -39,6 +41,13 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [showWelcomeBack, setShowWelcomeBack]);
+
+  useEffect(() => {
+    if (showSessionCompleteToast) {
+      const timer = setTimeout(() => setShowSessionCompleteToast(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSessionCompleteToast, setShowSessionCompleteToast]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -143,6 +152,24 @@ function App() {
                 <span className="text-xs text-foreground/70 font-medium">Es ist schön, dich wiederzusehen.</span>
               </div>
               <button onClick={() => setShowWelcomeBack(false)} className="ml-4 text-foreground/50 hover:text-foreground">
+                ✕
+              </button>
+            </motion.div>
+          )}
+
+          {showSessionCompleteToast && (
+            <motion.div
+              initial={{ opacity: 0, y: -50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.9 }}
+              className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] glass px-6 py-3 shadow-xl border-success dark:border-success/50 flex items-center gap-3"
+            >
+              <span className="text-2xl">🔥</span>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-foreground">Klasse gemacht!</span>
+                <span className="text-xs text-foreground/70 font-medium">Du hast deine 5 Wörter für heute gemeistert.</span>
+              </div>
+              <button onClick={() => setShowSessionCompleteToast(false)} className="ml-4 text-foreground/50 hover:text-foreground">
                 ✕
               </button>
             </motion.div>

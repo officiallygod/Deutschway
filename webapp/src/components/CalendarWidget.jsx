@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { STORAGE_KEYS } from '../services/apiService';
 
-const CalendarWidget = React.memo(({ onSelectDate }) => {
+const CalendarWidget = React.memo(({ onSelectDate, isTodayCompleted }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [historyMap, setHistoryMap] = useState({});
   const [view, setView] = useState('days'); // 'days' | 'months' | 'years'
@@ -20,6 +20,13 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const historyDates = Object.keys(historyMap).map(d => new Date(d));
+  let firstStreakDate = today;
+  if (historyDates.length > 0) {
+    firstStreakDate = new Date(Math.min(...historyDates));
+  }
+  firstStreakDate.setHours(0, 0, 0, 0);
 
   const renderHeader = () => {
     let title = "";
@@ -88,25 +95,46 @@ const CalendarWidget = React.memo(({ onSelectDate }) => {
         <div className="grid grid-cols-7 gap-1">
           {days.map((item, i) => {
             const isToday = item.fullDate.toDateString() === new Date().toDateString();
-            const hasHistory = !!historyMap[item.fullDate.toDateString()];
+            const hasHistory = !!historyMap[item.fullDate.toDateString()] || (isToday && isTodayCompleted);
             const isFuture = item.fullDate > today;
+            const isBeforeFirstStreak = item.fullDate < firstStreakDate;
+            const isDisabled = isFuture || isBeforeFirstStreak;
+
+            let customStyles = '';
+            if (hasHistory) {
+              customStyles = 'bg-sky-200 text-sky-800 dark:bg-sky-500/30 dark:text-sky-300 font-bold shadow-sm hover:bg-sky-300 dark:hover:bg-sky-500/50';
+            } else if (isToday) {
+              customStyles = 'border-2 border-sky-300 text-sky-600 dark:border-sky-500/60 dark:text-sky-300 font-bold';
+            } else if (!isDisabled && item.isCurrentMonth) {
+              customStyles = 'text-foreground hover:bg-black/5 dark:hover:bg-white/10';
+            } else {
+              customStyles = 'text-foreground/30';
+            }
 
             return (
               <button
                 key={i}
-                disabled={isFuture}
+                disabled={isDisabled}
                 onClick={() => onSelectDate && onSelectDate(item.fullDate.toDateString())}
                 className={`aspect-square flex items-center justify-center rounded-full text-sm transition-all cursor-pointer 
-                  ${!item.isCurrentMonth ? 'text-foreground/30' : 'text-foreground hover:bg-black/5 dark:hover:bg-white/10'}
-                  ${isFuture ? 'opacity-30 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}
-                  ${isToday && !hasHistory ? 'border-2 border-primary text-primary font-bold' : ''}
-                  ${hasHistory ? 'bg-blue-500 text-white font-bold shadow-md hover:bg-blue-600 dark:hover:bg-blue-600' : ''}
+                  ${isDisabled ? 'opacity-30 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}
+                  ${customStyles}
                 `}
               >
                 {item.date}
               </button>
             );
           })}
+        </div>
+        <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-black/5 dark:border-white/10 text-xs text-foreground/60 font-medium">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full border-2 border-sky-300 dark:border-sky-500/60"></div>
+            <span>Heute</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-sky-200 dark:bg-sky-500/30 border border-sky-300 dark:border-sky-500/50"></div>
+            <span>Gelernt</span>
+          </div>
         </div>
       </>
     );

@@ -112,7 +112,10 @@ const Sidebar = React.memo(({
 
         {showCalendarPopup && (
           <div ref={calendarRef} className="fixed md:absolute z-[1000] bottom-[80px] md:bottom-[60px] left-[50%] md:left-[100%] -translate-x-1/2 md:translate-x-4">
-            <CalendarWidget onSelectDate={(d) => { onSelectDate(d); setShowCalendarPopup(false); }} />
+            <CalendarWidget 
+              onSelectDate={(d) => { onSelectDate(d); setShowCalendarPopup(false); }} 
+              isTodayCompleted={dailyWords.length > 0 && completedIndices.length === dailyWords.length}
+            />
           </div>
         )}
       </div>

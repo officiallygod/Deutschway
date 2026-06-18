@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trophy } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { Card, CardHeader, Alert } from '@heroui/react';
 import { motion } from 'framer-motion';
 
@@ -33,9 +33,19 @@ const StatsModal = ({ xpEarned, chartData }) => {
         </CardHeader>
         
         <div className="flex flex-col pb-6 px-4">
+          <h3 className="text-sm font-bold text-foreground/60 uppercase tracking-widest text-center mb-2">
+            7-Tage-Statistik
+          </h3>
           <div className="w-full h-48 mt-2">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorXp" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--primary-accent)" stopOpacity={0.6}/>
+                    <stop offset="95%" stopColor="var(--primary-accent)" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" opacity={0.6} />
                 <XAxis 
                   dataKey="name" 
                   axisLine={false} 
@@ -57,16 +67,16 @@ const StatsModal = ({ xpEarned, chartData }) => {
                   }}
                   itemStyle={{ color: 'var(--primary-accent)' }}
                 />
-                <Line 
+                <Area 
                   type="monotone"
                   dataKey="xp" 
                   stroke="var(--primary-accent)" 
-                  strokeWidth={4}
-                  dot={{ r: 4, fill: 'var(--card-bg)', strokeWidth: 2, stroke: 'var(--primary-accent)' }}
-                  activeDot={{ r: 6, fill: 'var(--primary-accent)', stroke: 'var(--card-bg)' }}
+                  strokeWidth={3}
+                  fillOpacity={1}
+                  fill="url(#colorXp)"
                   animationDuration={1500}
                 />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>

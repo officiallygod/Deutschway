@@ -45,8 +45,14 @@ function App() {
 
   if (loading) {
     return (
-      <div className="app-layout" style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <p>Lade Wörter...</p>
+      <div className="app-layout flex items-center justify-center">
+        <div className="flex flex-col items-center gap-5">
+          <div 
+            className="w-12 h-12 border-[4px] border-solid border-black/10 dark:border-white/10 rounded-full animate-spin"
+            style={{ borderTopColor: 'var(--primary-accent)' }}
+          ></div>
+          <p className="text-foreground/60 font-semibold tracking-wide animate-pulse">Lade Wörter...</p>
+        </div>
       </div>
     );
   }

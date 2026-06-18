@@ -135,7 +135,7 @@ function App() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.9 }}
-              className="absolute top-6 left-1/2 -translate-x-1/2 z-[100] glass px-6 py-3 shadow-xl border-sky-300 dark:border-sky-500/50 flex items-center gap-3"
+              className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] glass px-6 py-3 shadow-xl border-sky-300 dark:border-sky-500/50 flex items-center gap-3"
             >
               <span className="text-2xl">🎉</span>
               <div className="flex flex-col">

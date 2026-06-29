@@ -136,7 +136,7 @@ function App() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="main-content flex-1 min-w-0 h-full flex flex-col items-center justify-center relative overflow-y-auto overflow-x-hidden">
+      <main className="main-content flex-1 min-w-0 h-full flex flex-col items-center relative overflow-y-auto overflow-x-hidden pt-28 pb-10">
         
         <AnimatePresence>
           {showWelcomeBack && (
@@ -204,7 +204,7 @@ function App() {
           </div>
         </div>
 
-        <div className="w-full max-w-[800px] flex flex-col gap-6 z-10 mx-auto px-4 mt-16 self-center">
+        <div className="w-full max-w-[800px] flex flex-col gap-6 z-10 mx-auto px-4 my-auto">
           {renderMainContent()}
         </div>
       </main>

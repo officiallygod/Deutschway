@@ -1,9 +1,9 @@
 import React from 'react';
-import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
 import { getGenderInfo } from '../utils/grammarEngine';
-import { playAudio } from '../utils/audioService';
 import { motion, AnimatePresence } from 'framer-motion';
 import InteractiveSentence from './InteractiveSentence';
+import AudioButtonWithSlider from './AudioButtonWithSlider';
 
 const WordCard = React.memo(({
   word,
@@ -61,7 +61,7 @@ const WordCard = React.memo(({
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="word-card glass"
         >
-          <div className="card-top">
+          <div className="card-top flex items-center justify-between">
             {genderInfo ? (
               <span className={`gender-badge ${genderInfo.color}`}>
                 {genderInfo.label}
@@ -69,17 +69,23 @@ const WordCard = React.memo(({
             ) : (
               <span className="gender-badge opacity-0">...</span>
             )}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              className="audio-btn cursor-pointer"
-              onClick={() => playAudio(`${word.word}. ${word.example}`)}
-              aria-label="Listen to pronunciation"
-            >
-              <Volume2 size={24} />
-            </motion.button>
+
+            {/* Quick Action Group: Dictionary Link + Audio Hover Slider */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => onOpenDictionaryWord && onOpenDictionaryWord(word)}
+                className="w-10 h-10 rounded-full glass border border-white/20 dark:border-white/10 flex items-center justify-center text-foreground/60 hover:text-primary transition-colors cursor-pointer shadow-sm"
+                title="Im Wörterbuch ansehen"
+                aria-label="Im Wörterbuch ansehen"
+              >
+                <BookOpen size={18} />
+              </button>
+
+              <AudioButtonWithSlider text={`${word.word}. ${word.example}`} />
+            </div>
           </div>
 
-          <div className="word-title">
+          <div className="word-title text-center">
             <h2>{word.word}</h2>
             <p>{word.translation}</p>
           </div>
@@ -113,6 +119,16 @@ const WordCard = React.memo(({
                 ))}
               </div>
             )}
+
+            {/* Dictionary Deep Link */}
+            <div className="pt-2">
+              <button
+                onClick={() => onOpenDictionaryWord && onOpenDictionaryWord(word)}
+                className="text-xs font-bold text-primary hover:underline underline-offset-4 cursor-pointer"
+              >
+                Formen, Konjugation & Wiktionary-Bedeutungen anzeigen →
+              </button>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

@@ -118,22 +118,52 @@ export function wordMatches(wordEntry, query) {
 }
 
 // ─── Local Word Lookup & Search ────────────────────────────────────────────
+// High-performance hashmap index for instant O(1) hover lookups
+const VOCAB_MAP = new Map();
+for (const w of wordsData) {
+  const bare = w.word.replace(/^(der|die|das)\s+/i, '').toLowerCase();
+  VOCAB_MAP.set(bare, w);
+  VOCAB_MAP.set(w.word.toLowerCase(), w);
+  VOCAB_MAP.set(normalizeGerman(bare), w);
+}
+
+// Common German function words that must never trigger hover popovers
+const STOP_WORDS = new Set([
+  'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'mich', 'dich', 'ihn', 'uns', 'euch', 'ihnen',
+  'mein', 'meine', 'meinen', 'dein', 'deine', 'sein', 'seine', 'ihr', 'ihre', 'unser', 'unsere', 'euer',
+  'der', 'die', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einen', 'einem', 'einer', 'eines',
+  'und', 'oder', 'aber', 'denn', 'sondern', 'dass', 'weil', 'wenn', 'als', 'ob',
+  'wie', 'was', 'wo', 'wann', 'warum', 'wer', 'wen', 'wem', 'wohin', 'woher',
+  'im', 'in', 'an', 'auf', 'aus', 'bei', 'mit', 'nach', 'seit', 'von', 'zu', 'über', 'unter', 'vor', 'zwischen',
+  'durch', 'für', 'gegen', 'ohne', 'um', 'bis', 'ab',
+  'nicht', 'nur', 'auch', 'so', 'sehr', 'viel', 'viele', 'mehr', 'gut', 'schon', 'noch', 'hier', 'da', 'dort',
+  'jetzt', 'heute', 'morgen', 'gestern', 'immer', 'nie', 'oft', 'etwas', 'nichts', 'alles', 'alle',
+  'ist', 'sind', 'war', 'waren', 'wird', 'werden', 'wurde', 'hat', 'haben', 'hatte', 'kann', 'können', 'muss', 'müssen',
+  'will', 'wollen', 'soll', 'sollen', 'darf', 'dürfen', 'bitte', 'ja', 'nein', 'man'
+]);
+
+export function isHoverableVocabWord(word) {
+  if (!word || word.length < 3) return false;
+  const lower = word.toLowerCase();
+  if (STOP_WORDS.has(lower)) return false;
+  return VOCAB_MAP.has(lower) || VOCAB_MAP.has(normalizeGerman(lower));
+}
+
 export function findLocalWord(query) {
   if (!query) return null;
   const q = query.trim().toLowerCase();
   const qBare = q.replace(/^(der|die|das)\s+/i, '');
   const qNorm = normalizeGerman(qBare);
 
+  if (VOCAB_MAP.has(qBare)) return VOCAB_MAP.get(qBare);
+  if (VOCAB_MAP.has(q)) return VOCAB_MAP.get(q);
+  if (VOCAB_MAP.has(qNorm)) return VOCAB_MAP.get(qNorm);
+
   return (
     wordsData.find(w => {
       const bare = w.word.replace(/^(der|die|das)\s+/i, '').toLowerCase();
       return bare === qBare || w.word.toLowerCase() === q;
-    }) ||
-    wordsData.find(w => {
-      const bare = w.word.replace(/^(der|die|das)\s+/i, '').toLowerCase();
-      return normalizeGerman(bare) === qNorm;
-    }) ||
-    null
+    }) || null
   );
 }
 

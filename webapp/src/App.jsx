@@ -8,6 +8,7 @@ import WordCard from './components/WordCard';
 import FunFactWidget from './components/FunFactWidget';
 import DictionaryPage from './components/DictionaryPage';
 import WalkthroughModal, { WALKTHROUGH_STORAGE_KEY } from './components/WalkthroughModal';
+import StatsSkeleton from './components/StatsSkeleton';
 
 const StatsModal = React.lazy(() => import('./components/StatsModal'));
 
@@ -46,7 +47,6 @@ function App() {
     try {
       const seen = localStorage.getItem(WALKTHROUGH_STORAGE_KEY);
       if (!seen) {
-        // Small delay so layout stabilizes before showing walkthrough
         const timer = setTimeout(() => setShowWalkthrough(true), 600);
         return () => clearTimeout(timer);
       }
@@ -101,6 +101,7 @@ function App() {
   };
 
   const openDictionary = () => {
+    setDictSelectedWord(null);
     setPage(PAGE.DICTIONARY);
     setSidebarOpen(false);
   };
@@ -135,7 +136,7 @@ function App() {
   const renderMainContent = () => {
     if (page === PAGE.STATS) {
       return (
-        <Suspense fallback={<div className="animate-pulse text-foreground/60 text-center py-10 font-semibold">Lade Statistiken...</div>}>
+        <Suspense fallback={<StatsSkeleton />}>
           <StatsModal
             xpEarned={completedIndices.length * 10}
             chartData={stats.chartData}
@@ -343,7 +344,7 @@ function App() {
           </div>
         </div>
 
-        {/* Dynamic Responsive Container: Narrow for Daily Session, Wide Fluid Grid for Dictionary */}
+        {/* Dynamic Responsive Container (Clean, Centered, No Overlaps) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={page}
@@ -351,11 +352,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className={`w-full flex flex-col gap-6 z-10 mx-auto px-4 sm:px-6 my-auto ${
-              page === PAGE.DICTIONARY
-                ? 'max-w-[1380px] 2xl:max-w-[1680px]'
-                : 'max-w-[760px]'
-            }`}
+            className="w-full max-w-[840px] flex flex-col gap-6 z-10 mx-auto px-4 sm:px-6 my-auto"
           >
             {renderMainContent()}
           </motion.div>

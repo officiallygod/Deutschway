@@ -139,71 +139,83 @@ const Sidebar = React.memo(({
           ))}
         </div>
 
-        <div className="sidebar-footer" style={{ position: 'relative' }}>
-          <div
-            className={`streak-badge ${animateStreak ? 'animate-streak' : ''}`}
-            title={`${streak} Days Streak`}
-          >
-            <Flame className="flame-icon" size={20} />
-            {streak}
+        {/* Clean, Hierarchical Footer */}
+        <div className="sidebar-footer flex flex-col gap-3 pt-3" style={{ position: 'relative' }}>
+          {/* Main learning tools row */}
+          <div className="flex items-center justify-between w-full">
+            <div
+              className={`streak-badge ${animateStreak ? 'animate-streak' : ''}`}
+              title={`${streak} Tage Streak`}
+            >
+              <Flame className="flame-icon" size={20} />
+              <span>{streak}</span>
+            </div>
+
+            <div className="flex items-center gap-1.5 p-1 rounded-2xl glass border border-white/20 dark:border-white/10">
+              <button
+                className="theme-btn"
+                onClick={() => {
+                  onOpenStats();
+                  setShowCalendarPopup(false);
+                }}
+                aria-label="Statistiken"
+                title="Statistiken"
+              >
+                <BarChart2 size={18} />
+              </button>
+
+              <button
+                className="theme-btn calendar-btn-toggle"
+                onClick={() => setShowCalendarPopup(!showCalendarPopup)}
+                aria-label="Kalender"
+                title="Kalender"
+              >
+                <CalendarIcon size={18} />
+              </button>
+
+              <button
+                className="theme-btn"
+                onClick={() => {
+                  onOpenDictionary?.();
+                  setShowCalendarPopup(false);
+                }}
+                aria-label="Wörterbuch"
+                title="Wörterbuch"
+                style={activePage === 'dictionary' ? { color: 'var(--primary-accent)' } : {}}
+              >
+                <BookOpen size={18} />
+              </button>
+            </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.4rem' }}>
+          {/* Secondary utilities row: theme & tour */}
+          <div className="flex items-center justify-between text-xs text-foreground/50 pt-1 px-1">
             <button
-              className="theme-btn"
-              onClick={() => {
-                onOpenStats();
-                setShowCalendarPopup(false);
-              }}
-              aria-label="Statistiken"
-              title="Statistiken"
-            >
-              <BarChart2 size={19} />
-            </button>
-
-            <button
-              className="theme-btn calendar-btn-toggle"
-              onClick={() => setShowCalendarPopup(!showCalendarPopup)}
-              aria-label="Kalender"
-              title="Kalender"
-            >
-              <CalendarIcon size={19} />
-            </button>
-
-            <button
-              className="theme-btn"
-              onClick={() => {
-                onOpenDictionary?.();
-                setShowCalendarPopup(false);
-              }}
-              aria-label="Wörterbuch"
-              title="Wörterbuch öffnen"
-              style={activePage === 'dictionary' ? { color: 'var(--primary-accent)' } : {}}
-            >
-              <BookOpen size={19} />
-            </button>
-
-            <button
-              className="theme-btn"
               onClick={() => {
                 onOpenWalkthrough?.();
                 setShowCalendarPopup(false);
               }}
-              aria-label="Einführungstour"
-              title="Walkthrough / Hilfe"
+              className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer text-xs font-semibold"
+              title="Einführungstour"
             >
-              <HelpCircle size={19} />
+              <HelpCircle size={14} />
+              <span>Hilfe &amp; Tour</span>
             </button>
 
-            <button className="theme-btn" onClick={toggleTheme} aria-label="Theme wechseln" title="Dark / Light Mode">
-              {theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer text-xs font-semibold"
+              aria-label="Theme wechseln"
+            >
+              {theme === 'light' ? <Moon size={14} /> : <Sun size={14} />}
+              <span>{theme === 'light' ? 'Dunkel' : 'Hell'}</span>
             </button>
           </div>
 
           {showCalendarPopup && (
             <div
               ref={calendarRef}
-              className="fixed md:absolute z-[1000] bottom-[80px] md:bottom-[60px] left-[50%] md:left-[100%] -translate-x-1/2 md:translate-x-4"
+              className="fixed md:absolute z-[1000] bottom-[90px] md:bottom-[70px] left-[50%] md:left-[100%] -translate-x-1/2 md:translate-x-4"
             >
               <CalendarWidget
                 onSelectDate={(d) => {

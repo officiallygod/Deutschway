@@ -1,11 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Volume2, ChevronRight, BookOpen, Lightbulb, Sparkles } from 'lucide-react';
-import { playAudio } from '../utils/audioService';
-import { findLocalWord, stripHtml } from '../services/dictionaryService';
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+  ArrowLeft, ChevronRight, MessageSquareText,
+  Table, BookOpen, Lightbulb, Sparkles
+} from 'lucide-react';
+import AudioButtonWithSlider from './AudioButtonWithSlider';
 import InteractiveSentence from './InteractiveSentence';
 
-// ─── Shimmer skeleton ─────────────────────────────────────────────────────────
+// ─── Shimmer Loading Skeleton ────────────────────────────────────────────────
 const Shimmer = ({ className = '' }) => (
   <div className={`animate-pulse rounded-2xl bg-black/5 dark:bg-white/5 ${className}`} />
 );
@@ -36,7 +38,7 @@ const LoadingSkeleton = ({ onBack }) => (
   </div>
 );
 
-// ─── Gender / article badge ───────────────────────────────────────────────────
+// ─── Gender Badge ─────────────────────────────────────────────────────────────
 const GENDER_BADGE = {
   masculine: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700/30',
   feminine:  'bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-700/30',
@@ -54,7 +56,7 @@ const GenderTag = ({ genderInfo }) => {
 };
 
 // ─── Section Card Wrapper ─────────────────────────────────────────────────────
-const Section = ({ icon, title, children, delay = 0 }) => (
+const Section = ({ icon: Icon, title, children, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
@@ -62,14 +64,14 @@ const Section = ({ icon, title, children, delay = 0 }) => (
     className="glass rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
   >
     <div className="flex items-center gap-2.5 px-6 py-4 border-b border-black/[0.04] dark:border-white/[0.05]">
-      <span className="text-base">{icon}</span>
-      <h3 className="text-xs font-black uppercase tracking-widest text-foreground/50">{title}</h3>
+      {Icon && <Icon size={16} className="text-primary" />}
+      <h3 className="text-xs font-black uppercase tracking-widest text-foreground/55">{title}</h3>
     </div>
     <div className="px-6 py-5">{children}</div>
   </motion.div>
 );
 
-// ─── Conjugation / Declension Table ──────────────────────────────────────────
+// ─── Form Table ──────────────────────────────────────────────────────────────
 const FormTable = ({ rows, data }) => (
   <div className="flex flex-col divide-y divide-black/[0.04] dark:divide-white/[0.04]">
     {rows.map((row) => (
@@ -126,14 +128,14 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
 
   return (
     <div className="flex flex-col gap-5 w-full pb-8">
-      {/* ── Breadcrumb back navigation ── */}
+      {/* ── Breadcrumb Navigation ── */}
       <div className="flex items-center gap-2.5">
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={onBack}
-          className="icon-btn flex-shrink-0 w-10 h-10 shadow-sm"
+          className="icon-btn flex-shrink-0 w-10 h-10 shadow-sm cursor-pointer"
           aria-label="Zurück zum Wörterbuch"
-          title="Zurück zur Liste"
+          title="Zurück zum Wörterbuch"
         >
           <ArrowLeft size={18} />
         </motion.button>
@@ -149,14 +151,14 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
         <span className="text-sm font-bold text-foreground truncate">{bareWord || word}</span>
       </div>
 
-      {/* ── Main Hero Card ── */}
+      {/* ── 1. Main Hero Card ── */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.28, ease: 'easeOut' }}
         className="glass rounded-3xl overflow-hidden shadow-sm"
       >
-        {/* Top: Gender Tag + Audio */}
+        {/* Top: Gender Tag + Audio Slider */}
         <div className="flex items-center justify-between px-6 sm:px-8 pt-6 pb-2">
           {genderInfo ? (
             <GenderTag genderInfo={genderInfo} />
@@ -166,15 +168,8 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
             </span>
           )}
 
-          <motion.button
-            whileTap={{ scale: 0.88 }}
-            className="audio-btn w-11 h-11 flex items-center justify-center rounded-full shadow-sm hover:scale-105 transition-transform"
-            onClick={() => playAudio(`${word}. ${example || ''}`)}
-            aria-label="Aussprache anhören"
-            title="Aussprache"
-          >
-            <Volume2 size={20} />
-          </motion.button>
+          {/* Audio Pronunciation Button with Hover Volume Slider */}
+          <AudioButtonWithSlider text={`${word}. ${example || ''}`} />
         </div>
 
         {/* Word + Translation */}
@@ -192,62 +187,52 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
           )}
         </div>
 
-        {/* In-Hero Example & Grammar */}
-        {(example || grammarNote || (synonyms && synonyms.length > 0)) && (
-          <div className="border-t border-black/[0.04] dark:border-white/[0.05] px-6 sm:px-8 py-5 flex flex-col gap-4">
-            {example && (
-              <div className="flex flex-col items-center gap-1.5 text-center">
-                <p className="font-medium text-foreground leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}>
-                  <InteractiveSentence text={example} mainWord={word} onSelectWord={onSelectWord} />
-                </p>
-                {exampleTranslation && (
-                  <p className="text-sm text-foreground/50 italic">{exampleTranslation}</p>
-                )}
-              </div>
-            )}
-
-            {grammarNote && (
-              <div className="bg-black/[0.025] dark:bg-white/[0.03] rounded-2xl px-4 py-3 flex gap-3 text-left">
-                <span className="text-base flex-shrink-0 mt-0.5">💡</span>
-                <p className="text-xs sm:text-sm text-foreground/75 leading-relaxed">{grammarNote}</p>
-              </div>
-            )}
-
-            {synonyms && synonyms.length > 0 && (
-              <div className="flex flex-wrap gap-2 items-center justify-center pt-1">
-                <span className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Synonyme:</span>
-                {synonyms.map(s => (
-                  <button
-                    key={s}
-                    onClick={() => onSelectWord && onSelectWord({ word: s, translation: '' })}
-                    className="text-xs font-medium px-3 py-1 glass rounded-xl text-foreground/80 hover:text-primary transition-colors cursor-pointer"
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
+        {/* Synonyms if available */}
+        {synonyms && synonyms.length > 0 && (
+          <div className="border-t border-black/[0.04] dark:border-white/[0.05] px-6 sm:px-8 py-4 flex flex-wrap gap-2 items-center justify-center">
+            <span className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Synonyme:</span>
+            {synonyms.map((s) => (
+              <button
+                key={s}
+                onClick={() => onSelectWord && onSelectWord({ word: s, translation: '' })}
+                className="text-xs font-medium px-3 py-1 glass rounded-xl text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+              >
+                {s}
+              </button>
+            ))}
           </div>
         )}
       </motion.div>
 
-      {/* ── Smart Explainer / Cognitive Insight ── */}
-      {smartExplainer && (
-        <Section icon="🧠" title={smartExplainer.type} delay={0.04}>
-          <div className="flex items-start gap-3">
-            <span className="px-2.5 py-1 rounded-xl bg-primary/10 text-primary font-extrabold text-xs">
-              {smartExplainer.badge}
-            </span>
-            <p className="text-sm text-foreground/80 leading-relaxed font-medium">
-              {smartExplainer.note}
-            </p>
+      {/* ── 2. Beispielsätze (Placed immediately below the main card as requested) ── */}
+      {hasExamples && (
+        <Section icon={MessageSquareText} title="Beispielsätze" delay={0.04}>
+          <div className="flex flex-col gap-3">
+            {example && (
+              <ExampleCard
+                german={example}
+                english={exampleTranslation}
+                mainWord={word}
+                onSelectWord={onSelectWord}
+                delay={0}
+              />
+            )}
+            {additionalExamples && additionalExamples.map((ex, i) => (
+              <ExampleCard
+                key={i}
+                german={ex}
+                mainWord={word}
+                onSelectWord={onSelectWord}
+                delay={(i + 1) * 0.04}
+              />
+            ))}
           </div>
         </Section>
       )}
 
-      {/* ── Verb Conjugation ── */}
+      {/* ── 3. Konjugation (for verbs) ── */}
       {isVerb && verbForms && (
-        <Section icon="🔤" title="Konjugation" delay={0.06}>
+        <Section icon={Table} title="Konjugation" delay={0.06}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Präsens</p>
@@ -272,9 +257,9 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
         </Section>
       )}
 
-      {/* ── Noun Declension ── */}
+      {/* ── 3. Deklination (for nouns) ── */}
       {isNoun && nounForms && (
-        <Section icon="📐" title="Deklination (Alle 4 Fälle)" delay={0.06}>
+        <Section icon={Table} title="Deklination (Alle 4 Fälle)" delay={0.06}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Singular</p>
@@ -288,9 +273,9 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
         </Section>
       )}
 
-      {/* ── Wiktionary Definitions ── */}
+      {/* ── 4. Wiktionary Definitions ── */}
       {definitions && definitions.length > 0 && (
-        <Section icon="📖" title="Bedeutungen & Definitionen (Wiktionary)" delay={0.08}>
+        <Section icon={BookOpen} title="Bedeutungen & Definitionen (Wiktionary)" delay={0.08}>
           <div className="flex flex-col gap-4">
             {definitions.map((group, gi) => (
               <div key={gi} className="flex flex-col gap-2">
@@ -308,39 +293,33 @@ const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
                 </ol>
               </div>
             ))}
-            <p className="text-[11px] text-foreground/30 text-right pt-2 border-t border-black/[0.03] dark:border-white/[0.03]">
-              Quelle: <a href="https://en.wiktionary.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground/50 transition-colors">Wiktionary</a> · Freie Wörterbuch-API
+            <p className="text-[11px] text-foreground/35 text-right pt-2 border-t border-black/[0.03] dark:border-white/[0.03]">
+              Quelle: <a href="https://en.wiktionary.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground/50 transition-colors">Wiktionary</a>
             </p>
           </div>
         </Section>
       )}
 
-      {/* ── Beispielsätze ── */}
-      {hasExamples && (
-        <Section icon="💬" title="Beispielsätze" delay={0.1}>
+      {/* ── 5. Endung-Regel & Grammatik (Placed at the end as requested) ── */}
+      {(grammarNote || smartExplainer) && (
+        <Section icon={Lightbulb} title="Grammatik & Wortbildung" delay={0.1}>
           <div className="flex flex-col gap-3">
-            {example && (
-              <ExampleCard
-                german={example}
-                english={exampleTranslation}
-                mainWord={word}
-                onSelectWord={onSelectWord}
-                delay={0}
-              />
+            {grammarNote && (
+              <p className="text-sm text-foreground/80 leading-relaxed font-medium">
+                {grammarNote}
+              </p>
             )}
-            {additionalExamples && additionalExamples.map((ex, i) => (
-              <ExampleCard
-                key={i}
-                german={ex}
-                mainWord={word}
-                onSelectWord={onSelectWord}
-                delay={(i + 1) * 0.05}
-              />
-            ))}
+            {smartExplainer && (
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-black/[0.025] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05]">
+                <span className="px-2.5 py-1 rounded-xl bg-primary/10 text-primary font-extrabold text-xs flex-shrink-0">
+                  {smartExplainer.badge}
+                </span>
+                <p className="text-xs sm:text-sm text-foreground/75 leading-relaxed font-medium">
+                  {smartExplainer.note}
+                </p>
+              </div>
+            )}
           </div>
-          <p className="text-[11px] text-foreground/40 mt-3 text-right">
-            💡 Tippe auf unterstrichene Nomen im Satz, um ihre Übersetzung zu sehen
-          </p>
         </Section>
       )}
     </div>

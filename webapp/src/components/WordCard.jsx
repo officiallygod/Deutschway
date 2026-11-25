@@ -3,22 +3,23 @@ import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getGenderInfo } from '../utils/grammarEngine';
 import { playAudio } from '../utils/audioService';
 import { motion, AnimatePresence } from 'framer-motion';
+import InteractiveSentence from './InteractiveSentence';
 
-const WordCard = React.memo(({ 
-  word, 
-  currentIndex, 
-  totalWords, 
-  handleNext, 
+const WordCard = React.memo(({
+  word,
+  currentIndex,
+  totalWords,
+  handleNext,
   handlePrev,
   dailyWords,
   jumpToWord,
-  isSessionComplete
+  isSessionComplete,
+  onOpenDictionaryWord
 }) => {
   if (!word) return null;
 
   const isLastWord = currentIndex === totalWords - 1;
   const hideNextButton = isLastWord && isSessionComplete;
-
   const genderInfo = getGenderInfo(word.word);
 
   return (
@@ -32,7 +33,7 @@ const WordCard = React.memo(({
                 <button
                   key={idx}
                   onClick={() => jumpToWord(idx)}
-                  className={`relative flex-1 h-10 rounded-xl text-sm font-medium transition-colors ${
+                  className={`relative flex-1 h-10 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                     isSelected ? 'text-white' : 'text-foreground hover:bg-white/20'
                   }`}
                 >
@@ -52,7 +53,7 @@ const WordCard = React.memo(({
       )}
 
       <AnimatePresence mode="wait">
-        <motion.div 
+        <motion.div
           key={currentIndex}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -68,25 +69,31 @@ const WordCard = React.memo(({
             ) : (
               <span className="gender-badge opacity-0">...</span>
             )}
-            <motion.button 
+            <motion.button
               whileTap={{ scale: 0.9 }}
-              className="audio-btn" 
+              className="audio-btn cursor-pointer"
               onClick={() => playAudio(`${word.word}. ${word.example}`)}
               aria-label="Listen to pronunciation"
             >
               <Volume2 size={24} />
             </motion.button>
           </div>
-          
+
           <div className="word-title">
             <h2>{word.word}</h2>
             <p>{word.translation}</p>
           </div>
 
           <div className="example-section">
-            <div className="sentence">{word.example}</div>
+            <div className="sentence">
+              <InteractiveSentence
+                text={word.example}
+                mainWord={word.word}
+                onSelectWord={onOpenDictionaryWord}
+              />
+            </div>
             <div className="translation">{word.exampleTranslation}</div>
-            
+
             <div className="grammar-breakdown">
               <strong>Grammatik:</strong>
               <span>{word.grammarNote || "Achten Sie auf den spezifischen Kontext des Wortes."}</span>
@@ -96,7 +103,13 @@ const WordCard = React.memo(({
               <div className="synonyms">
                 <strong>Ähnlich:</strong>
                 {word.synonyms.map(syn => (
-                  <span key={syn} className="syn-tag">{syn}</span>
+                  <span
+                    key={syn}
+                    onClick={() => onOpenDictionaryWord && onOpenDictionaryWord({ word: syn, translation: '' })}
+                    className="syn-tag cursor-pointer hover:border-primary transition-colors"
+                  >
+                    {syn}
+                  </span>
                 ))}
               </div>
             )}
@@ -107,24 +120,24 @@ const WordCard = React.memo(({
       {/* Unified Controls for all screens */}
       <div className="controls flex flex-col items-center justify-center mt-6 w-full gap-6">
         <div className="flex w-full justify-between items-center gap-4">
-          <button 
-            className="btn secondary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
-            onClick={handlePrev} 
+          <button
+            className="btn secondary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center cursor-pointer"
+            onClick={handlePrev}
             disabled={currentIndex === 0}
           >
             <ChevronLeft size={20} /> <span className="hidden md:inline">Zurück</span>
           </button>
-          
+
           {!hideNextButton && (
-            <button 
-              className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center" 
+            <button
+              className="btn primary flex items-center gap-2 px-6 py-3 flex-1 md:flex-none justify-center cursor-pointer"
               onClick={handleNext}
             >
               {isLastWord ? (
                 <span className="font-semibold tracking-wide uppercase text-sm">Lektion beenden</span>
               ) : (
                 <><span className="hidden md:inline">Nächstes Wort</span><span className="md:hidden">Weiter</span> <ChevronRight size={20} /></>
-              )} 
+              )}
             </button>
           )}
         </div>
@@ -139,9 +152,9 @@ const WordCard = React.memo(({
                   <button
                     key={idx}
                     onClick={() => jumpToWord(idx)}
-                    className={`relative rounded-full transition-all duration-300 ${
-                      isSelected 
-                        ? 'w-6 h-2 bg-primary' 
+                    className={`relative rounded-full transition-all duration-300 cursor-pointer ${
+                      isSelected
+                        ? 'w-6 h-2 bg-primary'
                         : 'w-2 h-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
                     }`}
                     aria-label={`Gehe zu Wort ${idx + 1}`}

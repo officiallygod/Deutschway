@@ -1,353 +1,349 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Volume2, BookOpen, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Volume2, ChevronRight, BookOpen, Lightbulb, Sparkles } from 'lucide-react';
 import { playAudio } from '../utils/audioService';
+import { findLocalWord, stripHtml } from '../services/dictionaryService';
+import InteractiveSentence from './InteractiveSentence';
 
-// ---- Shimmer skeleton ----
+// ─── Shimmer skeleton ─────────────────────────────────────────────────────────
 const Shimmer = ({ className = '' }) => (
-  <div className={`animate-pulse rounded-xl bg-black/5 dark:bg-white/5 ${className}`} />
+  <div className={`animate-pulse rounded-2xl bg-black/5 dark:bg-white/5 ${className}`} />
 );
 
-const DetailSkeleton = () => (
-  <div className="flex flex-col gap-6 w-full">
+const LoadingSkeleton = ({ onBack }) => (
+  <div className="flex flex-col gap-5 w-full">
+    <div className="flex items-center gap-3">
+      <button onClick={onBack} className="icon-btn w-10 h-10 shadow-sm" aria-label="Zurück">
+        <ArrowLeft size={18} />
+      </button>
+      <Shimmer className="h-4 w-40 rounded-lg" />
+    </div>
     <div className="glass rounded-3xl p-6 sm:p-8 flex flex-col gap-5">
-      <div className="flex justify-between items-start">
-        <Shimmer className="h-5 w-24 rounded-lg" />
+      <div className="flex justify-between items-center">
+        <Shimmer className="h-7 w-24 rounded-xl" />
         <Shimmer className="h-10 w-10 rounded-full" />
       </div>
-      <div className="text-center flex flex-col items-center gap-3">
-        <Shimmer className="h-14 w-56 rounded-xl" />
-        <Shimmer className="h-5 w-32 rounded-lg" />
+      <div className="flex flex-col items-center gap-3 py-6">
+        <Shimmer className="h-12 sm:h-16 w-3/4 max-w-xs rounded-2xl" />
+        <Shimmer className="h-5 w-40 rounded-lg" />
       </div>
       <div className="border-t border-black/5 dark:border-white/5 pt-5 flex flex-col gap-3">
         <Shimmer className="h-4 w-full rounded-lg" />
         <Shimmer className="h-4 w-5/6 rounded-lg" />
-        <Shimmer className="h-10 w-full rounded-xl" />
       </div>
     </div>
     <Shimmer className="h-48 w-full rounded-3xl" />
-    <Shimmer className="h-32 w-full rounded-3xl" />
   </div>
 );
 
-// ---- Sub-components ----
-const SectionCard = ({ title, icon, children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 12 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="glass rounded-3xl p-5 sm:p-6 flex flex-col gap-4"
-  >
-    <div className="flex items-center gap-2">
-      <span className="text-base">{icon}</span>
-      <h3 className="text-xs font-bold uppercase tracking-wider text-foreground/50">{title}</h3>
-    </div>
-    {children}
-  </motion.div>
-);
+// ─── Gender / article badge ───────────────────────────────────────────────────
+const GENDER_BADGE = {
+  masculine: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700/30',
+  feminine:  'bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-700/30',
+  neuter:    'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700/30',
+};
 
-const GenderBadge = ({ genderInfo }) => {
+const GenderTag = ({ genderInfo }) => {
   if (!genderInfo) return null;
-  const styles = {
-    masculine: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/50',
-    feminine: 'bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800/50',
-    neuter: 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800/50',
-  };
+  const cls = GENDER_BADGE[genderInfo.gender] || 'bg-black/5 dark:bg-white/5 text-foreground/50';
   return (
-    <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-xl border ${styles[genderInfo.gender] || 'bg-black/5 dark:bg-white/5 text-foreground/60'}`}>
+    <span className={`inline-flex items-center px-3 py-1 rounded-xl text-xs font-bold tracking-wider uppercase border ${cls}`}>
       {genderInfo.label}
     </span>
   );
 };
 
-// Conjugation / declension table
-const GrammarTable = ({ rows, columns, data }) => (
-  <div className="overflow-x-auto -mx-1">
-    <table className="w-full text-sm border-collapse min-w-[280px]">
-      <thead>
-        <tr>
-          {columns.map(col => (
-            <th key={col} className="text-left text-xs font-bold uppercase tracking-wider text-foreground/40 py-2 px-3 border-b border-black/5 dark:border-white/5 first:pl-0">
-              {col}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row, i) => (
-          <tr key={row} className={i % 2 === 0 ? 'bg-black/[0.015] dark:bg-white/[0.015]' : ''}>
-            <td className="py-2 px-3 pl-0 font-semibold text-foreground/60 text-xs capitalize">{row}</td>
-            {columns.slice(1).map(col => (
-              <td key={col} className="py-2 px-3 font-medium text-foreground">
-                {data[row]?.[col] || data[row] || '—'}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+// ─── Section Card Wrapper ─────────────────────────────────────────────────────
+const Section = ({ icon, title, children, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay, duration: 0.25, ease: 'easeOut' }}
+    className="glass rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+  >
+    <div className="flex items-center gap-2.5 px-6 py-4 border-b border-black/[0.04] dark:border-white/[0.05]">
+      <span className="text-base">{icon}</span>
+      <h3 className="text-xs font-black uppercase tracking-widest text-foreground/50">{title}</h3>
+    </div>
+    <div className="px-6 py-5">{children}</div>
+  </motion.div>
+);
+
+// ─── Conjugation / Declension Table ──────────────────────────────────────────
+const FormTable = ({ rows, data }) => (
+  <div className="flex flex-col divide-y divide-black/[0.04] dark:divide-white/[0.04]">
+    {rows.map((row) => (
+      <div key={row} className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0">
+        <span className="text-xs font-semibold text-foreground/50 capitalize w-24 sm:w-28 flex-shrink-0">{row}</span>
+        <span className="text-sm font-semibold text-foreground text-right">{data[row] || '—'}</span>
+      </div>
+    ))}
   </div>
 );
 
-// Example sentence card
-const ExampleCard = ({ german, english, highlight }) => {
-  // Highlight the target word
-  const highlightWord = (text, word) => {
-    if (!word || !text) return text;
-    const bare = word.replace(/^(der|die|das)\s+/i, '');
-    const regex = new RegExp(`(${bare})`, 'gi');
-    const parts = text.split(regex);
-    return parts.map((part, i) =>
-      regex.test(part) ? (
-        <mark key={i} className="bg-yellow-200 dark:bg-yellow-800/50 text-foreground rounded px-0.5">{part}</mark>
-      ) : part
-    );
-  };
+// ─── Example Sentence Card ────────────────────────────────────────────────────
+const ExampleCard = ({ german, english, mainWord, onSelectWord, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 6 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay }}
+    className="bg-black/[0.02] dark:bg-white/[0.025] rounded-2xl p-4 sm:p-5 border border-black/[0.04] dark:border-white/[0.05] relative"
+  >
+    <p className="text-sm sm:text-base font-medium text-foreground leading-relaxed">
+      <InteractiveSentence text={german} mainWord={mainWord} onSelectWord={onSelectWord} />
+    </p>
+    {english && (
+      <p className="text-xs sm:text-sm text-foreground/50 italic mt-2 leading-relaxed">{english}</p>
+    )}
+  </motion.div>
+);
 
-  return (
-    <div className="bg-black/[0.02] dark:bg-white/[0.03] rounded-2xl p-4 flex flex-col gap-1.5 border border-black/5 dark:border-white/5">
-      <p className="font-medium text-foreground leading-relaxed">
-        {highlight ? highlightWord(german, highlight) : german}
-      </p>
-      {english && <p className="text-sm text-foreground/50 italic">{english}</p>}
-    </div>
-  );
-};
-
-// ---- Main Detail Component ----
-const DictionaryDetail = ({ wordData, onBack, theme }) => {
+// ─── Main DictionaryDetail Component ──────────────────────────────────────────
+const DictionaryDetail = ({ wordData, onBack, onSelectWord }) => {
   if (!wordData || wordData.loading) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="w-full flex flex-col gap-4"
-      >
-        {/* Back button */}
-        <div className="flex items-center gap-3">
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={onBack}
-            className="icon-btn flex items-center justify-center w-10 h-10 rounded-full"
-          >
-            <ArrowLeft size={20} />
-          </motion.button>
-          <Shimmer className="h-5 w-32 rounded-lg" />
-        </div>
-        <DetailSkeleton />
-      </motion.div>
-    );
+    return <LoadingSkeleton onBack={onBack} />;
   }
 
-  const { word, bareWord, translation, genderInfo, isNoun, isVerb, example, exampleTranslation, grammarNote, synonyms, verbForms, nounForms, definitions, additionalExamples } = wordData;
+  const {
+    word,
+    bareWord,
+    translation,
+    genderInfo,
+    isNoun,
+    isVerb,
+    example,
+    exampleTranslation,
+    grammarNote,
+    synonyms,
+    verbForms,
+    nounForms,
+    definitions,
+    additionalExamples,
+    smartExplainer,
+  } = wordData;
+
+  const hasExamples = example || (additionalExamples && additionalExamples.length > 0);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="w-full flex flex-col gap-4"
-    >
-      {/* Back button */}
-      <div className="flex items-center gap-3">
+    <div className="flex flex-col gap-5 w-full pb-8">
+      {/* ── Breadcrumb back navigation ── */}
+      <div className="flex items-center gap-2.5">
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={onBack}
-          className="icon-btn flex items-center justify-center w-10 h-10 rounded-full"
-          aria-label="Zurück"
+          className="icon-btn flex-shrink-0 w-10 h-10 shadow-sm"
+          aria-label="Zurück zum Wörterbuch"
+          title="Zurück zur Liste"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={18} />
         </motion.button>
-        <span className="text-sm text-foreground/50 font-medium">Wörterbuch</span>
-        <ChevronRight size={14} className="text-foreground/30" />
-        <span className="text-sm font-semibold text-foreground truncate">{bareWord || word}</span>
+
+        <button
+          onClick={onBack}
+          className="text-sm font-semibold text-foreground/60 hover:text-foreground transition-colors cursor-pointer"
+        >
+          Wörterbuch
+        </button>
+
+        <ChevronRight size={14} className="text-foreground/30 flex-shrink-0" />
+        <span className="text-sm font-bold text-foreground truncate">{bareWord || word}</span>
       </div>
 
-      {/* Hero card */}
+      {/* ── Main Hero Card ── */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="word-card glass relative overflow-hidden"
+        transition={{ duration: 0.28, ease: 'easeOut' }}
+        className="glass rounded-3xl overflow-hidden shadow-sm"
       >
-        {/* Top row: gender + audio */}
-        <div className="card-top">
+        {/* Top: Gender Tag + Audio */}
+        <div className="flex items-center justify-between px-6 sm:px-8 pt-6 pb-2">
           {genderInfo ? (
-            <GenderBadge genderInfo={genderInfo} />
+            <GenderTag genderInfo={genderInfo} />
           ) : (
-            <span className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-xl border border-black/5 dark:border-white/5 text-foreground/40">
+            <span className="inline-flex items-center px-3 py-1 rounded-xl text-xs font-bold tracking-wider uppercase bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700/30">
               {isVerb ? 'Verb' : 'Wort'}
             </span>
           )}
+
           <motion.button
-            whileTap={{ scale: 0.9 }}
-            className="audio-btn"
+            whileTap={{ scale: 0.88 }}
+            className="audio-btn w-11 h-11 flex items-center justify-center rounded-full shadow-sm hover:scale-105 transition-transform"
             onClick={() => playAudio(`${word}. ${example || ''}`)}
-            aria-label="Aussprache"
+            aria-label="Aussprache anhören"
+            title="Aussprache"
           >
-            <Volume2 size={22} />
+            <Volume2 size={20} />
           </motion.button>
         </div>
 
-        {/* Word + translation */}
-        <div className="word-title">
-          <h2 style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)' }}>{word}</h2>
-          {translation && <p>{translation}</p>}
+        {/* Word + Translation */}
+        <div className="flex flex-col items-center text-center px-6 sm:px-8 py-6 gap-2">
+          <h2
+            className="font-black tracking-tight text-foreground leading-tight select-text"
+            style={{ fontSize: 'clamp(2.4rem, 6vw, 4rem)' }}
+          >
+            {word}
+          </h2>
+          {translation && (
+            <p className="text-foreground/60 font-medium" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
+              {translation}
+            </p>
+          )}
         </div>
 
-        {/* Example sentence */}
-        {example && (
-          <div className="example-section">
-            <div className="sentence">{example}</div>
-            {exampleTranslation && <div className="translation">{exampleTranslation}</div>}
+        {/* In-Hero Example & Grammar */}
+        {(example || grammarNote || (synonyms && synonyms.length > 0)) && (
+          <div className="border-t border-black/[0.04] dark:border-white/[0.05] px-6 sm:px-8 py-5 flex flex-col gap-4">
+            {example && (
+              <div className="flex flex-col items-center gap-1.5 text-center">
+                <p className="font-medium text-foreground leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}>
+                  <InteractiveSentence text={example} mainWord={word} onSelectWord={onSelectWord} />
+                </p>
+                {exampleTranslation && (
+                  <p className="text-sm text-foreground/50 italic">{exampleTranslation}</p>
+                )}
+              </div>
+            )}
+
             {grammarNote && (
-              <div className="grammar-breakdown">
-                <strong>Grammatikhinweis:</strong>
-                <span>{grammarNote}</span>
+              <div className="bg-black/[0.025] dark:bg-white/[0.03] rounded-2xl px-4 py-3 flex gap-3 text-left">
+                <span className="text-base flex-shrink-0 mt-0.5">💡</span>
+                <p className="text-xs sm:text-sm text-foreground/75 leading-relaxed">{grammarNote}</p>
+              </div>
+            )}
+
+            {synonyms && synonyms.length > 0 && (
+              <div className="flex flex-wrap gap-2 items-center justify-center pt-1">
+                <span className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Synonyme:</span>
+                {synonyms.map(s => (
+                  <button
+                    key={s}
+                    onClick={() => onSelectWord && onSelectWord({ word: s, translation: '' })}
+                    className="text-xs font-medium px-3 py-1 glass rounded-xl text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+                  >
+                    {s}
+                  </button>
+                ))}
               </div>
             )}
           </div>
         )}
-
-        {/* Synonyms */}
-        {synonyms && synonyms.length > 0 && (
-          <div className="synonyms" style={{ paddingTop: example ? 0 : '1rem' }}>
-            <strong>Synonyme:</strong>
-            {synonyms.map(syn => (
-              <span key={syn} className="syn-tag">{syn}</span>
-            ))}
-          </div>
-        )}
       </motion.div>
 
-      {/* Verb conjugation */}
+      {/* ── Smart Explainer / Cognitive Insight ── */}
+      {smartExplainer && (
+        <Section icon="🧠" title={smartExplainer.type} delay={0.04}>
+          <div className="flex items-start gap-3">
+            <span className="px-2.5 py-1 rounded-xl bg-primary/10 text-primary font-extrabold text-xs">
+              {smartExplainer.badge}
+            </span>
+            <p className="text-sm text-foreground/80 leading-relaxed font-medium">
+              {smartExplainer.note}
+            </p>
+          </div>
+        </Section>
+      )}
+
+      {/* ── Verb Conjugation ── */}
       {isVerb && verbForms && (
-        <SectionCard title="Konjugation" icon="🔤">
-          <div className="flex flex-col gap-4">
-            {/* Präsens */}
+        <Section icon="🔤" title="Konjugation" delay={0.06}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p className="text-xs font-semibold text-foreground/50 mb-2 uppercase tracking-wide">Präsens</p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
-                {Object.entries(verbForms.present).map(([pronoun, form]) => (
-                  <div key={pronoun} className="flex justify-between py-1 border-b border-black/5 dark:border-white/5 last:border-0">
-                    <span className="text-sm text-foreground/50 font-medium capitalize">{pronoun}</span>
-                    <span className="text-sm font-semibold text-foreground">{form}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Präsens</p>
+              <FormTable rows={Object.keys(verbForms.present)} data={verbForms.present} />
             </div>
-
-            {/* Präteritum */}
             <div>
-              <p className="text-xs font-semibold text-foreground/50 mb-2 uppercase tracking-wide">Präteritum (Vergangenheit)</p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
-                {Object.entries(verbForms.simple_past).map(([pronoun, form]) => (
-                  <div key={pronoun} className="flex justify-between py-1 border-b border-black/5 dark:border-white/5 last:border-0">
-                    <span className="text-sm text-foreground/50 font-medium capitalize">{pronoun}</span>
-                    <span className="text-sm font-semibold text-foreground">{form}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Partizip II */}
-            <div className="bg-black/[0.02] dark:bg-white/[0.03] rounded-2xl p-4 border border-black/5 dark:border-white/5">
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-1">Partizip II</p>
-                  <p className="text-lg font-bold text-foreground">{verbForms.partizip2}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-1 text-right">Hilfsverb</p>
-                  <p className="text-lg font-bold text-foreground text-right">{verbForms.auxiliary}</p>
-                </div>
-              </div>
+              <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Präteritum</p>
+              <FormTable rows={Object.keys(verbForms.simple_past)} data={verbForms.simple_past} />
             </div>
           </div>
-        </SectionCard>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="rounded-2xl p-4 bg-primary/10 border border-primary/20">
+              <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-1">Partizip II</p>
+              <p className="text-lg sm:text-xl font-black text-foreground">{verbForms.partizip2}</p>
+            </div>
+            <div className="rounded-2xl p-4 bg-black/[0.025] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05]">
+              <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 mb-1">Hilfsverb</p>
+              <p className="text-lg sm:text-xl font-black text-foreground">{verbForms.auxiliary}</p>
+            </div>
+          </div>
+        </Section>
       )}
 
-      {/* Noun declension */}
+      {/* ── Noun Declension ── */}
       {isNoun && nounForms && (
-        <SectionCard title="Deklination" icon="📐">
-          <div className="flex flex-col gap-4">
+        <Section icon="📐" title="Deklination (Alle 4 Fälle)" delay={0.06}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p className="text-xs font-semibold text-foreground/50 mb-2 uppercase tracking-wide">Singular</p>
-              <div className="flex flex-col gap-1">
-                {Object.entries(nounForms.singular).map(([cas, form]) => (
-                  <div key={cas} className="flex justify-between py-1.5 border-b border-black/5 dark:border-white/5 last:border-0">
-                    <span className="text-sm text-foreground/50 font-medium">{cas}</span>
-                    <span className="text-sm font-semibold text-foreground">{form}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Singular</p>
+              <FormTable rows={Object.keys(nounForms.singular)} data={nounForms.singular} />
             </div>
             <div>
-              <p className="text-xs font-semibold text-foreground/50 mb-2 uppercase tracking-wide">Plural</p>
-              <div className="flex flex-col gap-1">
-                {Object.entries(nounForms.plural).map(([cas, form]) => (
-                  <div key={cas} className="flex justify-between py-1.5 border-b border-black/5 dark:border-white/5 last:border-0">
-                    <span className="text-sm text-foreground/50 font-medium">{cas}</span>
-                    <span className="text-sm font-semibold text-foreground">{form}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-[11px] font-black uppercase tracking-widest text-foreground/40 mb-3">Plural</p>
+              <FormTable rows={Object.keys(nounForms.plural)} data={nounForms.plural} />
             </div>
           </div>
-        </SectionCard>
+        </Section>
       )}
 
-      {/* Wiktionary definitions */}
+      {/* ── Wiktionary Definitions ── */}
       {definitions && definitions.length > 0 && (
-        <SectionCard title="Bedeutungen (Wiktionary)" icon="📖">
+        <Section icon="📖" title="Bedeutungen & Definitionen (Wiktionary)" delay={0.08}>
           <div className="flex flex-col gap-4">
             {definitions.map((group, gi) => (
               <div key={gi} className="flex flex-col gap-2">
                 {group.pos && (
-                  <span className="text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-lg bg-black/5 dark:bg-white/5 text-foreground/50 self-start">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-black/[0.04] dark:bg-white/[0.06] text-foreground/60 self-start">
                     {group.pos}
                   </span>
                 )}
-                <ol className="list-decimal list-inside flex flex-col gap-1.5 pl-1">
+                <ol className="list-decimal list-inside flex flex-col gap-2 pl-0.5">
                   {group.defs.map((def, di) => (
-                    <li key={di} className="text-sm text-foreground leading-relaxed">
+                    <li key={di} className="text-sm sm:text-base text-foreground/85 leading-relaxed font-normal">
                       {def.definition}
                     </li>
                   ))}
                 </ol>
               </div>
             ))}
+            <p className="text-[11px] text-foreground/30 text-right pt-2 border-t border-black/[0.03] dark:border-white/[0.03]">
+              Quelle: <a href="https://en.wiktionary.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground/50 transition-colors">Wiktionary</a> · Freie Wörterbuch-API
+            </p>
           </div>
-        </SectionCard>
+        </Section>
       )}
 
-      {/* Example sentences */}
-      {(additionalExamples?.length > 0 || example) && (
-        <SectionCard title="Beispielsätze" icon="💬">
+      {/* ── Beispielsätze ── */}
+      {hasExamples && (
+        <Section icon="💬" title="Beispielsätze" delay={0.1}>
           <div className="flex flex-col gap-3">
             {example && (
               <ExampleCard
                 german={example}
                 english={exampleTranslation}
-                highlight={word}
+                mainWord={word}
+                onSelectWord={onSelectWord}
+                delay={0}
               />
             )}
-            {additionalExamples?.map((ex, i) => (
-              <ExampleCard key={i} german={ex} highlight={word} />
+            {additionalExamples && additionalExamples.map((ex, i) => (
+              <ExampleCard
+                key={i}
+                german={ex}
+                mainWord={word}
+                onSelectWord={onSelectWord}
+                delay={(i + 1) * 0.05}
+              />
             ))}
           </div>
-        </SectionCard>
+          <p className="text-[11px] text-foreground/40 mt-3 text-right">
+            💡 Tippe auf unterstrichene Nomen im Satz, um ihre Übersetzung zu sehen
+          </p>
+        </Section>
       )}
-
-      {/* Grammar note (standalone if no example) */}
-      {grammarNote && !example && (
-        <SectionCard title="Grammatik" icon="📝">
-          <p className="text-sm text-foreground/80 leading-relaxed">{grammarNote}</p>
-        </SectionCard>
-      )}
-
-      {/* Bottom spacing */}
-      <div className="h-6" />
-    </motion.div>
+    </div>
   );
 };
 

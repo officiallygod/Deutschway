@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Check, Flame, Moon, Sun, BarChart2, X, Calendar as CalendarIcon } from 'lucide-react';
+import { Check, Flame, Moon, Sun, BarChart2, X, Calendar as CalendarIcon, BookOpen } from 'lucide-react';
 import CalendarWidget from './CalendarWidget';
 import Logo from './Logo';
 
@@ -13,8 +13,10 @@ const Sidebar = React.memo(({
   toggleTheme,
   isOpen,
   onOpenStats,
+  onOpenDictionary,
   onSelectDate,
-  onClose
+  onClose,
+  activePage,
 }) => {
   const [animateStreak, setAnimateStreak] = useState(false);
   const [showCalendarPopup, setShowCalendarPopup] = useState(false);
@@ -102,8 +104,21 @@ const Sidebar = React.memo(({
           <button className="theme-btn" onClick={() => { onOpenStats(); setShowCalendarPopup(false); }} aria-label="Statistiken">
             <BarChart2 size={20} />
           </button>
-          <button className="theme-btn calendar-btn-toggle" onClick={() => setShowCalendarPopup(!showCalendarPopup)} aria-label="Kalender">
+          <button
+            className="theme-btn calendar-btn-toggle"
+            onClick={() => setShowCalendarPopup(!showCalendarPopup)}
+            aria-label="Kalender"
+          >
             <CalendarIcon size={20} />
+          </button>
+          <button
+            className="theme-btn"
+            onClick={() => { onOpenDictionary?.(); setShowCalendarPopup(false); }}
+            aria-label="Wörterbuch"
+            title="Wörterbuch öffnen"
+            style={activePage === 'dictionary' ? { color: 'var(--primary-accent)' } : {}}
+          >
+            <BookOpen size={20} />
           </button>
           <button className="theme-btn" onClick={toggleTheme} aria-label="Theme wechseln">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
